@@ -20,8 +20,7 @@ public enum Engineer {
 		String name = "null";
 		for(Engineer engineerId : values()) {
 			if(engineerId.getEngineerID() == engineerID) {
-				name = engineerId.name().replace("_", " ");
-				name = engineerId.name().replace("$", "'");
+				name = engineerId.name().replaceAll("_", " ").replaceAll("\\$", "-");
 			}
 		}
 		return name;

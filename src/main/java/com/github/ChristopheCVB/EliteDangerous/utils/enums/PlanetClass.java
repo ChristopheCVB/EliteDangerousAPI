@@ -22,8 +22,7 @@ public enum PlanetClass {
 		String name = "null";
 		for(PlanetClass planetClass : values()) {
 			if(planetClass.getPlanetClassIdentifiers().equals(identifier)) {
-				name = planetClass.name().replace("_", " ");
-				name = planetClass.name().replace("$", "-");
+				name = planetClass.name().replaceAll("_", " ").replaceAll("\\$", "-");
 			}
 		}
 		return name;

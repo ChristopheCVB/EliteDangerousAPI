@@ -54,7 +54,7 @@ public class GameFilesUtils {
         else {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Journal") && getFileExtension(file).equals(".log")) {
+                    if (file.getName().contains("Journal") && getFileExtension(file).equals("log")) {
                         if (latest == null) {
                             latest = file;
                         }

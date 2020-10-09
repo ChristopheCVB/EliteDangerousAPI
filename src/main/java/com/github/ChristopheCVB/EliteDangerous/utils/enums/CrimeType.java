@@ -22,8 +22,7 @@ public enum CrimeType {
 		String name = "null";
 		for(CrimeType crimeType : values()) {
 			if(crimeType.getCrimeTypeIdentifiers().equals(identifier)) {
-				name = crimeType.name().replace("_", " ");
-				name = crimeType.name().replace("$", "-");
+				name = crimeType.name().replaceAll("_", " ").replaceAll("\\$", "-");
 			}
 		}
 		return name;

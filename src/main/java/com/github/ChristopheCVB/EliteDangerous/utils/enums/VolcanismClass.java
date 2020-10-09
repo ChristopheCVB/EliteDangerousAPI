@@ -20,8 +20,7 @@ public enum VolcanismClass {
 		String name = "null";
 		for(VolcanismClass volcanismClass : values()) {
 			if(volcanismClass.getVolcanismClassIdentifiers().equals(identifier)) {
-				name = volcanismClass.name().replace("_", " ");
-				name = volcanismClass.name().replace("$", "-");
+				name = volcanismClass.name().replaceAll("_", " ").replaceAll("\\$", "-");
 			}
 		}
 		return name;

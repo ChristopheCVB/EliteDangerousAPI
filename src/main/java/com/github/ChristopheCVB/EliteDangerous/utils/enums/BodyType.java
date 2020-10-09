@@ -18,8 +18,7 @@ public enum BodyType {
 		String name = "null";
 		for(BodyType bodyType : values()) {
 			if(bodyType.getBodyTypeIdentifiers().equals(identifier)) {
-				name = bodyType.name().replace("_", " ");
-				name = bodyType.name().replace("$", "-");
+				name = bodyType.name().replaceAll("_", " ").replaceAll("\\$", "-");
 			}
 		}
 		return name;

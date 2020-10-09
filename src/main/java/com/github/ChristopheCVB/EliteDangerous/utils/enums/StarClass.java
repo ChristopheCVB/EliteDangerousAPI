@@ -21,9 +21,9 @@ public enum StarClass {
 		String name = "null";
 		for(StarClass starClass : values()) {
 			for(String ident : starClass.getStarClassIdentifiers()) {
-				if(ident.equals(identifier)) {
-					name = starClass.name().replace("_", " ");
-					name = starClass.name().replace("$", "-");
+				if (ident.equals(identifier)) {
+					name = starClass.name().replaceAll("_", " ").replaceAll("\\$", "-");
+					break;
 				}
 			}
 		}

@@ -14,9 +14,12 @@ import com.github.ChristopheCVB.EliteDangerous.events.startup.*;
 import com.github.ChristopheCVB.EliteDangerous.events.stationservices.*;
 import com.github.ChristopheCVB.EliteDangerous.events.trade.*;
 import com.github.ChristopheCVB.EliteDangerous.events.travel.*;
+import com.github.ChristopheCVB.EliteDangerous.states.Status;
+import com.github.ChristopheCVB.EliteDangerous.states.StatusListener;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnsupportedGameVersion;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
@@ -26,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,20 +40,22 @@ public class EliteDangerousAPI {
 	private boolean isFirstLine = true;
 	private File journalFile;
 	private RandomAccessFile randomAccessFile;
-	private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
+	private final Gson gson;
 	private Thread readerThread;
+	private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
+	private StatusListener statusListener;
 
 	private Thread createReaderThread() {
 		return new Thread(() -> {
 			while (this.active) {
 				File latestJournalFile = GameFilesUtils.getLatestJournalFile();
-				if (!latestJournalFile.equals(this.journalFile)) {
+				if (latestJournalFile != null && !latestJournalFile.equals(this.journalFile)) {
 					this.journalFile = latestJournalFile;
 					this.randomAccessFile = null;
 				}
 
 				if (this.randomAccessFile == null) {
-					if (this.journalFile.exists()) {
+					if (this.journalFile != null) {
 						try {
 							this.randomAccessFile = new RandomAccessFile(this.journalFile, "r");
 						}
@@ -82,6 +88,14 @@ public class EliteDangerousAPI {
 					else {
 						System.out.println("RandomAccessFile File cannot be created");
 					}
+
+					if (this.statusListener != null) {
+						File statusFile = GameFilesUtils.getStatusFile();
+						if (statusFile != null) {
+							String statusFileContent = new String(Files.readAllBytes(statusFile.toPath()), StandardCharsets.UTF_8);
+							this.statusListener.onStatus(this.gson.fromJson(statusFileContent, Status.class));
+						}
+					}
 				}
 				catch (UnsupportedGameVersion unsupportedGameVersion) {
 					System.out.println(this.journalFile.getName() + " was created by an unsupported version, skipping for now...");
@@ -89,11 +103,13 @@ public class EliteDangerousAPI {
 				catch (IOException | JsonSyntaxException e) {
 					e.printStackTrace();
 				}
+
 			}
 		});
 	}
 
 	private EliteDangerousAPI() {
+		this.gson = new Gson();
 	}
 
 	public void stop() {
@@ -525,9 +541,16 @@ public class EliteDangerousAPI {
 
 	public static class Builder {
 		private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
+		private StatusListener statusListener;
 
 		public <T extends Event> Builder addEventListener(Class<T> eventClass, T.Listener listener) {
 			this.listeners.put(eventClass, listener);
+
+			return this;
+		}
+
+		public Builder setStatusListener(StatusListener statusListener) {
+			this.statusListener = statusListener;
 
 			return this;
 		}
@@ -541,6 +564,7 @@ public class EliteDangerousAPI {
 			EliteDangerousAPI eliteDangerousAPI = new EliteDangerousAPI();
 
 			eliteDangerousAPI.listeners.putAll(this.listeners);
+			eliteDangerousAPI.statusListener = this.statusListener;
 
 			return eliteDangerousAPI;
 		}

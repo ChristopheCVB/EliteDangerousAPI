@@ -19,8 +19,7 @@ public enum AtmosphereCompasitionType {
 		String name = "null";
 		for(AtmosphereCompasitionType atmosphereCompasitionType : values()) {
 			if(atmosphereCompasitionType.getAtmosphereCompasitionTypeIdentifiers().equals(identifier)) {
-				name = atmosphereCompasitionType.name().replace("_", " ");
-				name = atmosphereCompasitionType.name().replace("$", "-");
+				name = atmosphereCompasitionType.name().replaceAll("_", " ").replaceAll("\\$", "-");
 			}
 		}
 		return name;
