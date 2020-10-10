@@ -1,27 +1,17 @@
 package com.github.ChristopheCVB.EliteDangerous.events;
 
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.Date;
 
 public abstract class Event {
-	long timestamp;
+	public Date timestamp;
+	@SerializedName("event")
+	public String type;
 
 	public Event(String timestamp) {
-		this.timestamp = GameFilesUtils.getTimeMillis(timestamp);
-	}
-
-	/**
-	 * @return String Date & Time as String formatted E.g
-	 * {@literal} <b>12 Apr 2019</b>
-	 */
-	public String getTimestampFormatted() {
-		return GameFilesUtils.getFormattedDate(this.timestamp);
-	}
-
-	/**
-	 * @return timestamp time in milliseconds
-	 */
-	public long getTimestamp() {
-		return timestamp;
+		this.timestamp = new Date(GameFilesUtils.getTimeMillis(timestamp));
 	}
 
 	public interface Listener {

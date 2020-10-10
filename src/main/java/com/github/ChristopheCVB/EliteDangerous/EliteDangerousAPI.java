@@ -16,13 +16,11 @@ import com.github.ChristopheCVB.EliteDangerous.events.trade.*;
 import com.github.ChristopheCVB.EliteDangerous.events.travel.*;
 import com.github.ChristopheCVB.EliteDangerous.states.Status;
 import com.github.ChristopheCVB.EliteDangerous.states.StatusListener;
+import com.github.ChristopheCVB.EliteDangerous.utils.EventDeserializer;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnsupportedGameVersion;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -109,7 +107,14 @@ public class EliteDangerousAPI {
 	}
 
 	private EliteDangerousAPI() {
-		this.gson = new Gson();
+		EventDeserializer eventDeserializer = new EventDeserializer("event");
+		eventDeserializer.registerEventType(SupercruiseEntryEvent.class.getSimpleName().replace("Event", ""), SupercruiseEntryEvent.class);
+		eventDeserializer.registerEventType(SupercruiseExitEvent.class.getSimpleName().replace("Event", ""), SupercruiseExitEvent.class);
+
+		this.gson = new GsonBuilder()
+				.registerTypeAdapter(Event.class, eventDeserializer)
+				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+				.create();
 	}
 
 	public void stop() {
@@ -139,6 +144,14 @@ public class EliteDangerousAPI {
 
 	private Event parseEvent(JsonObject jsonEvent) {
 		Event event = null;
+		try {
+			event = this.gson.fromJson(jsonEvent, Event.class);
+			if (event != null) {
+				return event;
+			}
+		}
+		catch (JsonSyntaxException ignored) {}
+
 		String timestamp = JsonUtils.pullString(jsonEvent, "timestamp");
 		String eventName = JsonUtils.pullString(jsonEvent, "event");
 
@@ -225,12 +238,6 @@ public class EliteDangerousAPI {
 				break;
 			case "StartJump":
 				event = new StartJumpEvent(timestamp, jsonEvent);
-				break;
-			case "SupercruiseEntry":
-				event = new SupercruiseEntryEvent(timestamp, jsonEvent);
-				break;
-			case "SupercruiseExit":
-				event = new SupercruiseExitEvent(timestamp, jsonEvent);
 				break;
 			case "Touchdown":
 				event = new TouchdownEvent(timestamp, jsonEvent);
