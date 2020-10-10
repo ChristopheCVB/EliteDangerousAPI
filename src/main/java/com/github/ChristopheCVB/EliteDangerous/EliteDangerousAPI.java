@@ -126,6 +126,13 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(ShieldStateEvent.class.getSimpleName().replace("Event", ""), ShieldStateEvent.class);
 		eventDeserializer.registerEventType(ShipTargetedEvent.class.getSimpleName().replace("Event", ""), ShipTargetedEvent.class);
 		eventDeserializer.registerEventType(SRVDestroyedEvent.class.getSimpleName().replace("Event", ""), SRVDestroyedEvent.class);
+		eventDeserializer.registerEventType(ApproachBodyEvent.class.getSimpleName().replace("Event", ""), ApproachBodyEvent.class);
+		eventDeserializer.registerEventType(ApproachSettlementEvent.class.getSimpleName().replace("Event", ""), ApproachSettlementEvent.class);
+		eventDeserializer.registerEventType(DockedEvent.class.getSimpleName().replace("Event", ""), DockedEvent.class);
+		eventDeserializer.registerEventType(DockingCancelledEvent.class.getSimpleName().replace("Event", ""), DockingCancelledEvent.class);
+		eventDeserializer.registerEventType(DockingDeniedEvent.class.getSimpleName().replace("Event", ""), DockingDeniedEvent.class);
+		eventDeserializer.registerEventType(DockingGrantedEvent.class.getSimpleName().replace("Event", ""), DockingGrantedEvent.class);
+		eventDeserializer.registerEventType(DockingRequestedEvent.class.getSimpleName().replace("Event", ""), DockingRequestedEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -219,27 +226,6 @@ public class EliteDangerousAPI {
 				break;
 			case "Statistics":
 				event = new StatisticsEvent(timestamp, jsonEvent);
-				break;
-			case "ApproachBody":
-				event = new ApproachBodyEvent(timestamp, jsonEvent);
-				break;
-			case "ApproachSettlement":
-				event = new ApproachSettlementEvent(timestamp, jsonEvent);
-				break;
-			case "Docked":
-				event = new DockedEvent(timestamp, jsonEvent);
-				break;
-			case "DockingDenied":
-				event = new DockingDeniedEvent(timestamp, jsonEvent);
-				break;
-			case "DockingGranted":
-				event = new DockingGrantedEvent(timestamp, jsonEvent);
-				break;
-			case "DockingCancelled":
-				event = new DockingCancelledEvent(timestamp, jsonEvent);
-				break;
-			case "DockingRequested":
-				event = new DockingRequestedEvent(timestamp, jsonEvent);
 				break;
 			case "FSDJump":
 				event = new FSDJumpEvent(timestamp, jsonEvent);

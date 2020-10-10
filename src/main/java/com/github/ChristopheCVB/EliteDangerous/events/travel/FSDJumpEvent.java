@@ -6,20 +6,43 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Faction;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FSDJumpEvent extends Event {
 	
-	private String starSystem, systemAllegiance, systemEconomy, systemEconomyLocalised, systemSecondEconomy, systemSecondEconomy_Localised, systemGovernment, systemGovernmentLocalised,
-	systemSecurity, systemSecurityLocalised, body, bodyType, powerplayState, systemfactionName, systemfactionState;
-	private Long population, systemAddress, boostUsed;
-	private Integer bodyId;
-	private Double jumpDistance, fuelUsed, fuelLevel;
-	private List<Faction> factions;
-	private Conflict conflict;
-	private Double[] starPos;
-	private List<String> powers;
+	public String starSystem;
+	public String systemAllegiance;
+	public String systemEconomy;
+	@SerializedName("SystemEconomy_Localised")
+	public String systemEconomyLocalised;
+	public String systemSecondEconomy;
+	@SerializedName("SystemSecondEconomy_Localised")
+	public String systemSecondEconomyLocalised;
+	public String systemGovernment;
+	@SerializedName("SystemGovernment_Localised")
+	public String systemGovernmentLocalised;
+	public String systemSecurity;
+	@SerializedName("SystemSecurity_Localised")
+	public String systemSecurityLocalised;
+	public String body;
+	public String bodyType;
+	public String powerplayState;
+	public String systemfactionName;
+	public String systemfactionState;
+	public Long population;
+	public Long systemAddress;
+	public Long boostUsed;
+	public Integer bodyId;
+	public Double jumpDistance;
+	public Double fuelUsed;
+	public Double fuelLevel;
+	public ArrayList<Faction> factions;
+	public ArrayList<Conflict> conflicts;
+	public Double[] starPos;
+	public ArrayList<String> powers;
 	
 	public FSDJumpEvent(String timestamp, JsonObject jsonEvent) {
 		super(timestamp);
