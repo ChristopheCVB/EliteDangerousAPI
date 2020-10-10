@@ -219,6 +219,10 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(LoadGameEvent.class.getSimpleName().replace("Event", ""), LoadGameEvent.class);
 		eventDeserializer.registerEventType(NewCommanderEvent.class.getSimpleName().replace("Event", ""), NewCommanderEvent.class);
 		eventDeserializer.registerEventType(ProgressEvent.class.getSimpleName().replace("Event", ""), ProgressEvent.class);
+		eventDeserializer.registerEventType(CarrierBankTransferEvent.class.getSimpleName().replace("Event", ""), CarrierBankTransferEvent.class);
+		eventDeserializer.registerEventType(CarrierCrewServicesEvent.class.getSimpleName().replace("Event", ""), CarrierCrewServicesEvent.class);
+		eventDeserializer.registerEventType(CarrierDepositFuelEvent.class.getSimpleName().replace("Event", ""), CarrierDepositFuelEvent.class);
+		eventDeserializer.registerEventType(CarrierFinanceEvent.class.getSimpleName().replace("Event", ""), CarrierFinanceEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -354,18 +358,6 @@ public class EliteDangerousAPI {
 				break;
 			case "CargoTransfer":
 				event = new CargoTransferEvent(timestamp, jsonEvent);
-				break;
-			case "CarrierBankTransfer":
-				event = new CarrierBankTransferEvent(timestamp, jsonEvent);
-				break;
-			case "CarrierCrewServices":
-				event = new CarrierCrewServicesEvent(timestamp, jsonEvent);
-				break;
-			case "CarrierDepositFuel":
-				event = new CarrierDepositFuelEvent(timestamp, jsonEvent);
-				break;
-			case "CarrierFinance":
-				event = new CarrierFinanceEvent(timestamp, jsonEvent);
 				break;
 			default:
 				GameFilesUtils.sendUnprocessedEvent(eventName, jsonEvent);
