@@ -12,6 +12,7 @@ import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MassModuleStoreEvent extends Event {
@@ -19,7 +20,7 @@ public class MassModuleStoreEvent extends Event {
 	public Long marketID;
 	public String ship;
 	public Integer shipId;
-	public List<ModuleItem> items;
+	public ArrayList<ModuleItem> items;
 
 	public MassModuleStoreEvent(String timestamp, JsonObject jsonEvent) {
         super(timestamp);
@@ -27,6 +28,7 @@ public class MassModuleStoreEvent extends Event {
         this.marketID = JsonUtils.pullLong(jsonEvent, "MarketID");
         this.ship = JsonUtils.pullString(jsonEvent, "Ship");
         this.shipId = JsonUtils.pullInt(jsonEvent, "ShipID");
+        //TODO: again idk how to do the createModuleItemsList
         this.items = GameFilesUtils.createModuleItemsList(JsonUtils.pullJsonArray(jsonEvent, "Items"));
 
         GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);

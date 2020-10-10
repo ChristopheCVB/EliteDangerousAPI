@@ -14,9 +14,10 @@ import com.google.gson.JsonObject;
 
 public class MaterialTradeEvent extends Event {
 	
-	Long marketId;
-	String traderType;
-	TradeData paid, received;
+	public Long marketId;
+	public String traderType;
+	public TradeData paid;
+	public TradeData received;
 
 	public MaterialTradeEvent(String timestamp, JsonObject jsonEvent) {
         super(timestamp);

@@ -7,20 +7,21 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MarketFile {
 
-    private Integer marketID;
-    private String stationName, starSystem;
-    private List<Item> items;
+    public Integer marketID;
+    public String stationName, starSystem;
+    public ArrayList<Item> items;
 
     public MarketFile() {
         File file = GameFilesUtils.getMarketFile();
         if (file != null) {
             try {
                 String marketFileContent = String.join("", Files.readAllLines(file.toPath(), StandardCharsets.UTF_8));
-
+                // TODO: idk how to do this with the createItemList
                 this.items = GameFilesUtils.createItemList(JsonParser.parseString(marketFileContent).getAsJsonObject().getAsJsonArray("Items"));
             }
             catch (IOException e) {

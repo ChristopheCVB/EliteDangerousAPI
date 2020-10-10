@@ -180,6 +180,23 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(MarketBuyEvent.class.getSimpleName().replace("Event", ""), MarketBuyEvent.class);
 		eventDeserializer.registerEventType(MarketSellEvent.class.getSimpleName().replace("Event", ""), MarketSellEvent.class);
 		eventDeserializer.registerEventType(MiningRefinedEvent.class.getSimpleName().replace("Event", ""), MiningRefinedEvent.class);
+		eventDeserializer.registerEventType(BuyAmmoEvent.class.getSimpleName().replace("Event", ""), BuyAmmoEvent.class);
+		eventDeserializer.registerEventType(BuyDronesEvent.class.getSimpleName().replace("Event", ""), BuyDronesEvent.class);
+		eventDeserializer.registerEventType(CargoDepotEvent.class.getSimpleName().replace("Event", ""), CargoDepotEvent.class);
+		eventDeserializer.registerEventType(CommunityGoalDiscardEvent.class.getSimpleName().replace("Event", ""), CommunityGoalDiscardEvent.class);
+		eventDeserializer.registerEventType(CommunityGoalEvent.class.getSimpleName().replace("Event", ""), CommunityGoalEvent.class);
+		eventDeserializer.registerEventType(CommunityGoalJoinEvent.class.getSimpleName().replace("Event", ""), CommunityGoalJoinEvent.class);
+		eventDeserializer.registerEventType(CommunityGoalRewardEvent.class.getSimpleName().replace("Event", ""), CommunityGoalRewardEvent.class);
+		eventDeserializer.registerEventType(CrewAssignEvent.class.getSimpleName().replace("Event", ""), CrewAssignEvent.class);
+		eventDeserializer.registerEventType(CrewFireEvent.class.getSimpleName().replace("Event", ""), CrewFireEvent.class);
+		eventDeserializer.registerEventType(CrewHireEvent.class.getSimpleName().replace("Event", ""), CrewHireEvent.class);
+		eventDeserializer.registerEventType(EngineerContributionEvent.class.getSimpleName().replace("Event", ""), EngineerContributionEvent.class);
+		eventDeserializer.registerEventType(EngineerCraftEvent.class.getSimpleName().replace("Event", ""), EngineerCraftEvent.class);
+		eventDeserializer.registerEventType(FetchRemoteModuleEvent.class.getSimpleName().replace("Event", ""), FetchRemoteModuleEvent.class);
+		eventDeserializer.registerEventType(MissionAbandonedEvent.class.getSimpleName().replace("Event", ""), MissionAbandonedEvent.class);
+		eventDeserializer.registerEventType(MissionAcceptedEvent.class.getSimpleName().replace("Event", ""), MissionAcceptedEvent.class);
+		eventDeserializer.registerEventType(MissionCompletedEvent.class.getSimpleName().replace("Event", ""), MissionCompletedEvent.class);
+		eventDeserializer.registerEventType(MissionFailedEvent.class.getSimpleName().replace("Event", ""), MissionFailedEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -277,47 +294,8 @@ public class EliteDangerousAPI {
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
 				break;
-			case "BuyAmmo":
-				event = new BuyAmmoEvent(timestamp, jsonEvent);
-				break;
-			case "BuyDrones":
-				event = new BuyDronesEvent(timestamp, jsonEvent);
-				break;
-			case "CargoDepot":
-				event = new CargoDepotEvent(timestamp, jsonEvent);
-				break;
-			case "CommunityGoal":
-				event = new CommunityGoalEvent(timestamp, jsonEvent);
-				break;
-			case "CommunityGoalDiscard":
-				event = new CommunityGoalDiscardEvent(timestamp, jsonEvent);
-				break;
-			case "CommunityGoalJoin":
-				event = new CommunityGoalJoinEvent(timestamp, jsonEvent);
-				break;
-			case "CommunityGoalReward":
-				event = new CommunityGoalRewardEvent(timestamp, jsonEvent);
-				break;
-			case "CrewAssign":
-				event = new CrewAssignEvent(timestamp, jsonEvent);
-				break;
-			case "CrewFire":
-				event = new CrewFireEvent(timestamp, jsonEvent);
-				break;
-			case "CrewHire":
-				event = new CrewHireEvent(timestamp, jsonEvent);
-				break;
-			case "EngineerContribution":
-				event = new EngineerContributionEvent(timestamp, jsonEvent);
-				break;
-			case "EngineerCraft":
-				event = new EngineerCraftEvent(timestamp, jsonEvent);
-				break;
 			case "EngineerProgress":
 				event = new EngineerProgressEvent(timestamp, jsonEvent);
-				break;
-			case "FetchRemoteModule":
-				event = new FetchRemoteModuleEvent(timestamp, jsonEvent);
 				break;
 			case "Market":
 				event = new MarketEvent(timestamp, jsonEvent);
@@ -327,18 +305,6 @@ public class EliteDangerousAPI {
 				break;
 			case "MaterialTrade":
 				event = new MaterialTradeEvent(timestamp, jsonEvent);
-				break;
-			case "MissionAbandoned":
-				event = new MissionAbandonedEvent(timestamp, jsonEvent);
-				break;
-			case "MissionAccepted":
-				event = new MissionAcceptedEvent(timestamp, jsonEvent);
-				break;
-			case "MissionCompleted":
-				event = new MissionCompletedEvent(timestamp, jsonEvent);
-				break;
-			case "MissionFailed":
-				event = new MissionFailedEvent(timestamp, jsonEvent);
 				break;
 			case "MissionRedirected":
 				event = new MissionRedirectedEvent(timestamp, jsonEvent);

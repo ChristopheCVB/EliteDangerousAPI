@@ -6,10 +6,16 @@ File created: 05/12/2020 11:29
 
 package com.github.ChristopheCVB.EliteDangerous.events.datastorage;
 
+import com.google.gson.annotations.SerializedName;
+
 public class TradeData {
-	
-	private String material, materialLocalised, category, categoryLocalised;
-	private Integer quantity;
+
+	//TODO: here you have Localised again but you dont see what to put in the @SerializedName can you do this?
+	public String material;
+	public String materialLocalised;
+	public String category;
+	public String categoryLocalised;
+	public Integer quantity;
 	
 	public TradeData(String material, String materialLocalised, String category, String categoryLocalised,
 			Integer quantity) {

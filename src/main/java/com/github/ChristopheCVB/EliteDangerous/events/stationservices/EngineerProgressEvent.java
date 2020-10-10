@@ -12,10 +12,12 @@ import com.google.gson.JsonObject;
 
 public class EngineerProgressEvent extends Event {
 
-    private String engineer, progress;
-    private Integer engineerId, rank;
-    private Double rankProgress;
-    private JsonArray engineersArray;
+    public String engineer;
+    public String progress;
+    public Integer engineerId;
+    public Integer rank;
+    public Double rankProgress;
+    public JsonArray engineersArray;
 
     public EngineerProgressEvent(String timestamp, JsonObject jsonEvent) {
         super(timestamp);

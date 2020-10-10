@@ -7,10 +7,13 @@ import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.google.gson.JsonObject;
 
 public class MarketEvent extends Event {
-	
-	private String stationName, starSystem, stationType, carrierDockingAccess;
-	private Integer marketID;
-	private MarketFile marketFile;
+	// TODO: Chris can you do this file?
+	public String stationName;
+	public String starSystem;
+	public String stationType;
+	public String carrierDockingAccess;
+	public Integer marketID;
+	public MarketFile marketFile;
 	
 	public MarketEvent(String timestamp, JsonObject jsonEvent) {
 		super(timestamp);
