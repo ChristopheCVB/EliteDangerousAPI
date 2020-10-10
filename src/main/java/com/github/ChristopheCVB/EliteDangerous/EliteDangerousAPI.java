@@ -219,6 +219,13 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(LoadGameEvent.class.getSimpleName().replace("Event", ""), LoadGameEvent.class);
 		eventDeserializer.registerEventType(NewCommanderEvent.class.getSimpleName().replace("Event", ""), NewCommanderEvent.class);
 		eventDeserializer.registerEventType(ProgressEvent.class.getSimpleName().replace("Event", ""), ProgressEvent.class);
+		eventDeserializer.registerEventType(CargoEvent.class.getSimpleName().replace("Event", ""), CargoEvent.class);
+		eventDeserializer.registerEventType(LoadoutEvent.class.getSimpleName().replace("Event", ""), LoadoutEvent.class);
+		eventDeserializer.registerEventType(MaterialsEvent.class.getSimpleName().replace("Event", ""), MaterialsEvent.class);
+		eventDeserializer.registerEventType(PassengersEvent.class.getSimpleName().replace("Event", ""), PassengersEvent.class);
+		eventDeserializer.registerEventType(MissionsEvent.class.getSimpleName().replace("Event", ""), MissionsEvent.class);
+		eventDeserializer.registerEventType(RankEvent.class.getSimpleName().replace("Event", ""), RankEvent.class);
+		eventDeserializer.registerEventType(ReputationEvent.class.getSimpleName().replace("Event", ""), ReputationEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -269,31 +276,8 @@ public class EliteDangerousAPI {
 		String eventName = JsonUtils.pullString(jsonEvent, "event");
 
 		switch (eventName) {
-			case "Cargo":
-				if (jsonEvent.has("Inventory")) {
-					event = new CargoEvent(timestamp, jsonEvent);
-				}
-				break;
-			case "Loadout":
-				event = new LoadoutEvent(timestamp, jsonEvent);
-				break;
-			case "Materials":
-				event = new MaterialsEvent(timestamp, jsonEvent);
-				break;
-			case "Missions":
-				event = new MissionsEvent(timestamp, jsonEvent);
-				break;
-			case "Passengers":
-				event = new PassengersEvent(timestamp, jsonEvent);
-				break;
 			case "Powerplay":
 				event = new PowerplayEvent(timestamp, jsonEvent);
-				break;
-			case "Rank":
-				event = new RankEvent(timestamp, jsonEvent);
-				break;
-			case "Reputation":
-				event = new ReputationEvent(timestamp, jsonEvent);
 				break;
 			case "Statistics":
 				event = new StatisticsEvent(timestamp, jsonEvent);

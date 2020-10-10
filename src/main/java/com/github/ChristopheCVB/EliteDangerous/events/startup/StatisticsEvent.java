@@ -4,9 +4,13 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 
 public class StatisticsEvent extends Event {
-	//    TODO: i dont know what to do here to can you do it?
+	// TODO: Refactor StatisticsEvent with subclasses
+	@SerializedName("Bank_Account")
+	public BankAccount bankAccount;
+	public Combat combat;
 
 	private Long currentWealth, spentOnShips, spentOnOutfitting, spentOnRepairs, spentOnFuel, spentOnAmmoConsumables, spentOnInsurance, bountyHuntingProfit, combatBondsProfit, assassinationProfits,
 	totalFines, totalBounties, blackMarketsProfit, averageSmugglingProfit, marketProfit, miningProfits, explorationProfits, searchRescueProfit, totalNpcCrewWages, fleetCarrierRearmTotal,
@@ -26,11 +30,41 @@ public class StatisticsEvent extends Event {
 	private String lastTGEncounterSystem, lastTGEncounterTime, lastTGEncounterShip, fleetCarrierDistanceTravelled;
 	
 	private Double cqcKD, cqcWL;
+
+	public static class BankAccount {
+		@SerializedName("Current_Wealth")
+		public Long currentWealth;
+		@SerializedName("Spent_On_Ships")
+		public Long spentOnShips;
+		@SerializedName("Spent_On_Outfitting")
+		public Long spentOnOutfitting;
+		@SerializedName("Spent_On_Repairs")
+		public Long spentOnRepairs;
+		@SerializedName("Spent_On_Fuel")
+		public Long spentOnFuel;
+		@SerializedName("Spent_On_Ammo_Consumables")
+		public Long spentOnAmmoConsumables;
+		@SerializedName("Spent_On_Insurance")
+		public Long spentOnInsurance;
+		@SerializedName("Insurance_Claims")
+		public Integer insuranceClaims;
+		@SerializedName("Owned_Ship_Count")
+		public Integer ownedShipCount;
+	}
+
+	public static class Combat {
+		public Long bountyHuntingProfit;
+		public Long combatBondsProfit;
+		public Long assassinationProfits;
+		public Integer bountiesClaimed;
+		public Integer combatBonds;
+		public Integer assassinations;
+		public Integer highestSingleReward;
+		public Integer skimmersKilled;
+	}
 	
 	public StatisticsEvent(String timestamp, JsonObject jsonEvent) {
 		super(timestamp);
-		JsonObject bankAccount = JsonUtils.pullJsonObject(jsonEvent, "Bank_Account");
-		JsonObject combat = JsonUtils.pullJsonObject(jsonEvent, "Combat");
 		JsonObject crime = JsonUtils.pullJsonObject(jsonEvent, "Crime");
 		JsonObject smuggling = JsonUtils.pullJsonObject(jsonEvent, "Smuggling");
 		JsonObject trading = JsonUtils.pullJsonObject(jsonEvent, "Trading");
@@ -116,27 +150,6 @@ public class StatisticsEvent extends Event {
 		}
 		JsonObject cqc = JsonUtils.pullJsonObject(jsonEvent, "CQC");
 
-		// Bank Account
-		this.currentWealth = JsonUtils.pullLong(bankAccount, "Current_Wealth");
-		this.spentOnShips = JsonUtils.pullLong(bankAccount, "Spent_On_Ships");
-		this.spentOnOutfitting = JsonUtils.pullLong(bankAccount, "Spent_On_Outfitting");
-		this.spentOnRepairs = JsonUtils.pullLong(bankAccount, "Spent_On_Repairs");
-		this.spentOnFuel = JsonUtils.pullLong(bankAccount, "Spent_On_Fuel");
-		this.spentOnAmmoConsumables = JsonUtils.pullLong(bankAccount, "Spent_On_Ammo_Consumables");
-		this.spentOnInsurance = JsonUtils.pullLong(bankAccount, "Spent_On_Insurance");
-		this.insuranceClaims = JsonUtils.pullInt(bankAccount, "Insurance_Claims");
-		this.ownedShipCount = JsonUtils.pullInt(bankAccount, "Owned_Ship_Count");
-
-		// Combat
-		this.bountyHuntingProfit = JsonUtils.pullLong(combat, "Bounty_Hunting_Profit");
-		this.combatBondsProfit = JsonUtils.pullLong(combat, "Combat_Bond_Profits");
-		this.assassinationProfits = JsonUtils.pullLong(combat, "Assassination_Profits");
-		this.bountiesClaimed = JsonUtils.pullInt(combat, "Bounties_Claimed");
-		this.combatBonds = JsonUtils.pullInt(combat, "Combat_Bonds");
-		this.assassinations = JsonUtils.pullInt(combat, "Assassinations");
-		this.highestSingleReward = JsonUtils.pullInt(combat, "Highest_Single_Reward");
-		this.skimmersKilled = combat.has("Skimmers_Killed") ? JsonUtils.pullInt(combat, "Skimmers_Killed") : null;
-
 		// Crime
 		this.totalFines = JsonUtils.pullLong(crime, "Total_Fines");
 		this.totalBounties = JsonUtils.pullLong(crime, "Total_Bounties");
@@ -201,429 +214,4 @@ public class StatisticsEvent extends Event {
 
         GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);
     }
-
-	public Long getCurrentWealth() {
-		return currentWealth;
-	}
-
-	public Long getSpentOnShips() {
-		return spentOnShips;
-	}
-
-	public Long getSpentOnOutfitting() {
-		return spentOnOutfitting;
-	}
-
-	public Long getSpentOnRepairs() {
-		return spentOnRepairs;
-	}
-
-	public Long getSpentOnFuel() {
-		return spentOnFuel;
-	}
-
-	public Long getSpentOnAmmoConsumables() {
-		return spentOnAmmoConsumables;
-	}
-
-	public Long getSpentOnInsurance() {
-		return spentOnInsurance;
-	}
-
-	public Long getBountyHuntingProfit() {
-		return bountyHuntingProfit;
-	}
-
-	public Long getCombatBondsProfit() {
-		return combatBondsProfit;
-	}
-
-	public Long getAssassinationProfits() {
-		return assassinationProfits;
-	}
-
-	public Long getTotalFines() {
-		return totalFines;
-	}
-
-	public Long getTotalBounties() {
-		return totalBounties;
-	}
-
-	public Long getBlackMarketsProfit() {
-		return blackMarketsProfit;
-	}
-
-	public Long getAverageSmugglingProfit() {
-		return averageSmugglingProfit;
-	}
-
-	public Long getMarketProfit() {
-		return marketProfit;
-	}
-
-	public Long getMiningProfits() {
-		return miningProfits;
-	}
-
-	public Long getExplorationProfits() {
-		return explorationProfits;
-	}
-
-	public Long getSearchRescueProfit() {
-		return searchRescueProfit;
-	}
-
-	public Long getTotalNpcCrewWages() {
-		return totalNpcCrewWages;
-	}
-
-	public Long getFleetCarrierRearmTotal() {
-		return fleetCarrierRearmTotal;
-	}
-
-	public Long getFleetCarrierExportTotal() {
-		return fleetCarrierExportTotal;
-	}
-
-	public Long getFleetCarrierImportTotal() {
-		return fleetCarrierImportTotal;
-	}
-
-	public Long getFleetCarrierRefuelTotal() {
-		return fleetCarrierRefuelTotal;
-	}
-
-	public Long getFleetCarrierRefuelProfit() {
-		return fleetCarrierRefuelProfit;
-	}
-
-	public Long getFleetCarrierRepairsTotal() {
-		return fleetCarrierRepairsTotal;
-	}
-
-	public Long getFleetCarrierShipyardSold() {
-		return fleetCarrierShipyardSold;
-	}
-
-	public Long getFleetCarrierOutfittingSold() {
-		return fleetCarrierOutfittingSold;
-	}
-
-	public Long getFleetCarrierShipyardProfit() {
-		return fleetCarrierShipyardProfit;
-	}
-
-	public Long getFleetCarrierVouchersProfit() {
-		return fleetCarrierVouchersProfit;
-	}
-
-	public Long getFleetCarrierTradespendTotal() {
-		return fleetCarrierTradespendTotal;
-	}
-
-	public Long getFleetCarrierOutfittingProfit() {
-		return fleetCarrierOutfittingProfit;
-	}
-
-	public Long getFleetCarrierStolenspendTotal() {
-		return fleetCarrierStolenspendTotal;
-	}
-
-	public Long getFleetCarrierTradeprofitTotal() {
-		return fleetCarrierTradeprofitTotal;
-	}
-
-	public Long getFleetCarrierVouchersRedeemed() {
-		return fleetCarrierVouchersRedeemed;
-	}
-
-	public Long getFleetCarrierStolenprofitTotal() {
-		return fleetCarrierStolenprofitTotal;
-	}
-
-	public Long getCqcKills() {
-		return cqcKills;
-	}
-
-	public Long getCqcTimePlayed() {
-		return cqcTimePlayed;
-	}
-
-	public Long getCqcCreditsEarned() {
-		return cqcCreditsEarned;
-	}
-
-	public Long getFleetCarrierTotalJumps() {
-		return fleetCarrierTotalJumps;
-	}
-
-	public Integer getBountiesReceived() {
-		return bountiesReceived;
-	}
-
-	public Integer getInsuranceClaims() {
-		return insuranceClaims;
-	}
-
-	public Integer getOwnedShipCount() {
-		return ownedShipCount;
-	}
-
-	public Integer getBountiesClaimed() {
-		return bountiesClaimed;
-	}
-
-	public Integer getCombatBonds() {
-		return combatBonds;
-	}
-
-	public Integer getAssassinations() {
-		return assassinations;
-	}
-
-	public Integer getHighestSingleReward() {
-		return highestSingleReward;
-	}
-
-	public Integer getSkimmersKilled() {
-		return skimmersKilled;
-	}
-
-	public Integer getNotoriety() {
-		return notoriety;
-	}
-
-	public Integer getFines() {
-		return fines;
-	}
-
-	public Integer getHighestBounty() {
-		return highestBounty;
-	}
-
-	public Integer getBlackMartketsTradedWith() {
-		return blackMartketsTradedWith;
-	}
-
-	public Integer getRessourcesSmuggled() {
-		return ressourcesSmuggled;
-	}
-
-	public Integer getHighestSingleSmugglingTransaction() {
-		return highestSingleSmugglingTransaction;
-	}
-
-	public Integer getMarketsTradedWith() {
-		return marketsTradedWith;
-	}
-
-	public Integer getRessourcesTraded() {
-		return ressourcesTraded;
-	}
-
-	public Integer getAverageTradingProfit() {
-		return averageTradingProfit;
-	}
-
-	public Integer getHighestSingleTradingTransaction() {
-		return highestSingleTradingTransaction;
-	}
-
-	public Integer getQuantityMined() {
-		return quantityMined;
-	}
-
-	public Integer getMaterialsCollected() {
-		return materialsCollected;
-	}
-
-	public Integer getSystemsVisited() {
-		return systemsVisited;
-	}
-
-	public Integer getPlanetsScannedToLevel2() {
-		return planetsScannedToLevel2;
-	}
-
-	public Integer getPlanetsScannedToLevel3() {
-		return planetsScannedToLevel3;
-	}
-
-	public Integer getEfficientScans() {
-		return efficientScans;
-	}
-
-	public Integer getHighestPayout() {
-		return highestPayout;
-	}
-
-	public Integer getTotalHyperspaceDistance() {
-		return totalHyperspaceDistance;
-	}
-
-	public Integer getTotalHyperspaceJumps() {
-		return totalHyperspaceJumps;
-	}
-
-	public Integer getGreatestDistanceFromStart() {
-		return greatestDistanceFromStart;
-	}
-
-	public Integer getTimePlayed() {
-		return timePlayed;
-	}
-
-	public Integer getPassengersMissionsAccepted() {
-		return passengersMissionsAccepted;
-	}
-
-	public Integer getPassengersMissionsDisgruntled() {
-		return passengersMissionsDisgruntled;
-	}
-
-	public Integer getPassengersMissionsBulk() {
-		return passengersMissionsBulk;
-	}
-
-	public Integer getPassengersMissionsVIP() {
-		return passengersMissionsVIP;
-	}
-
-	public Integer getPassengersMissionsDelivered() {
-		return passengersMissionsDelivered;
-	}
-
-	public Integer getPassengersMissionsEjected() {
-		return passengersMissionsEjected;
-	}
-
-	public Integer getSearchRescueTraded() {
-		return searchRescueTraded;
-	}
-
-	public Integer getSearchRescueCount() {
-		return searchRescueCount;
-	}
-
-	public Integer getTotalTGEncounters() {
-		return totalTGEncounters;
-	}
-
-	public Integer gettGScoutCount() {
-		return tGScoutCount;
-	}
-
-	public Integer getEngineersUsedCount() {
-		return engineersUsedCount;
-	}
-
-	public Integer getTotalRecipesGenerated() {
-		return totalRecipesGenerated;
-	}
-
-	public Integer getRecipesGeneratedRank1() {
-		return recipesGeneratedRank1;
-	}
-
-	public Integer getRecipesGeneratedRank2() {
-		return recipesGeneratedRank2;
-	}
-
-	public Integer getRecipesGeneratedRank3() {
-		return recipesGeneratedRank3;
-	}
-
-	public Integer getRecipesGeneratedRank4() {
-		return recipesGeneratedRank4;
-	}
-
-	public Integer getRecipesGeneratedRank5() {
-		return recipesGeneratedRank5;
-	}
-
-	public Integer getHiredNpcCrew() {
-		return hiredNpcCrew;
-	}
-
-	public Integer getFiredNpcCrew() {
-		return firedNpcCrew;
-	}
-
-	public Integer getTotalMulticrewTime() {
-		return totalMulticrewTime;
-	}
-
-	public Integer getTotalMulticrewTimeGunner() {
-		return totalMulticrewTimeGunner;
-	}
-
-	public Integer getTotalMulticrewTimeFighter() {
-		return totalMulticrewTimeFighter;
-	}
-
-	public Integer getTotalMulticrewCredits() {
-		return totalMulticrewCredits;
-	}
-
-	public Integer getTotalMulticrewFines() {
-		return totalMulticrewFines;
-	}
-
-	public Integer getMaterialTraderTradesCompledted() {
-		return materialTraderTradesCompledted;
-	}
-
-	public Integer getMaterialTraderMaterialsTraded() {
-		return materialTraderMaterialsTraded;
-	}
-
-	public Integer getMaterialTraderEncodedMaterialsTraded() {
-		return materialTraderEncodedMaterialsTraded;
-	}
-
-	public Integer getMaterialTraderGrade1Traded() {
-		return materialTraderGrade1Traded;
-	}
-
-	public Integer getMaterialTraderGrade2Traded() {
-		return materialTraderGrade2Traded;
-	}
-
-	public Integer getMaterialTraderGrade3Traded() {
-		return materialTraderGrade3Traded;
-	}
-
-	public Integer getMaterialTraderGrade4Traded() {
-		return materialTraderGrade4Traded;
-	}
-
-	public Integer getMaterialTraderGrade5Traded() {
-		return materialTraderGrade5Traded;
-	}
-
-	public String getLastTGEncounterSystem() {
-		return lastTGEncounterSystem;
-	}
-
-	public String getLastTGEncounterTime() {
-		return lastTGEncounterTime;
-	}
-
-	public String getLastTGEncounterShip() {
-		return lastTGEncounterShip;
-	}
-
-	public String getFleetCarrierDistanceTravelled() {
-		return fleetCarrierDistanceTravelled;
-	}
-
-	public Double getCqcKD() {
-		return cqcKD;
-	}
-
-	public Double getCqcWL() {
-		return cqcWL;
-	}
-	
 }
