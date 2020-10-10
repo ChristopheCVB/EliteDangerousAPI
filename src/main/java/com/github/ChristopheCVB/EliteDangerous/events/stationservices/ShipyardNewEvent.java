@@ -6,25 +6,10 @@ import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.google.gson.JsonObject;
 
 public class ShipyardNewEvent extends Event {
+	public String shipType;
+	public Integer newShipID;
 	
-	private String shipType;
-	private Integer newShipId;
-	
-	public ShipyardNewEvent(String timestamp, JsonObject jsonEvent) {
+	public ShipyardNewEvent(String timestamp) {
         super(timestamp);
-
-        this.shipType = JsonUtils.pullString(jsonEvent, "ShipType");
-        this.newShipId = JsonUtils.pullInt(jsonEvent, "NewShipID");
-
-        GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);
     }
-
-	public String getShipType() {
-		return shipType;
-	}
-
-	public Integer getNewShipId() {
-		return newShipId;
-	}
-
 }

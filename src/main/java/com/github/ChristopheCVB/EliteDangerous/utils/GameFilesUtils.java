@@ -535,22 +535,6 @@ public class GameFilesUtils {
         return inv;
     }
 
-    public static List<StoredModule> createStoredModuleList(JsonArray array) {
-        List<StoredModule> storedModuleList = null;
-
-        if (array != null) {
-            storedModuleList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                storedModuleList.add(new StoredModule(JsonUtils.pullString(json, "Name"), JsonUtils.pullString(json, "Name_Localised"), JsonUtils.pullString(json, "StarSystem"), JsonUtils.pullInt(json, "StorageSlot"), JsonUtils.pullLong(json, "MarketID"),
-                        JsonUtils.pullLong(json, "TransferCost"), JsonUtils.pullLong(json, "TransferTime"), JsonUtils.pullLong(json, "BuyPrice"), JsonUtils.pullBoolean(json, "Hot")));
-            }
-        }
-
-        return storedModuleList;
-    }
-
     public static List<String> createStationServiceList(JsonArray array) {
         List<String> stationServiceList = null;
 
@@ -562,40 +546,6 @@ public class GameFilesUtils {
             }
         }
         return stationServiceList;
-    }
-
-    public static List<StoredShipHere> createStoredShipsHereList(JsonArray array) {
-        List<StoredShipHere> storedShipHereList = null;
-
-        if (array != null) {
-            storedShipHereList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-
-                storedShipHereList.add(new StoredShipHere(JsonUtils.pullBoolean(json, "Hot"), JsonUtils.pullString(json, "Name"), JsonUtils.pullString(json, "ShipType"), JsonUtils.pullString(json, "ShipType_Localised"),
-                        JsonUtils.pullLong(json, "Value"), JsonUtils.pullInt(json, "ShipID")));
-            }
-        }
-
-        return storedShipHereList;
-    }
-
-    public static List<StoredShipRemote> createStoredShipsRemoteList(JsonArray array) {
-        List<StoredShipRemote> storedShipRemoteList = null;
-
-        if (array != null) {
-            storedShipRemoteList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-
-                storedShipRemoteList.add(new StoredShipRemote(JsonUtils.pullBoolean(json, "Hot"), JsonUtils.pullString(json, "Name"), JsonUtils.pullString(json, "ShipType"), JsonUtils.pullString(json, "ShipType_Localised"),
-                        JsonUtils.pullString(json, "StarSystem"), JsonUtils.pullLong(json, "Value"), JsonUtils.pullLong(json, "ShipMarketID"), JsonUtils.pullLong(json, "TransferTime"), JsonUtils.pullLong(json, "TransferPrice"), JsonUtils.pullInt(json, "ShipID")));
-            }
-        }
-
-        return storedShipRemoteList;
     }
 
     public static List<Transfer> createTransferList(JsonArray array) {
