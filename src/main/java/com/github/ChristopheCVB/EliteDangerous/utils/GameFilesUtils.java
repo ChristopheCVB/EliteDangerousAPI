@@ -268,56 +268,6 @@ public class GameFilesUtils {
         return ingredients;
     }
 
-    public static String[] createDataSystemsList(JsonArray array) {
-        String[] systems = null;
-
-        if (array != null) {
-            systems = new String[array.size()];
-
-            int arrayPos = 0;
-
-            for (JsonElement system : array) {
-                systems[arrayPos] = system.getAsString();
-                arrayPos++;
-            }
-        }
-
-        return systems;
-    }
-
-    public static String[] createDataDiscoveredList(JsonArray array) {
-        String[] discoveries = null;
-
-        if (array != null) {
-            discoveries = new String[array.size()];
-
-            int arrayPos = 0;
-
-            for (JsonElement discovered : array) {
-                discoveries[arrayPos] = discovered.getAsString();
-                arrayPos++;
-            }
-        }
-
-        return discoveries;
-    }
-
-    public static List<Discovered> createDiscoveredList(JsonArray array) {
-        List<Discovered> discoveries = null;
-
-        if (array != null) {
-            discoveries = new ArrayList<>();
-
-            for (JsonElement comp : array) {
-                JsonObject json = comp.getAsJsonObject();
-
-                discoveries.add(new Discovered(JsonUtils.pullString(json, "SystemName"), JsonUtils.pullInt(json, "NumBodies")));
-            }
-        }
-
-        return discoveries;
-    }
-
     public static List<Material> createMaterialList(JsonArray array) {
         List<Material> materials = null;
 
