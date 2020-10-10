@@ -214,6 +214,8 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(RedeemVoucherEvent.class.getSimpleName().replace("Event", ""), RedeemVoucherEvent.class);
 		eventDeserializer.registerEventType(RefuelAllEvent.class.getSimpleName().replace("Event", ""), RefuelAllEvent.class);
 		eventDeserializer.registerEventType(RefuelPartialEvent.class.getSimpleName().replace("Event", ""), RefuelPartialEvent.class);
+		eventDeserializer.registerEventType(ClearSavedGameEvent.class.getSimpleName().replace("Event", ""), ClearSavedGameEvent.class);
+		eventDeserializer.registerEventType(CommanderEvent.class.getSimpleName().replace("Event", ""), CommanderEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -268,12 +270,6 @@ public class EliteDangerousAPI {
 				if (jsonEvent.has("Inventory")) {
 					event = new CargoEvent(timestamp, jsonEvent);
 				}
-				break;
-			case "ClearSavedGame":
-				event = new ClearSavedGameEvent(timestamp, jsonEvent);
-				break;
-			case "Commander":
-				event = new CommanderEvent(timestamp, jsonEvent);
 				break;
 			case "Loadout":
 				event = new LoadoutEvent(timestamp, jsonEvent);
