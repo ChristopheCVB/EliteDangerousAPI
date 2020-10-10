@@ -10,10 +10,9 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 public class ScanEvent extends Event {
-	
+	// TODO: Refactor Gson Parsing ScanEvent
 	private String scanType, bodyName, starType, luminosity, terraformState, planetClass, atmosphere, atmosphereType, volcanism, reserveLevel, starSystem;
-	private Double distanceFromArrivalLS, stellarMass, surfaceTemperature, eccentricity, orbitalInclination, periapsis, rotationPeriod, axialTilt, absoluteMagnitude, massEM, surfaceGravity,
-	surfacePressure;
+	private Double distanceFromArrivalLS, stellarMass, surfaceTemperature, eccentricity, orbitalInclination, periapsis, rotationPeriod, axialTilt, absoluteMagnitude, massEM, surfaceGravity, surfacePressure;
 	private Integer bodyID, subclass;
 	private Long radius, semiMajorAxis, orbitalPeriod, ageMY, systemAddress;
 	private Boolean tidalLock, landable, star, wasMapped, wasDiscovered;

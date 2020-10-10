@@ -6,7 +6,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.Default
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.SkimmerBounty;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.BountyInfo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class BountyEvent extends Event {
 	public String faction;
@@ -14,7 +14,7 @@ public class BountyEvent extends Event {
 	public String victimsFaction;
 	public Long reward;
 	public Long totalReward;
-	public List<BountyReward> rewards;
+	public ArrayList<BountyReward> rewards;
 	
 	public BountyEvent(String timestamp) {
         super(timestamp);

@@ -126,6 +126,23 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(ShieldStateEvent.class.getSimpleName().replace("Event", ""), ShieldStateEvent.class);
 		eventDeserializer.registerEventType(ShipTargetedEvent.class.getSimpleName().replace("Event", ""), ShipTargetedEvent.class);
 		eventDeserializer.registerEventType(SRVDestroyedEvent.class.getSimpleName().replace("Event", ""), SRVDestroyedEvent.class);
+		eventDeserializer.registerEventType(UnderAttackEvent.class.getSimpleName().replace("Event", ""), UnderAttackEvent.class);
+		eventDeserializer.registerEventType(MusicEvent.class.getSimpleName().replace("Event", ""), MusicEvent.class);
+		eventDeserializer.registerEventType(ReceiveTextEvent.class.getSimpleName().replace("Event", ""), ReceiveTextEvent.class);
+		eventDeserializer.registerEventType(BuyExplorationDataEvent.class.getSimpleName().replace("Event", ""), BuyExplorationDataEvent.class);
+		eventDeserializer.registerEventType(CodexEntryEvent.class.getSimpleName().replace("Event", ""), CodexEntryEvent.class);
+		eventDeserializer.registerEventType(DiscoveryScanEvent.class.getSimpleName().replace("Event", ""), DiscoveryScanEvent.class);
+		eventDeserializer.registerEventType(FSSAllBodiesFoundEvent.class.getSimpleName().replace("Event", ""), FSSAllBodiesFoundEvent.class);
+		eventDeserializer.registerEventType(FSSDiscoveryScanEvent.class.getSimpleName().replace("Event", ""), FSSDiscoveryScanEvent.class);
+		eventDeserializer.registerEventType(FSSSignalDiscoveredEvent.class.getSimpleName().replace("Event", ""), FSSSignalDiscoveredEvent.class);
+		eventDeserializer.registerEventType(MaterialCollectedEvent.class.getSimpleName().replace("Event", ""), MaterialCollectedEvent.class);
+		eventDeserializer.registerEventType(MaterialDiscardedEvent.class.getSimpleName().replace("Event", ""), MaterialDiscardedEvent.class);
+		eventDeserializer.registerEventType(MaterialDiscoveredEvent.class.getSimpleName().replace("Event", ""), MaterialDiscoveredEvent.class);
+		eventDeserializer.registerEventType(MultiSellExplorationDataEvent.class.getSimpleName().replace("Event", ""), MultiSellExplorationDataEvent.class);
+		eventDeserializer.registerEventType(NavBeaconScanEvent.class.getSimpleName().replace("Event", ""), NavBeaconScanEvent.class);
+		eventDeserializer.registerEventType(SAAScanCompleteEvent.class.getSimpleName().replace("Event", ""), SAAScanCompleteEvent.class);
+		eventDeserializer.registerEventType(ScreenshotEvent.class.getSimpleName().replace("Event", ""), ScreenshotEvent.class);
+		eventDeserializer.registerEventType(SellExplorationDataEvent.class.getSimpleName().replace("Event", ""), SellExplorationDataEvent.class);
 		eventDeserializer.registerEventType(ApproachBodyEvent.class.getSimpleName().replace("Event", ""), ApproachBodyEvent.class);
 		eventDeserializer.registerEventType(ApproachSettlementEvent.class.getSimpleName().replace("Event", ""), ApproachSettlementEvent.class);
 		eventDeserializer.registerEventType(DockedEvent.class.getSimpleName().replace("Event", ""), DockedEvent.class);
@@ -235,53 +252,8 @@ public class EliteDangerousAPI {
 			case "Statistics":
 				event = new StatisticsEvent(timestamp, jsonEvent);
 				break;
-			case "UnderAttack":
-				event = new UnderAttackEvent(timestamp, jsonEvent);
-				break;
-			case "CodexEntry":
-				event = new CodexEntryEvent(timestamp, jsonEvent);
-				break;
-			case "DiscoveryScan":
-				event = new DiscoveryScanEvent(timestamp, jsonEvent);
-				break;
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
-				break;
-			case "FSSAllBodiesFound":
-				event = new FSSAllBodiesFoundEvent(timestamp, jsonEvent);
-				break;
-			case "FSSDiscoveryScan":
-				event = new FSSDiscoveryScanEvent(timestamp, jsonEvent);
-				break;
-			case "FSSSignalDiscovered":
-				event = new FSSSignalDiscoveredEvent(timestamp, jsonEvent);
-				break;
-			case "MaterialCollected":
-				event = new MaterialCollectedEvent(timestamp, jsonEvent);
-				break;
-			case "MaterialDiscarded":
-				event = new MaterialDiscardedEvent(timestamp, jsonEvent);
-				break;
-			case "MaterialDiscovered":
-				event = new MaterialDiscoveredEvent(timestamp, jsonEvent);
-				break;
-			case "MultiSellExplorationData":
-				event = new MultiSellExplorationDataEvent(timestamp, jsonEvent);
-				break;
-			case "NavBeaconScan":
-				event = new NavBeaconScanEvent(timestamp, jsonEvent);
-				break;
-			case "BuyExplorationData":
-				event = new BuyExplorationDataEvent(timestamp, jsonEvent);
-				break;
-			case "SAAScanComplete":
-				event = new SAAScanCompleteEvent(timestamp, jsonEvent);
-				break;
-			case "SellExplorationData":
-				event = new SellExplorationDataEvent(timestamp, jsonEvent);
-				break;
-			case "Screenshot":
-				event = new ScreenshotEvent(timestamp, jsonEvent);
 				break;
 			case "AsteroidCracked":
 				event = new AsteroidCrackedEvent(timestamp, jsonEvent);
@@ -471,12 +443,6 @@ public class EliteDangerousAPI {
 				break;
 			case "CarrierFinance":
 				event = new CarrierFinanceEvent(timestamp, jsonEvent);
-				break;
-			case "Music":
-				event = new MusicEvent(timestamp, jsonEvent);
-				break;
-			case "ReceiveText":
-				event = new ReceiveTextEvent(timestamp, jsonEvent);
 				break;
 			default:
 				GameFilesUtils.sendUnprocessedEvent(eventName, jsonEvent);
