@@ -204,11 +204,14 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(MissionRedirectedEvent.class.getSimpleName().replace("Event", ""), MissionRedirectedEvent.class);
 		eventDeserializer.registerEventType(ModuleBuyEvent.class.getSimpleName().replace("Event", ""), ModuleBuyEvent.class);
 		eventDeserializer.registerEventType(ModuleRetrieveEvent.class.getSimpleName().replace("Event", ""), ModuleRetrieveEvent.class);
+		eventDeserializer.registerEventType(ModuleSellEvent.class.getSimpleName().replace("Event", ""), ModuleSellEvent.class);
+		eventDeserializer.registerEventType(ModuleSellRemoteEvent.class.getSimpleName().replace("Event", ""), ModuleSellRemoteEvent.class);
+		eventDeserializer.registerEventType(ModuleStoreEvent.class.getSimpleName().replace("Event", ""), ModuleStoreEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
 		this.gson = new GsonBuilder()
-				.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+				.setFieldNamingStrategy(f -> FieldNamingPolicy.UPPER_CAMEL_CASE.translateName(f).replaceFirst("Localised$", "_Localised"))
 				.registerTypeAdapter(Event.class, eventDeserializer)
 				.registerTypeAdapter(DiedEvent.class, diedEventDeserializer)
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
@@ -300,15 +303,6 @@ public class EliteDangerousAPI {
 				break;
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleSell":
-				event = new ModuleSellEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleSellRemote":
-				event = new ModuleSellRemote(timestamp, jsonEvent);
-				break;
-			case "ModuleStore":
-				event = new ModuleStoreEvent(timestamp, jsonEvent);
 				break;
 			case "ModuleSwap":
 				event = new ModuleSwapEvent(timestamp, jsonEvent);
