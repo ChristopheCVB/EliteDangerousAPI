@@ -173,6 +173,13 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(StartJumpEvent.class.getSimpleName().replace("Event", ""), StartJumpEvent.class);
 		eventDeserializer.registerEventType(TouchdownEvent.class.getSimpleName().replace("Event", ""), TouchdownEvent.class);
 		eventDeserializer.registerEventType(UndockedEvent.class.getSimpleName().replace("Event", ""), UndockedEvent.class);
+		eventDeserializer.registerEventType(AsteroidCrackedEvent.class.getSimpleName().replace("Event", ""), AsteroidCrackedEvent.class);
+		eventDeserializer.registerEventType(BuyTradeDataEvent.class.getSimpleName().replace("Event", ""), BuyTradeDataEvent.class);
+		eventDeserializer.registerEventType(CollectCargoEvent.class.getSimpleName().replace("Event", ""), CollectCargoEvent.class);
+		eventDeserializer.registerEventType(EjectCargoEvent.class.getSimpleName().replace("Event", ""), EjectCargoEvent.class);
+		eventDeserializer.registerEventType(MarketBuyEvent.class.getSimpleName().replace("Event", ""), MarketBuyEvent.class);
+		eventDeserializer.registerEventType(MarketSellEvent.class.getSimpleName().replace("Event", ""), MarketSellEvent.class);
+		eventDeserializer.registerEventType(MiningRefinedEvent.class.getSimpleName().replace("Event", ""), MiningRefinedEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -269,27 +276,6 @@ public class EliteDangerousAPI {
 				break;
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
-				break;
-			case "AsteroidCracked":
-				event = new AsteroidCrackedEvent(timestamp, jsonEvent);
-				break;
-			case "BuyTradeData":
-				event = new BuyTradeDataEvent(timestamp, jsonEvent);
-				break;
-			case "CollectCargo":
-				event = new CollectCargoEvent(timestamp, jsonEvent);
-				break;
-			case "EjectCargo":
-				event = new EjectCargoEvent(timestamp, jsonEvent);
-				break;
-			case "MarketBuy":
-				event = new MarketBuyEvent(timestamp, jsonEvent);
-				break;
-			case "MarketSell":
-				event = new MarketSellEvent(timestamp, jsonEvent);
-				break;
-			case "MiningRefined":
-				event = new MiningRefinedEvent(timestamp, jsonEvent);
 				break;
 			case "BuyAmmo":
 				event = new BuyAmmoEvent(timestamp, jsonEvent);
