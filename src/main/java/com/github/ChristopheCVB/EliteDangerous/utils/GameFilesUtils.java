@@ -11,7 +11,6 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Encod
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Manufactured;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Raw;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.*;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.station.Discovered;
 import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnusedEventDataException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -410,24 +409,6 @@ public class GameFilesUtils {
         return passengers;
     }
 
-    public static List<StationEconomy> createStationEconomiesList(JsonArray array) {
-        List<StationEconomy> stationEconomiesList = null;
-
-        if (array != null) {
-            stationEconomiesList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                StationEconomy stationEconomy = new StationEconomy(JsonUtils.pullString(json, "Name"), JsonUtils.pullString(json, "Name_Localised"), JsonUtils.pullDouble(json, "Proportion"));
-
-                stationEconomiesList.add(stationEconomy);
-
-            }
-        }
-
-        return stationEconomiesList;
-    }
-
     public static List<Module> createModuleList(JsonArray array) {
         List<Module> modules = null;
 
@@ -659,60 +640,6 @@ public class GameFilesUtils {
             }
         }
         return stationServiceList;
-    }
-
-    public static List<Faction> createFactionsList(JsonArray array) {
-        List<Faction> factionsList = null;
-
-        if (array != null) {
-            factionsList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                JsonArray activeStatesArray = JsonUtils.pullJsonArray(json, "ActiveStates");
-                JsonArray recoveringStatesArray = JsonUtils.pullJsonArray(json, "RecoveringStates");
-                JsonArray pendingStatesArray = JsonUtils.pullJsonArray(json, "PendingStates");
-
-                factionsList.add(new Faction(JsonUtils.pullString(json, "Name"), JsonUtils.pullString(json, "FactionState"), JsonUtils.pullString(json, "Government"), JsonUtils.pullString(json, "Allegiance"), JsonUtils.pullString(json, "Happiness"),
-                        JsonUtils.pullDouble(json, "MyReputation"), JsonUtils.pullDouble(json, "Influence"), GameFilesUtils.createFactionStates(activeStatesArray), GameFilesUtils.createFactionStates(pendingStatesArray),
-                        GameFilesUtils.createFactionStates(recoveringStatesArray), JsonUtils.pullBoolean(json, "SquadronSystem"), JsonUtils.pullBoolean(json, "HappiestSystem"), JsonUtils.pullBoolean(json, "HomeSystem")));
-            }
-        }
-
-        return factionsList;
-    }
-
-    private static FactionState createFactionStates(JsonArray array) {
-        if (array != null) {
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                return new FactionState(JsonUtils.pullString(json, "State"), JsonUtils.pullDouble(json, "Trend"));
-            }
-        }
-        return null;
-    }
-
-    public static Conflict createConflict(JsonArray array) {
-        if (array == null) {
-            return null;
-        }
-
-        List<ConflicFaction> conflictFactionList = new ArrayList<>();
-
-        JsonObject json = array.get(0).getAsJsonObject();
-        JsonObject faction1 = JsonUtils.pullJsonObject(json, "Faction1");
-        JsonObject faction2 = JsonUtils.pullJsonObject(json, "Faction2");
-
-        String status = JsonUtils.pullString(json, "Status");
-        String warType = JsonUtils.pullString(json, "WarType");
-
-        ConflicFaction cf1 = new ConflicFaction(JsonUtils.pullString(faction1, "Name"), JsonUtils.pullString(faction1, "Stake"), JsonUtils.pullInt(faction1, "WonDays"));
-        ConflicFaction cf2 = new ConflicFaction(JsonUtils.pullString(faction2, "Name"), JsonUtils.pullString(faction2, "Stake"), JsonUtils.pullInt(faction2, "WonDays"));
-
-        conflictFactionList.add(cf1);
-        conflictFactionList.add(cf2);
-
-        return new Conflict(status, warType, conflictFactionList);
     }
 
     public static List<StoredShipHere> createStoredShipsHereList(JsonArray array) {
