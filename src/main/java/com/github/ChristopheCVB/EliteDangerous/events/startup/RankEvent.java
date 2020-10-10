@@ -8,7 +8,12 @@ import com.google.gson.JsonObject;
 
 public class RankEvent extends Event {
 	
-	private Integer combat, trade, explore, empire, federation, cqc;
+	public Integer combat;
+	public Integer trade;
+	public Integer explore;
+	public Integer empire;
+	public Integer federation;
+	public Integer cqc;
 
 	public RankEvent(String timestamp, JsonObject jsonEvent) {
         super(timestamp);
@@ -22,6 +27,8 @@ public class RankEvent extends Event {
 
         GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);
     }
+
+//    TODO: i dont know what to do here can you do it?
 
 	/**
 	 * Gets the Combat rank as an Integer between 0 - 8.

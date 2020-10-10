@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
  *
  */
 public class ReputationEvent extends Event {
+	//    TODO: i dont know what to do here to can you do it?
 
 	private Integer empire, federation, alliance, independent;
 

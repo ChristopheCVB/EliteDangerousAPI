@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 public class PassengersEvent extends Event {
-	
+//	TODO: can you do this one? another createPassengerManifest
 	private List<PassengerManifest> passengers;
 
 	public PassengersEvent(String timestamp, JsonObject jsonEvent) {

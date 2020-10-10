@@ -6,7 +6,8 @@ import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.google.gson.JsonObject;
 
 public class StatisticsEvent extends Event {
-	
+	//    TODO: i dont know what to do here to can you do it?
+
 	private Long currentWealth, spentOnShips, spentOnOutfitting, spentOnRepairs, spentOnFuel, spentOnAmmoConsumables, spentOnInsurance, bountyHuntingProfit, combatBondsProfit, assassinationProfits,
 	totalFines, totalBounties, blackMarketsProfit, averageSmugglingProfit, marketProfit, miningProfits, explorationProfits, searchRescueProfit, totalNpcCrewWages, fleetCarrierRearmTotal,
 	fleetCarrierExportTotal, fleetCarrierImportTotal, fleetCarrierRefuelTotal, fleetCarrierRefuelProfit, fleetCarrierRepairsTotal, fleetCarrierShipyardSold, fleetCarrierOutfittingSold,
