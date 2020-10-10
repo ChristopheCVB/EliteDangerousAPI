@@ -13,7 +13,7 @@ TODO
 
 TODO
 
-Go to [releases](https://github.com/ChristopheCVB/EliteDangerous/releases)
+Go to [releases](https://github.com/ChristopheCVB/EliteDangerousAPI/releases)
 
 ## Get Started
 
@@ -46,4 +46,4 @@ Use the common `gradlew build` task to build your project.
 
 ## ROADMAP
 
-The roadmap can be found [here](https://github.com/ChristopheCVB/EliteDangerous/projects/1)
+The roadmap can be found [here](https://github.com/ChristopheCVB/EliteDangerousAPI/projects/1)
