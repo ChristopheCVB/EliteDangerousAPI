@@ -133,6 +133,14 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(DockingDeniedEvent.class.getSimpleName().replace("Event", ""), DockingDeniedEvent.class);
 		eventDeserializer.registerEventType(DockingGrantedEvent.class.getSimpleName().replace("Event", ""), DockingGrantedEvent.class);
 		eventDeserializer.registerEventType(DockingRequestedEvent.class.getSimpleName().replace("Event", ""), DockingRequestedEvent.class);
+		eventDeserializer.registerEventType(FSDJumpEvent.class.getSimpleName().replace("Event", ""), FSDJumpEvent.class);
+		eventDeserializer.registerEventType(FSDTargetEvent.class.getSimpleName().replace("Event", ""), FSDTargetEvent.class);
+		eventDeserializer.registerEventType(LeaveBodyEvent.class.getSimpleName().replace("Event", ""), LeaveBodyEvent.class);
+		eventDeserializer.registerEventType(LiftoffEvent.class.getSimpleName().replace("Event", ""), LiftoffEvent.class);
+		eventDeserializer.registerEventType(LocationEvent.class.getSimpleName().replace("Event", ""), LocationEvent.class);
+		eventDeserializer.registerEventType(StartJumpEvent.class.getSimpleName().replace("Event", ""), StartJumpEvent.class);
+		eventDeserializer.registerEventType(TouchdownEvent.class.getSimpleName().replace("Event", ""), TouchdownEvent.class);
+		eventDeserializer.registerEventType(UndockedEvent.class.getSimpleName().replace("Event", ""), UndockedEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -226,30 +234,6 @@ public class EliteDangerousAPI {
 				break;
 			case "Statistics":
 				event = new StatisticsEvent(timestamp, jsonEvent);
-				break;
-			case "FSDJump":
-				event = new FSDJumpEvent(timestamp, jsonEvent);
-				break;
-			case "FSDTarget":
-				event = new FSDTargetEvent(timestamp, jsonEvent);
-				break;
-			case "LeaveBody":
-				event = new LeaveBodyEvent(timestamp, jsonEvent);
-				break;
-			case "Liftoff":
-				event = new LiftoffEvent(timestamp, jsonEvent);
-				break;
-			case "Location":
-				event = new LocationEvent(timestamp, jsonEvent);
-				break;
-			case "StartJump":
-				event = new StartJumpEvent(timestamp, jsonEvent);
-				break;
-			case "Touchdown":
-				event = new TouchdownEvent(timestamp, jsonEvent);
-				break;
-			case "Undocked":
-				event = new UndockedEvent(timestamp, jsonEvent);
 				break;
 			case "UnderAttack":
 				event = new UnderAttackEvent(timestamp, jsonEvent);

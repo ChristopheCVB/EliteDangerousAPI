@@ -693,27 +693,6 @@ public class GameFilesUtils {
         return stationServiceList;
     }
 
-    public static List<Faction> createFactionsList(JsonArray array) {
-        List<Faction> factionsList = null;
-
-        if (array != null) {
-            factionsList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                JsonArray activeStatesArray = JsonUtils.pullJsonArray(json, "ActiveStates");
-                JsonArray recoveringStatesArray = JsonUtils.pullJsonArray(json, "RecoveringStates");
-                JsonArray pendingStatesArray = JsonUtils.pullJsonArray(json, "PendingStates");
-
-                factionsList.add(new Faction(JsonUtils.pullString(json, "Name"), JsonUtils.pullString(json, "FactionState"), JsonUtils.pullString(json, "Government"), JsonUtils.pullString(json, "Allegiance"), JsonUtils.pullString(json, "Happiness"),
-                        JsonUtils.pullDouble(json, "MyReputation"), JsonUtils.pullDouble(json, "Influence"), GameFilesUtils.createFactionStates(activeStatesArray), GameFilesUtils.createFactionStates(pendingStatesArray),
-                        GameFilesUtils.createFactionStates(recoveringStatesArray), JsonUtils.pullBoolean(json, "SquadronSystem"), JsonUtils.pullBoolean(json, "HappiestSystem"), JsonUtils.pullBoolean(json, "HomeSystem")));
-            }
-        }
-
-        return factionsList;
-    }
-
     private static FactionState createFactionStates(JsonArray array) {
         if (array != null) {
             for (JsonElement o : array) {
