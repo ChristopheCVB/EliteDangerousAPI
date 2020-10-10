@@ -1,9 +1,3 @@
-/*
-Author: XenoPyax
-Discord: XenoPyax#5647
-File created: 07/02/2020 08:05
-*/
-
 package com.github.ChristopheCVB.EliteDangerous.events.inventory;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;

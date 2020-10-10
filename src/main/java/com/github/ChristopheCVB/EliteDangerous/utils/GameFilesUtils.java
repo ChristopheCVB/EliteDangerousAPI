@@ -2,7 +2,6 @@ package com.github.ChristopheCVB.EliteDangerous.utils;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.*;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.FactionBounty;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.inventory.Transfer;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.market.Item;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Encoded;
@@ -534,21 +533,6 @@ public class GameFilesUtils {
         }
 
         return inv;
-    }
-
-    public static List<FactionBounty> createFactionBountyList(JsonArray array) {
-        List<FactionBounty> factionBountyList = null;
-
-        if (array != null) {
-            factionBountyList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                factionBountyList.add(new FactionBounty(JsonUtils.pullString(json, "Faction"), JsonUtils.pullLong(json, "Amount")));
-            }
-        }
-
-        return factionBountyList;
     }
 
     public static List<StoredModule> createStoredModuleList(JsonArray array) {

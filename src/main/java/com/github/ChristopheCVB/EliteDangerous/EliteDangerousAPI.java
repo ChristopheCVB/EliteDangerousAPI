@@ -207,6 +207,13 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(ModuleSellEvent.class.getSimpleName().replace("Event", ""), ModuleSellEvent.class);
 		eventDeserializer.registerEventType(ModuleSellRemoteEvent.class.getSimpleName().replace("Event", ""), ModuleSellRemoteEvent.class);
 		eventDeserializer.registerEventType(ModuleStoreEvent.class.getSimpleName().replace("Event", ""), ModuleStoreEvent.class);
+		eventDeserializer.registerEventType(ModuleSwapEvent.class.getSimpleName().replace("Event", ""), ModuleSwapEvent.class);
+		eventDeserializer.registerEventType(OutfittingEvent.class.getSimpleName().replace("Event", ""), OutfittingEvent.class);
+		eventDeserializer.registerEventType(PayBountiesEvent.class.getSimpleName().replace("Event", ""), PayBountiesEvent.class);
+		eventDeserializer.registerEventType(PayFinesEvent.class.getSimpleName().replace("Event", ""), PayFinesEvent.class);
+		eventDeserializer.registerEventType(RedeemVoucherEvent.class.getSimpleName().replace("Event", ""), RedeemVoucherEvent.class);
+		eventDeserializer.registerEventType(RefuelAllEvent.class.getSimpleName().replace("Event", ""), RefuelAllEvent.class);
+		eventDeserializer.registerEventType(RefuelPartialEvent.class.getSimpleName().replace("Event", ""), RefuelPartialEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -303,27 +310,6 @@ public class EliteDangerousAPI {
 				break;
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleSwap":
-				event = new ModuleSwapEvent(timestamp, jsonEvent);
-				break;
-			case "Outfitting":
-				event = new OutfittingEvent(timestamp, jsonEvent);
-				break;
-			case "PayBounties":
-				event = new PayBountiesEvent(timestamp, jsonEvent);
-				break;
-			case "PayFines":
-				event = new PayFinesEvent(timestamp, jsonEvent);
-				break;
-			case "RedeemVoucher":
-				event = new RedeemVoucherEvent(timestamp, jsonEvent);
-				break;
-			case "RefuelAll":
-				event = new RefuelAllEvent(timestamp, jsonEvent);
-				break;
-			case "RefuelPartial":
-				event = new RefuelPartialEvent(timestamp, jsonEvent);
 				break;
 			case "Repair":
 				event = new RepairEvent(timestamp, jsonEvent);
