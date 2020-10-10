@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ModuleRetrieveEvent extends Event {
 	
-	public Long marketId;
+	public Long marketID;
 	public String slot;
 	public String retrievedItem;
 	@SerializedName("RetrievedItem_Localised")
@@ -20,7 +20,7 @@ public class ModuleRetrieveEvent extends Event {
 	public String swapOutItem;
 	@SerializedName("SwapOutItem_Localised")
 	public String swapOutItemLocalised;
-	public Integer shipId;
+	public Integer shipID;
 	public Boolean hot;
 	
 	public ModuleRetrieveEvent(String timestamp) {

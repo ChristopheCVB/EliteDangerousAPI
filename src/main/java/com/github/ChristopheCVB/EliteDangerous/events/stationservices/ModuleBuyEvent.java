@@ -23,9 +23,9 @@ public class ModuleBuyEvent extends Event {
 	@SerializedName("SellItem_Localised")
 	public String sellItemLocalised;
 	public Long buyPrice;
-	public Long marketId;
+	public Long marketID;
 	public Long sellPrice;
-	public Integer shipId;
+	public Integer shipID;
 	
 	public ModuleBuyEvent(String timestamp) {
 		super(timestamp);

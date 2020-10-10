@@ -301,15 +301,6 @@ public class EliteDangerousAPI {
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
 				break;
-			case "MissionRedirected":
-				event = new MissionRedirectedEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleBuy":
-				event = new ModuleBuyEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleRetrieve":
-				event = new ModuleRetrieveEvent(timestamp, jsonEvent);
-				break;
 			case "ModuleSell":
 				event = new ModuleSellEvent(timestamp, jsonEvent);
 				break;

@@ -1,9 +1,10 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
+import com.google.gson.annotations.SerializedName;
 
 public class CommunityGoalEvent extends Event {
-	
+	@SerializedName("CGID")
 	public Integer cgid;
 	public Integer playerContribution;
 	public Integer numContributors;
