@@ -12,11 +12,11 @@ public class ApproachSettlementEvent extends Event {
 	
 	public String name;
 	public String bodyName;
-	public Integer bodyId;
+	public Integer bodyID;
 	public Double latitude;
 	public Double longitude;
-	public Long marketId;
-	public Long systemaddress;
+	public Long marketID;
+	public Long systemAddress;
 	
 	public ApproachSettlementEvent(String timestamp) {
         super(timestamp);
