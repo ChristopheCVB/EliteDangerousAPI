@@ -197,6 +197,9 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(MissionAcceptedEvent.class.getSimpleName().replace("Event", ""), MissionAcceptedEvent.class);
 		eventDeserializer.registerEventType(MissionCompletedEvent.class.getSimpleName().replace("Event", ""), MissionCompletedEvent.class);
 		eventDeserializer.registerEventType(MissionFailedEvent.class.getSimpleName().replace("Event", ""), MissionFailedEvent.class);
+		eventDeserializer.registerEventType(MissionRedirectedEvent.class.getSimpleName().replace("Event", ""), MissionRedirectedEvent.class);
+		eventDeserializer.registerEventType(ModuleBuyEvent.class.getSimpleName().replace("Event", ""), ModuleBuyEvent.class);
+		eventDeserializer.registerEventType(ModuleRetrieveEvent.class.getSimpleName().replace("Event", ""), ModuleRetrieveEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -305,15 +308,6 @@ public class EliteDangerousAPI {
 				break;
 			case "MaterialTrade":
 				event = new MaterialTradeEvent(timestamp, jsonEvent);
-				break;
-			case "MissionRedirected":
-				event = new MissionRedirectedEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleBuy":
-				event = new ModuleBuyEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleRetrieve":
-				event = new ModuleRetrieveEvent(timestamp, jsonEvent);
 				break;
 			case "ModuleSell":
 				event = new ModuleSellEvent(timestamp, jsonEvent);
