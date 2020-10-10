@@ -6,14 +6,25 @@ import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoadoutEvent extends Event {
 	
-	private String ship, shipName, shipIdent;
-	private Integer shipID, hullValue, moduleValue, rebuy, cargoCapcity, main;
-	private Double hullHealth, maxJumpRange, reserve, unladenMass;
-	private List<Module> modules;
+	public String ship;
+	public String shipName;
+	public String shipIdent;
+	public Integer shipID;
+	public Integer hullValue;
+	public Integer moduleValue;
+	public Integer rebuy;
+	public Integer cargoCapcity;
+	public Integer main;
+	public Double hullHealth;
+	public Double maxJumpRange;
+	public Double reserve;
+	public Double unladenMass;
+	public ArrayList<Module> modules;
 	
 	public LoadoutEvent(String timestamp, JsonObject jsonEvent) {
 		super(timestamp);
@@ -32,6 +43,7 @@ public class LoadoutEvent extends Event {
         this.main = JsonUtils.pullInt(fuelCapacity, "Main");
         this.reserve = JsonUtils.pullDouble(fuelCapacity, "Reserve");
         this.unladenMass = JsonUtils.pullDouble(jsonEvent, "UnladenMass");
+        //TODO: Can you do this createModuleList again? the Module class is again not changed yet
         this.modules = GameFilesUtils.createModuleList(JsonUtils.pullJsonArray(jsonEvent, "Modules"));
 
         GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);

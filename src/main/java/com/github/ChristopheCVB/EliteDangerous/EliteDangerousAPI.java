@@ -216,6 +216,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(RefuelPartialEvent.class.getSimpleName().replace("Event", ""), RefuelPartialEvent.class);
 		eventDeserializer.registerEventType(ClearSavedGameEvent.class.getSimpleName().replace("Event", ""), ClearSavedGameEvent.class);
 		eventDeserializer.registerEventType(CommanderEvent.class.getSimpleName().replace("Event", ""), CommanderEvent.class);
+		eventDeserializer.registerEventType(LoadGameEvent.class.getSimpleName().replace("Event", ""), LoadGameEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -282,9 +283,6 @@ public class EliteDangerousAPI {
 				break;
 			case "NewCommander":
 				event = new NewCommanderEvent(timestamp, jsonEvent);
-				break;
-			case "LoadGame":
-				event = new LoadGameEvent(timestamp, jsonEvent);
 				break;
 			case "Passengers":
 				event = new PassengersEvent(timestamp, jsonEvent);

@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 public class MissionsEvent extends Event {
-	
+//	TODO: can you do this to, haven't done anything
 	private List<Mission> active;
 	private List<Mission> failed;
 	private List<Mission> complete;

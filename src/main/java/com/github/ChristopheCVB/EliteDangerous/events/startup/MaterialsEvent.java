@@ -11,10 +11,10 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 public class MaterialsEvent extends Event {
-	
-	private List<Raw> raw;
-	private List<Manufactured> manufactured;
-	private List<Encoded> encoded;
+	//TODO: Can you do this to? i havent changed anything besides making the fields public
+	public List<Raw> raw;
+	public List<Manufactured> manufactured;
+	public List<Encoded> encoded;
 	
 	public MaterialsEvent(String timestamp, JsonObject jsonEvent) {
         super(timestamp);
