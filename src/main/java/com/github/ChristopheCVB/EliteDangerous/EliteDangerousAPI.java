@@ -150,6 +150,13 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(DockingDeniedEvent.class.getSimpleName().replace("Event", ""), DockingDeniedEvent.class);
 		eventDeserializer.registerEventType(DockingGrantedEvent.class.getSimpleName().replace("Event", ""), DockingGrantedEvent.class);
 		eventDeserializer.registerEventType(DockingRequestedEvent.class.getSimpleName().replace("Event", ""), DockingRequestedEvent.class);
+		eventDeserializer.registerEventType(ApproachBodyEvent.class.getSimpleName().replace("Event", ""), ApproachBodyEvent.class);
+		eventDeserializer.registerEventType(ApproachSettlementEvent.class.getSimpleName().replace("Event", ""), ApproachSettlementEvent.class);
+		eventDeserializer.registerEventType(DockedEvent.class.getSimpleName().replace("Event", ""), DockedEvent.class);
+		eventDeserializer.registerEventType(DockingCancelledEvent.class.getSimpleName().replace("Event", ""), DockingCancelledEvent.class);
+		eventDeserializer.registerEventType(DockingDeniedEvent.class.getSimpleName().replace("Event", ""), DockingDeniedEvent.class);
+		eventDeserializer.registerEventType(DockingGrantedEvent.class.getSimpleName().replace("Event", ""), DockingGrantedEvent.class);
+		eventDeserializer.registerEventType(DockingRequestedEvent.class.getSimpleName().replace("Event", ""), DockingRequestedEvent.class);
 		eventDeserializer.registerEventType(FSDJumpEvent.class.getSimpleName().replace("Event", ""), FSDJumpEvent.class);
 		eventDeserializer.registerEventType(FSDTargetEvent.class.getSimpleName().replace("Event", ""), FSDTargetEvent.class);
 		eventDeserializer.registerEventType(LeaveBodyEvent.class.getSimpleName().replace("Event", ""), LeaveBodyEvent.class);

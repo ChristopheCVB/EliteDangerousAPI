@@ -37,7 +37,7 @@ public class FSDJumpEvent extends Event {
 	public ArrayList<Conflict> conflicts;
 	public Double[] starPos;
 	public ArrayList<String> powers;
-	
+
 	public FSDJumpEvent(String timestamp) {
 		super(timestamp);
     }
