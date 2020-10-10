@@ -10,6 +10,7 @@ public abstract class Event {
 	@SerializedName("event")
 	public String type;
 
+	// TODO: Remove Event constructor when Gson Parsing refactor is done
 	public Event(String timestamp) {
 		this.timestamp = new Date(GameFilesUtils.getTimeMillis(timestamp));
 	}
