@@ -11,7 +11,6 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Encod
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Manufactured;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Raw;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.*;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.station.Discovered;
 import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnusedEventDataException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -641,16 +640,6 @@ public class GameFilesUtils {
             }
         }
         return stationServiceList;
-    }
-
-    private static FactionState createFactionStates(JsonArray array) {
-        if (array != null) {
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                return new FactionState(JsonUtils.pullString(json, "State"), JsonUtils.pullDouble(json, "Trend"));
-            }
-        }
-        return null;
     }
 
     public static List<StoredShipHere> createStoredShipsHereList(JsonArray array) {
