@@ -2,7 +2,7 @@ package com.github.ChristopheCVB.EliteDangerous.utils.localiser;
 
 public class Reputation {
 
-    public static String getReputationLocalised(int reputation) {
+    public static String getReputationReadable(Double reputation) {
         String repName = "Neutral";
 
         if (reputation >= 90) {

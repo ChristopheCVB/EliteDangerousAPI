@@ -1,41 +1,16 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Encoded;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Manufactured;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Raw;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
-import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
-import com.google.gson.JsonObject;
+import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Material;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MaterialsEvent extends Event {
+	public ArrayList<Material> raw;
+	public ArrayList<Material> manufactured;
+	public ArrayList<Material> encoded;
 	
-	private List<Raw> raw;
-	private List<Manufactured> manufactured;
-	private List<Encoded> encoded;
-	
-	public MaterialsEvent(String timestamp, JsonObject jsonEvent) {
+	public MaterialsEvent(String timestamp) {
         super(timestamp);
-
-        this.raw = GameFilesUtils.createRawMaterialList(JsonUtils.pullJsonArray(jsonEvent, "Raw"));
-        this.manufactured = GameFilesUtils.createManufacturedMaterialList(JsonUtils.pullJsonArray(jsonEvent, "Manufactured"));
-        this.encoded = GameFilesUtils.createEncodedMaterialList(JsonUtils.pullJsonArray(jsonEvent, "Encoded"));
-
-        GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);
     }
-
-	public List<Raw> getRaw() {
-		return raw;
-	}
-
-	public List<Manufactured> getManufactured() {
-		return manufactured;
-	}
-
-	public List<Encoded> getEncoded() {
-		return encoded;
-	}
-	
 }

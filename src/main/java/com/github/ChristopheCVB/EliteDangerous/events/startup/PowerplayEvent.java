@@ -7,8 +7,11 @@ import com.google.gson.JsonObject;
 
 public class PowerplayEvent extends Event {
 	
-	private String power;
-	private Integer rank, merits, votes, timePledged;
+	public String power;
+	public Integer rank;
+	public Integer merits;
+	public Integer votes;
+	public Integer timePledged;
 	
 	public PowerplayEvent(String timestamp, JsonObject jsonEvent) {
         super(timestamp);
