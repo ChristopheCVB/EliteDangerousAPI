@@ -226,6 +226,23 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(MissionsEvent.class.getSimpleName().replace("Event", ""), MissionsEvent.class);
 		eventDeserializer.registerEventType(RankEvent.class.getSimpleName().replace("Event", ""), RankEvent.class);
 		eventDeserializer.registerEventType(ReputationEvent.class.getSimpleName().replace("Event", ""), ReputationEvent.class);
+		eventDeserializer.registerEventType(RepairAllEvent.class.getSimpleName().replace("Event", ""), RepairAllEvent.class);
+		eventDeserializer.registerEventType(RepairEvent.class.getSimpleName().replace("Event", ""), RepairEvent.class);
+		eventDeserializer.registerEventType(RestockVehicleEvent.class.getSimpleName().replace("Event", ""), RestockVehicleEvent.class);
+		eventDeserializer.registerEventType(ScientificResearchEvent.class.getSimpleName().replace("Event", ""), ScientificResearchEvent.class);
+		eventDeserializer.registerEventType(SearchAndRescueEvent.class.getSimpleName().replace("Event", ""), SearchAndRescueEvent.class);
+		eventDeserializer.registerEventType(SellDronesEvent.class.getSimpleName().replace("Event", ""), SellDronesEvent.class);
+		eventDeserializer.registerEventType(SellShipOnRebuyEvent.class.getSimpleName().replace("Event", ""), SellShipOnRebuyEvent.class);
+		eventDeserializer.registerEventType(SetUserShipNameEvent.class.getSimpleName().replace("Event", ""), SetUserShipNameEvent.class);
+		eventDeserializer.registerEventType(ShipyardBuyEvent.class.getSimpleName().replace("Event", ""), ShipyardBuyEvent.class);
+		eventDeserializer.registerEventType(ShipyardEvent.class.getSimpleName().replace("Event", ""), ShipyardEvent.class);
+		eventDeserializer.registerEventType(ShipyardNewEvent.class.getSimpleName().replace("Event", ""), ShipyardNewEvent.class);
+		eventDeserializer.registerEventType(ShipyardSellEvent.class.getSimpleName().replace("Event", ""), ShipyardSellEvent.class);
+		eventDeserializer.registerEventType(ShipyardSwapEvent.class.getSimpleName().replace("Event", ""), ShipyardSwapEvent.class);
+		eventDeserializer.registerEventType(ShipyardTransferEvent.class.getSimpleName().replace("Event", ""), ShipyardTransferEvent.class);
+		eventDeserializer.registerEventType(StoredModulesEvent.class.getSimpleName().replace("Event", ""), StoredModulesEvent.class);
+		eventDeserializer.registerEventType(StoredShipsEvent.class.getSimpleName().replace("Event", ""), StoredShipsEvent.class);
+		eventDeserializer.registerEventType(TechnologyBrokerEvent.class.getSimpleName().replace("Event", ""), TechnologyBrokerEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
@@ -284,57 +301,6 @@ public class EliteDangerousAPI {
 				break;
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
-				break;
-			case "Repair":
-				event = new RepairEvent(timestamp, jsonEvent);
-				break;
-			case "RepairAll":
-				event = new RepairAllEvent(timestamp, jsonEvent);
-				break;
-			case "RestockVehicle":
-				event = new RestockVehicleEvent(timestamp, jsonEvent);
-				break;
-			case "ScientificResearch":
-				event = new ScientificResearchEvent(timestamp, jsonEvent);
-				break;
-			case "SearchAndRescue":
-				event = new SearchAndRescueEvent(timestamp, jsonEvent);
-				break;
-			case "SellDrones":
-				event = new SellDronesEvent(timestamp, jsonEvent);
-				break;
-			case "SellShipOnRebuy":
-				event = new SellShipOnRebuyEvent(timestamp, jsonEvent);
-				break;
-			case "SetUserShipName":
-				event = new SetUserShipNameEvent(timestamp, jsonEvent);
-				break;
-			case "Shipyard":
-				event = new ShipyardEvent(timestamp, jsonEvent);
-				break;
-			case "ShipyardBuy":
-				event = new ShipyardBuyEvent(timestamp, jsonEvent);
-				break;
-			case "ShipyardNew":
-				event = new ShipyardNewEvent(timestamp, jsonEvent);
-				break;
-			case "ShipyardSell":
-				event = new ShipyardSellEvent(timestamp, jsonEvent);
-				break;
-			case "ShipyardTransfer":
-				event = new ShipyardTransferEvent(timestamp, jsonEvent);
-				break;
-			case "ShipyardSwap":
-				event = new ShipyardSwapEvent(timestamp, jsonEvent);
-				break;
-			case "StoredModules":
-				event = new StoredModulesEvent(timestamp, jsonEvent);
-				break;
-			case "StoredShips":
-				event = new StoredShipsEvent(timestamp, jsonEvent);
-				break;
-			case "TechnologyBroker":
-				event = new TechnologyBrokerEvent(timestamp, jsonEvent);
 				break;
 			case "CargoTransfer":
 				event = new CargoTransferEvent(timestamp, jsonEvent);
