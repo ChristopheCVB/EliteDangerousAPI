@@ -5,37 +5,27 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.BountyR
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.DefaultBounty;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.SkimmerBounty;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.BountyInfo;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
-import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
-import com.google.gson.JsonObject;
 
 import java.util.List;
 
 public class BountyEvent extends Event {
+	public String faction;
+	public String target;
+	public String victimsFaction;
+	public Long reward;
+	public Long totalReward;
+	public List<BountyReward> rewards;
 	
-	private String faction, target, victimsFaction;
-	private Long reward, totalReward;
-	private List<BountyReward> rewards;
-	
-	public BountyEvent(String timestamp, JsonObject jsonEvent) {
+	public BountyEvent(String timestamp) {
         super(timestamp);
-
-        this.faction = JsonUtils.pullString(jsonEvent, "Faction");
-        this.target = JsonUtils.pullString(jsonEvent, "Target");
-        this.victimsFaction = JsonUtils.pullString(jsonEvent, "VictimsFaction");
-        this.reward = JsonUtils.pullLong(jsonEvent, "Reward");
-        this.totalReward = JsonUtils.pullLong(jsonEvent, "TotalReward");
-        this.rewards = GameFilesUtils.createBountyRewardList(JsonUtils.pullJsonArray(jsonEvent, "Rewards"));
-
-        GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);
     }
 
 	public BountyInfo getBountyInfo() {
-		if(target.equals("Skimmer")) {
+		if("Skimmer".equals(target)) {
 			return new SkimmerBounty(faction, target, victimsFaction, reward);
-		}else {
+		}
+		else {
 			return new DefaultBounty(target, victimsFaction, totalReward, rewards);
 		}
 	}
-
 }

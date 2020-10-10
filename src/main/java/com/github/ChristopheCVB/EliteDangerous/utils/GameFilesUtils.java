@@ -2,7 +2,6 @@ package com.github.ChristopheCVB.EliteDangerous.utils;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.*;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.BountyReward;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.FactionBounty;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.engineer.EngineerProgress;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.engineer.Ingredient;
@@ -445,22 +444,6 @@ public class GameFilesUtils {
         return powers;
     }
 
-    public static List<Killer> createKillerList(JsonArray array) {
-        List<Killer> killers = null;
-
-        if (array != null) {
-            killers = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-
-                killers.add(new Killer(JsonUtils.pullString(json, "Name"), JsonUtils.pullString(json, "Ship"), JsonUtils.pullString(json, "Rank")));
-            }
-        }
-
-        return killers;
-    }
-
     public static List<PassengerManifest> createPassengerManifest(JsonArray array) {
         List<PassengerManifest> passengers = null;
 
@@ -475,21 +458,6 @@ public class GameFilesUtils {
         }
 
         return passengers;
-    }
-
-    public static List<BountyReward> createBountyRewardList(JsonArray array) {
-        List<BountyReward> bountyRewards = null;
-
-        if (array != null) {
-            bountyRewards = new ArrayList<>();
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-
-                bountyRewards.add(new BountyReward(JsonUtils.pullString(json, "Faction"), JsonUtils.pullLong(json, "Reward")));
-            }
-        }
-
-        return bountyRewards;
     }
 
     public static List<StationEconomy> createStationEconomiesList(JsonArray array) {

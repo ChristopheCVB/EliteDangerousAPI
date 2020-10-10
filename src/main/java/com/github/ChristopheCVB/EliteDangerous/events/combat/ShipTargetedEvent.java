@@ -6,49 +6,47 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.S
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.ShipScanStage2;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.ShipScanStage3;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.ScanStageInfo;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
-import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
-import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 
 public class ShipTargetedEvent extends Event {
+    public Integer scanStage;
+    public Boolean targetLocked;
+    public String ship;
+    @SerializedName("Ship_Localised")
+    public String shipLocalised;
+    public String pilotName;
+    @SerializedName("PilotName_Localised")
+    public String pilotNameLocalised;
+    public String pilotRank, faction, legalStatus, power;
+    public Double shieldHealth, hullHealth;
+    public Long bounty;
 
-	private Integer scanStage;
-	private Boolean targetLocked;
-	private String ship, shipLocalised, pilotName, pilotNameLocalised, pilotRank, faction, legalStatus, power;
-	private Double shieldHealth, hullHealth;
-	private Long bounty;
-	
-	public ShipTargetedEvent(String timestamp, JsonObject jsonEvent) {
-		super(timestamp);
-
-		this.scanStage = JsonUtils.pullInt(jsonEvent, "ScanStage");
-		this.bounty = JsonUtils.pullLong(jsonEvent, "Bounty");
-		this.targetLocked = JsonUtils.pullBoolean(jsonEvent, "TargetLocked");
-        this.ship = JsonUtils.pullString(jsonEvent, "Ship");
-        this.shipLocalised = JsonUtils.pullString(jsonEvent, "Ship_Localised");
-        this.pilotName = JsonUtils.pullString(jsonEvent, "PilotName");
-        this.pilotNameLocalised = JsonUtils.pullString(jsonEvent, "PilotName_Localised");
-        this.pilotRank = JsonUtils.pullString(jsonEvent, "PilotRank");
-        this.shieldHealth = JsonUtils.pullDouble(jsonEvent, "ShieldHealth");
-        this.hullHealth = JsonUtils.pullDouble(jsonEvent, "HullHealth");
-        this.faction = JsonUtils.pullString(jsonEvent, "Faction");
-        this.legalStatus = JsonUtils.pullString(jsonEvent, "LegalStatus");
-        this.power = JsonUtils.pullString(jsonEvent, "Power");
-
-        GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);
+    public ShipTargetedEvent(String timestamp) {
+        super(timestamp);
     }
-	
-	public ScanStageInfo getScanStageInfo() {
-		if(scanStage == 0) {
-			return new ShipScanStage0(targetLocked, ship, scanStage);
-	 	}else if(scanStage == 1) {
-	 		return new ShipScanStage1(targetLocked, ship, scanStage, pilotName, pilotNameLocalised, pilotRank, shipLocalised, power);
-	 	}else if(scanStage == 2) {
-			return new ShipScanStage2(targetLocked, ship, scanStage, pilotName, pilotNameLocalised, pilotRank, shipLocalised, power, shieldHealth, hullHealth);
-		}else if(scanStage == 3) {
-	 		return new ShipScanStage3(targetLocked, ship, scanStage, pilotName, pilotNameLocalised, pilotRank, shipLocalised, power, shieldHealth, hullHealth, faction, legalStatus, bounty);
-	 	}
-		return null;
-	 }
+
+    public ScanStageInfo getScanStageInfo() {
+    	ScanStageInfo scanStageInfo = null;
+
+    	switch (this.scanStage) {
+			case 0:
+				scanStageInfo = new ShipScanStage0(targetLocked, ship, scanStage);
+				break;
+
+			case 1:
+				scanStageInfo = new ShipScanStage1(targetLocked, ship, scanStage, pilotName, pilotNameLocalised, pilotRank, shipLocalised, power);
+				break;
+
+			case 2:
+				scanStageInfo = new ShipScanStage2(targetLocked, ship, scanStage, pilotName, pilotNameLocalised, pilotRank, shipLocalised, power, shieldHealth, hullHealth);
+				break;
+
+			case 3:
+				scanStageInfo = new ShipScanStage3(targetLocked, ship, scanStage, pilotName, pilotNameLocalised, pilotRank, shipLocalised, power, shieldHealth, hullHealth, faction, legalStatus, bounty);
+				break;
+		}
+
+        return scanStageInfo;
+    }
 
 }

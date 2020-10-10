@@ -16,6 +16,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.trade.*;
 import com.github.ChristopheCVB.EliteDangerous.events.travel.*;
 import com.github.ChristopheCVB.EliteDangerous.states.Status;
 import com.github.ChristopheCVB.EliteDangerous.states.StatusListener;
+import com.github.ChristopheCVB.EliteDangerous.utils.DiedEventDeserializer;
 import com.github.ChristopheCVB.EliteDangerous.utils.EventDeserializer;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
@@ -110,9 +111,28 @@ public class EliteDangerousAPI {
 		EventDeserializer eventDeserializer = new EventDeserializer("event");
 		eventDeserializer.registerEventType(SupercruiseEntryEvent.class.getSimpleName().replace("Event", ""), SupercruiseEntryEvent.class);
 		eventDeserializer.registerEventType(SupercruiseExitEvent.class.getSimpleName().replace("Event", ""), SupercruiseExitEvent.class);
+		eventDeserializer.registerEventType(BountyEvent.class.getSimpleName().replace("Event", ""), BountyEvent.class);
+		eventDeserializer.registerEventType(CapShipBondEvent.class.getSimpleName().replace("Event", ""), CapShipBondEvent.class);
+		eventDeserializer.registerEventType(DiedEvent.class.getSimpleName().replace("Event", ""), DiedEvent.class);
+		eventDeserializer.registerEventType(EscapeInterdictionEvent.class.getSimpleName().replace("Event", ""), EscapeInterdictionEvent.class);
+		eventDeserializer.registerEventType(FactionKillBondEvent.class.getSimpleName().replace("Event", ""), FactionKillBondEvent.class);
+		eventDeserializer.registerEventType(FighterDestroyedEvent.class.getSimpleName().replace("Event", ""), FighterDestroyedEvent.class);
+		eventDeserializer.registerEventType(HeatDamageEvent.class.getSimpleName().replace("Event", ""), HeatDamageEvent.class);
+		eventDeserializer.registerEventType(HeatWarningEvent.class.getSimpleName().replace("Event", ""), HeatWarningEvent.class);
+		eventDeserializer.registerEventType(HullDamageEvent.class.getSimpleName().replace("Event", ""), HullDamageEvent.class);
+		eventDeserializer.registerEventType(InterdictedEvent.class.getSimpleName().replace("Event", ""), InterdictedEvent.class);
+		eventDeserializer.registerEventType(InterdictionEvent.class.getSimpleName().replace("Event", ""), InterdictionEvent.class);
+		eventDeserializer.registerEventType(PvPKillEvent.class.getSimpleName().replace("Event", ""), PvPKillEvent.class);
+		eventDeserializer.registerEventType(ShieldStateEvent.class.getSimpleName().replace("Event", ""), ShieldStateEvent.class);
+		eventDeserializer.registerEventType(ShipTargetedEvent.class.getSimpleName().replace("Event", ""), ShipTargetedEvent.class);
+		eventDeserializer.registerEventType(SRVDestroyedEvent.class.getSimpleName().replace("Event", ""), SRVDestroyedEvent.class);
+
+		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
 		this.gson = new GsonBuilder()
+				.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
 				.registerTypeAdapter(Event.class, eventDeserializer)
+				.registerTypeAdapter(DiedEvent.class, diedEventDeserializer)
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
 				.create();
 	}
@@ -244,56 +264,6 @@ public class EliteDangerousAPI {
 				break;
 			case "Undocked":
 				event = new UndockedEvent(timestamp, jsonEvent);
-				break;
-			case "Bounty":
-				event = new BountyEvent(timestamp, jsonEvent);
-				break;
-			case "EscapeInterdiction":
-				event = new EscapeInterdictionEvent(timestamp, jsonEvent);
-				break;
-			case "FighterDestroyed":
-				event = new FighterDestroyedEvent(timestamp, jsonEvent);
-				break;
-			case "CapShipBond":
-				event = new CapShipBondEvent(timestamp, jsonEvent);
-				break;
-			case "Died":
-				if (!jsonEvent.has("Killers")) {
-					event = new DiedEvent(timestamp, jsonEvent);
-				}
-				else {
-					event = new DiedByWingEvent(timestamp, jsonEvent);
-				}
-				break;
-			case "FactionKillBond":
-				event = new FactionKillBondEvent(timestamp, jsonEvent);
-				break;
-			case "HeatDamage":
-				event = new HeatDamageEvent(timestamp, jsonEvent);
-				break;
-			case "HeatWarning":
-				event = new HeatWarningEvent(timestamp, jsonEvent);
-				break;
-			case "HullDamage":
-				event = new HullDamageEvent(timestamp, jsonEvent);
-				break;
-			case "Interdicted":
-				event = new InterdictedEvent(timestamp, jsonEvent);
-				break;
-			case "Interdiction":
-				event = new InterdictionEvent(timestamp, jsonEvent);
-				break;
-			case "PvPKill":
-				event = new PvPKillEvent(timestamp, jsonEvent);
-				break;
-			case "ShieldState":
-				event = new ShieldStateEvent(timestamp, jsonEvent);
-				break;
-			case "ShipTargeted":
-				event = new ShipTargetedEvent(timestamp, jsonEvent);
-				break;
-			case "SRVDestroyed":
-				event = new SRVDestroyedEvent(timestamp, jsonEvent);
 				break;
 			case "UnderAttack":
 				event = new UnderAttackEvent(timestamp, jsonEvent);

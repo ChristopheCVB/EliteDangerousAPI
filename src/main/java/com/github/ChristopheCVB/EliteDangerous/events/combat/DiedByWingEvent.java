@@ -1,27 +1,15 @@
 package com.github.ChristopheCVB.EliteDangerous.events.combat;
 
-import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Killer;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
-import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
-import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class DiedByWingEvent extends Event {
+public class DiedByWingEvent extends DiedEvent {
+	@SerializedName("Killers")
+	public ArrayList<Killer> killers;
 
-	private List<Killer> killers;
-
-	public DiedByWingEvent(String timestamp, JsonObject jsonEvent) {
+	public DiedByWingEvent(String timestamp) {
         super(timestamp);
-
-        this.killers = GameFilesUtils.createKillerList(JsonUtils.pullJsonArray(jsonEvent, "Killers"));
-
-        GameFilesUtils.isAllEventDataProcessed(this, jsonEvent);
     }
-
-	public List<Killer> getKillers() {
-		return killers;
-	}
-	
 }
