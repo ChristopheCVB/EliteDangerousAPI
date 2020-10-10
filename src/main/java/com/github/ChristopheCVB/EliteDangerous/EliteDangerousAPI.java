@@ -180,11 +180,45 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(MarketBuyEvent.class.getSimpleName().replace("Event", ""), MarketBuyEvent.class);
 		eventDeserializer.registerEventType(MarketSellEvent.class.getSimpleName().replace("Event", ""), MarketSellEvent.class);
 		eventDeserializer.registerEventType(MiningRefinedEvent.class.getSimpleName().replace("Event", ""), MiningRefinedEvent.class);
+		eventDeserializer.registerEventType(BuyAmmoEvent.class.getSimpleName().replace("Event", ""), BuyAmmoEvent.class);
+		eventDeserializer.registerEventType(BuyDronesEvent.class.getSimpleName().replace("Event", ""), BuyDronesEvent.class);
+		eventDeserializer.registerEventType(CargoDepotEvent.class.getSimpleName().replace("Event", ""), CargoDepotEvent.class);
+		eventDeserializer.registerEventType(CommunityGoalDiscardEvent.class.getSimpleName().replace("Event", ""), CommunityGoalDiscardEvent.class);
+		eventDeserializer.registerEventType(CommunityGoalEvent.class.getSimpleName().replace("Event", ""), CommunityGoalEvent.class);
+		eventDeserializer.registerEventType(CommunityGoalJoinEvent.class.getSimpleName().replace("Event", ""), CommunityGoalJoinEvent.class);
+		eventDeserializer.registerEventType(CommunityGoalRewardEvent.class.getSimpleName().replace("Event", ""), CommunityGoalRewardEvent.class);
+		eventDeserializer.registerEventType(CrewAssignEvent.class.getSimpleName().replace("Event", ""), CrewAssignEvent.class);
+		eventDeserializer.registerEventType(CrewFireEvent.class.getSimpleName().replace("Event", ""), CrewFireEvent.class);
+		eventDeserializer.registerEventType(CrewHireEvent.class.getSimpleName().replace("Event", ""), CrewHireEvent.class);
+		eventDeserializer.registerEventType(EngineerContributionEvent.class.getSimpleName().replace("Event", ""), EngineerContributionEvent.class);
+		eventDeserializer.registerEventType(EngineerCraftEvent.class.getSimpleName().replace("Event", ""), EngineerCraftEvent.class);
+		eventDeserializer.registerEventType(EngineerProgressEvent.class.getSimpleName().replace("Event", ""), EngineerProgressEvent.class);
+		eventDeserializer.registerEventType(FetchRemoteModuleEvent.class.getSimpleName().replace("Event", ""), FetchRemoteModuleEvent.class);
+		eventDeserializer.registerEventType(MarketEvent.class.getSimpleName().replace("Event", ""), MarketEvent.class);
+		eventDeserializer.registerEventType(MassModuleStoreEvent.class.getSimpleName().replace("Event", ""), MassModuleStoreEvent.class);
+		eventDeserializer.registerEventType(MaterialTradeEvent.class.getSimpleName().replace("Event", ""), MaterialTradeEvent.class);
+		eventDeserializer.registerEventType(MissionAbandonedEvent.class.getSimpleName().replace("Event", ""), MissionAbandonedEvent.class);
+		eventDeserializer.registerEventType(MissionAcceptedEvent.class.getSimpleName().replace("Event", ""), MissionAcceptedEvent.class);
+		eventDeserializer.registerEventType(MissionCompletedEvent.class.getSimpleName().replace("Event", ""), MissionCompletedEvent.class);
+		eventDeserializer.registerEventType(MissionFailedEvent.class.getSimpleName().replace("Event", ""), MissionFailedEvent.class);
+		eventDeserializer.registerEventType(MissionRedirectedEvent.class.getSimpleName().replace("Event", ""), MissionRedirectedEvent.class);
+		eventDeserializer.registerEventType(ModuleBuyEvent.class.getSimpleName().replace("Event", ""), ModuleBuyEvent.class);
+		eventDeserializer.registerEventType(ModuleRetrieveEvent.class.getSimpleName().replace("Event", ""), ModuleRetrieveEvent.class);
+		eventDeserializer.registerEventType(ModuleSellEvent.class.getSimpleName().replace("Event", ""), ModuleSellEvent.class);
+		eventDeserializer.registerEventType(ModuleSellRemoteEvent.class.getSimpleName().replace("Event", ""), ModuleSellRemoteEvent.class);
+		eventDeserializer.registerEventType(ModuleStoreEvent.class.getSimpleName().replace("Event", ""), ModuleStoreEvent.class);
+		eventDeserializer.registerEventType(ModuleSwapEvent.class.getSimpleName().replace("Event", ""), ModuleSwapEvent.class);
+		eventDeserializer.registerEventType(OutfittingEvent.class.getSimpleName().replace("Event", ""), OutfittingEvent.class);
+		eventDeserializer.registerEventType(PayBountiesEvent.class.getSimpleName().replace("Event", ""), PayBountiesEvent.class);
+		eventDeserializer.registerEventType(PayFinesEvent.class.getSimpleName().replace("Event", ""), PayFinesEvent.class);
+		eventDeserializer.registerEventType(RedeemVoucherEvent.class.getSimpleName().replace("Event", ""), RedeemVoucherEvent.class);
+		eventDeserializer.registerEventType(RefuelAllEvent.class.getSimpleName().replace("Event", ""), RefuelAllEvent.class);
+		eventDeserializer.registerEventType(RefuelPartialEvent.class.getSimpleName().replace("Event", ""), RefuelPartialEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 
 		this.gson = new GsonBuilder()
-				.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+				.setFieldNamingStrategy(f -> FieldNamingPolicy.UPPER_CAMEL_CASE.translateName(f).replaceFirst("Localised$", "_Localised"))
 				.registerTypeAdapter(Event.class, eventDeserializer)
 				.registerTypeAdapter(DiedEvent.class, diedEventDeserializer)
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
@@ -276,108 +310,6 @@ public class EliteDangerousAPI {
 				break;
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
-				break;
-			case "BuyAmmo":
-				event = new BuyAmmoEvent(timestamp, jsonEvent);
-				break;
-			case "BuyDrones":
-				event = new BuyDronesEvent(timestamp, jsonEvent);
-				break;
-			case "CargoDepot":
-				event = new CargoDepotEvent(timestamp, jsonEvent);
-				break;
-			case "CommunityGoal":
-				event = new CommunityGoalEvent(timestamp, jsonEvent);
-				break;
-			case "CommunityGoalDiscard":
-				event = new CommunityGoalDiscardEvent(timestamp, jsonEvent);
-				break;
-			case "CommunityGoalJoin":
-				event = new CommunityGoalJoinEvent(timestamp, jsonEvent);
-				break;
-			case "CommunityGoalReward":
-				event = new CommunityGoalRewardEvent(timestamp, jsonEvent);
-				break;
-			case "CrewAssign":
-				event = new CrewAssignEvent(timestamp, jsonEvent);
-				break;
-			case "CrewFire":
-				event = new CrewFireEvent(timestamp, jsonEvent);
-				break;
-			case "CrewHire":
-				event = new CrewHireEvent(timestamp, jsonEvent);
-				break;
-			case "EngineerContribution":
-				event = new EngineerContributionEvent(timestamp, jsonEvent);
-				break;
-			case "EngineerCraft":
-				event = new EngineerCraftEvent(timestamp, jsonEvent);
-				break;
-			case "EngineerProgress":
-				event = new EngineerProgressEvent(timestamp, jsonEvent);
-				break;
-			case "FetchRemoteModule":
-				event = new FetchRemoteModuleEvent(timestamp, jsonEvent);
-				break;
-			case "Market":
-				event = new MarketEvent(timestamp, jsonEvent);
-				break;
-			case "MassModuleStore":
-				event = new MassModuleStoreEvent(timestamp, jsonEvent);
-				break;
-			case "MaterialTrade":
-				event = new MaterialTradeEvent(timestamp, jsonEvent);
-				break;
-			case "MissionAbandoned":
-				event = new MissionAbandonedEvent(timestamp, jsonEvent);
-				break;
-			case "MissionAccepted":
-				event = new MissionAcceptedEvent(timestamp, jsonEvent);
-				break;
-			case "MissionCompleted":
-				event = new MissionCompletedEvent(timestamp, jsonEvent);
-				break;
-			case "MissionFailed":
-				event = new MissionFailedEvent(timestamp, jsonEvent);
-				break;
-			case "MissionRedirected":
-				event = new MissionRedirectedEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleBuy":
-				event = new ModuleBuyEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleRetrieve":
-				event = new ModuleRetrieveEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleSell":
-				event = new ModuleSellEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleSellRemote":
-				event = new ModuleSellRemote(timestamp, jsonEvent);
-				break;
-			case "ModuleStore":
-				event = new ModuleStoreEvent(timestamp, jsonEvent);
-				break;
-			case "ModuleSwap":
-				event = new ModuleSwapEvent(timestamp, jsonEvent);
-				break;
-			case "Outfitting":
-				event = new OutfittingEvent(timestamp, jsonEvent);
-				break;
-			case "PayBounties":
-				event = new PayBountiesEvent(timestamp, jsonEvent);
-				break;
-			case "PayFines":
-				event = new PayFinesEvent(timestamp, jsonEvent);
-				break;
-			case "RedeemVoucher":
-				event = new RedeemVoucherEvent(timestamp, jsonEvent);
-				break;
-			case "RefuelAll":
-				event = new RefuelAllEvent(timestamp, jsonEvent);
-				break;
-			case "RefuelPartial":
-				event = new RefuelPartialEvent(timestamp, jsonEvent);
 				break;
 			case "Repair":
 				event = new RepairEvent(timestamp, jsonEvent);

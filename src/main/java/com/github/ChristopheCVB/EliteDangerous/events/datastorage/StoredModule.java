@@ -1,9 +1,3 @@
-/*
-Author: XenoPyax
-Discord: XenoPyax#5647
-File created: 05/15/2020 12:36
-*/
-
 package com.github.ChristopheCVB.EliteDangerous.events.datastorage;
 
 public class StoredModule {

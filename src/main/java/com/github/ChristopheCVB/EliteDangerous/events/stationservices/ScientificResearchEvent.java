@@ -1,9 +1,3 @@
-/*
-Author: XenoPyax
-Discord: XenoPyax#5647
-File created: 05/14/2020 06:54
-*/
-
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;

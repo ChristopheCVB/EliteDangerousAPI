@@ -320,7 +320,7 @@ public abstract class EventListener {
 	public void onModuleSell(ModuleSellEvent event) {
 	}
 
-	public void onModuleSellRemote(ModuleSellRemote event) {
+	public void onModuleSellRemote(ModuleSellRemoteEvent event) {
 	}
 
 	public void onModuleStore(ModuleStoreEvent event) {

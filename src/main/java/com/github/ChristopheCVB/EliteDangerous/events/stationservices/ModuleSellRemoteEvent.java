@@ -2,15 +2,14 @@ package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
-public class ModuleSellEvent extends Event {
-	public String slot;
+public class ModuleSellRemoteEvent extends Event {
+	public Integer storageSlot, shipID;
 	public String sellItem;
 	public String sellItemLocalised;
 	public String ship;
-	public Long sellPrice, marketID;
-	public Integer shipID;
+	public Long serverID, sellPrice;
 	
-	public ModuleSellEvent(String timestamp) {
+	public ModuleSellRemoteEvent(String timestamp) {
         super(timestamp);
     }
 }

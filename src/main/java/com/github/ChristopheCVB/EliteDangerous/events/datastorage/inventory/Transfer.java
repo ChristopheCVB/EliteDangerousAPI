@@ -1,9 +1,3 @@
-/*
-Author: XenoPyax
-Discord: XenoPyax#5647
-File created: 07/02/2020 08:09
-*/
-
 package com.github.ChristopheCVB.EliteDangerous.events.datastorage.inventory;
 
 public class Transfer {

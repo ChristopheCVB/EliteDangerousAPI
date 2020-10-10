@@ -6,16 +6,13 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.S
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.ShipScanStage2;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.ShipScanStage3;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.ScanStageInfo;
-import com.google.gson.annotations.SerializedName;
 
 public class ShipTargetedEvent extends Event {
     public Integer scanStage;
     public Boolean targetLocked;
     public String ship;
-    @SerializedName("Ship_Localised")
     public String shipLocalised;
     public String pilotName;
-    @SerializedName("PilotName_Localised")
     public String pilotNameLocalised;
     public String pilotRank, faction, legalStatus, power;
     public Double shieldHealth, hullHealth;

@@ -1,31 +1,15 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
-import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 
 public class CommunityGoalJoinEvent extends Event {
+	@SerializedName("CGID")
+	public Integer cgid;
+	public String name;
+	public String system;
 	
-	private Integer cgid;
-	private String name, system;
-	
-	public CommunityGoalJoinEvent(String timestamp, JsonObject jsonEvent) {
+	public CommunityGoalJoinEvent(String timestamp) {
 		super(timestamp);
-		this.cgid = JsonUtils.pullInt(jsonEvent, "CGID");
-		this.name = JsonUtils.pullString(jsonEvent, "Name");
-		this.system = JsonUtils.pullString(jsonEvent, "System");
 	}
-
-	public Integer getCgid() {
-		return cgid;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getSystem() {
-		return system;
-	}
-
 }
