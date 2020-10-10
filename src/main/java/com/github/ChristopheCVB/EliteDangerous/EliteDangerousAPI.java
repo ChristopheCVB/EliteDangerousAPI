@@ -192,7 +192,11 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(CrewHireEvent.class.getSimpleName().replace("Event", ""), CrewHireEvent.class);
 		eventDeserializer.registerEventType(EngineerContributionEvent.class.getSimpleName().replace("Event", ""), EngineerContributionEvent.class);
 		eventDeserializer.registerEventType(EngineerCraftEvent.class.getSimpleName().replace("Event", ""), EngineerCraftEvent.class);
+		eventDeserializer.registerEventType(EngineerProgressEvent.class.getSimpleName().replace("Event", ""), EngineerProgressEvent.class);
 		eventDeserializer.registerEventType(FetchRemoteModuleEvent.class.getSimpleName().replace("Event", ""), FetchRemoteModuleEvent.class);
+		eventDeserializer.registerEventType(MarketEvent.class.getSimpleName().replace("Event", ""), MarketEvent.class);
+		eventDeserializer.registerEventType(MassModuleStoreEvent.class.getSimpleName().replace("Event", ""), MassModuleStoreEvent.class);
+		eventDeserializer.registerEventType(MaterialTradeEvent.class.getSimpleName().replace("Event", ""), MaterialTradeEvent.class);
 		eventDeserializer.registerEventType(MissionAbandonedEvent.class.getSimpleName().replace("Event", ""), MissionAbandonedEvent.class);
 		eventDeserializer.registerEventType(MissionAcceptedEvent.class.getSimpleName().replace("Event", ""), MissionAcceptedEvent.class);
 		eventDeserializer.registerEventType(MissionCompletedEvent.class.getSimpleName().replace("Event", ""), MissionCompletedEvent.class);
@@ -297,17 +301,14 @@ public class EliteDangerousAPI {
 			case "Scan":
 				event = new ScanEvent(timestamp, jsonEvent);
 				break;
-			case "EngineerProgress":
-				event = new EngineerProgressEvent(timestamp, jsonEvent);
+			case "MissionRedirected":
+				event = new MissionRedirectedEvent(timestamp, jsonEvent);
 				break;
-			case "Market":
-				event = new MarketEvent(timestamp, jsonEvent);
+			case "ModuleBuy":
+				event = new ModuleBuyEvent(timestamp, jsonEvent);
 				break;
-			case "MassModuleStore":
-				event = new MassModuleStoreEvent(timestamp, jsonEvent);
-				break;
-			case "MaterialTrade":
-				event = new MaterialTradeEvent(timestamp, jsonEvent);
+			case "ModuleRetrieve":
+				event = new ModuleRetrieveEvent(timestamp, jsonEvent);
 				break;
 			case "ModuleSell":
 				event = new ModuleSellEvent(timestamp, jsonEvent);

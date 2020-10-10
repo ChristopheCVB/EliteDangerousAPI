@@ -3,8 +3,6 @@ package com.github.ChristopheCVB.EliteDangerous.utils;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.*;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.FactionBounty;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.engineer.EngineerProgress;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.engineer.Ingredient;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.inventory.Transfer;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.market.Item;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.material.Encoded;
@@ -230,43 +228,6 @@ public class GameFilesUtils {
         return itemsList;
     }
 
-    public static List<EngineerProgress> createEngineerProgressList(JsonArray array) {
-        List<EngineerProgress> engineerProgressList = null;
-
-        if (array != null) {
-            engineerProgressList = new ArrayList<>();
-
-            for (JsonElement comp : array) {
-                JsonObject json = comp.getAsJsonObject();
-
-                EngineerProgress engineerProgress = new EngineerProgress(JsonUtils.pullString(json, "Engineer"), JsonUtils.pullString(json, "Progress"), JsonUtils.pullInt(json, "Rank"), JsonUtils.pullInt(json, "EngineerID"), JsonUtils.pullDouble(json, "RankProgress"));
-
-                engineerProgressList.add(engineerProgress);
-            }
-        }
-
-        return engineerProgressList;
-    }
-
-    public static List<Ingredient> createIngredientsList(JsonArray array) {
-        List<Ingredient> ingredients = null;
-
-        if (array != null) {
-            ingredients = new ArrayList<>();
-
-            for (JsonElement comp : array) {
-                Ingredient ingredient;
-                JsonObject json = comp.getAsJsonObject();
-
-                ingredient = new Ingredient(JsonUtils.pullString(json, "Name"), JsonUtils.pullInt(json, "Count"));
-
-                ingredients.add(ingredient);
-            }
-        }
-
-        return ingredients;
-    }
-
     public static List<Material> createMaterialList(JsonArray array) {
         List<Material> materials = null;
 
@@ -466,7 +427,11 @@ public class GameFilesUtils {
                 JsonObject json = o.getAsJsonObject();
                 Modifier mod;
 
-                mod = new Modifier(JsonUtils.pullString(json, "Label"), JsonUtils.pullDouble(json, "Value"), JsonUtils.pullDouble(json, "OriginalValue"), JsonUtils.pullInt(json, "LessIsGood"));
+                mod = new Modifier();
+                mod.label = JsonUtils.pullString(json, "Label");
+                mod.value = JsonUtils.pullDouble(json, "Value");
+                mod.originalValue = JsonUtils.pullDouble(json, "OriginalValue");
+                mod.lessIsGood = JsonUtils.pullInt(json, "LessIsGood");
 
                 modifier.add(mod);
             }
@@ -569,33 +534,6 @@ public class GameFilesUtils {
         }
 
         return inv;
-    }
-
-    public static List<ModuleItem> createModuleItemsList(JsonArray array) {
-        List<ModuleItem> itemList = null;
-
-        if (array != null) {
-            itemList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                String slot = JsonUtils.pullString(json, "Slot");
-                String name = JsonUtils.pullString(json, "Name");
-                String nameLocalised = JsonUtils.pullString(json, "Name_Localised");
-                Boolean hot = JsonUtils.pullBoolean(json, "Hot");
-                String engineerModifications = JsonUtils.pullString(json, "EngineerModifications");
-                Integer engineeredLevel = JsonUtils.pullInt(json, "Level");
-                Double quality = JsonUtils.pullDouble(json, "Quality");
-
-                itemList.add(new ModuleItem(slot, name, nameLocalised, engineerModifications, hot, engineeredLevel, quality));
-            }
-        }
-
-        return itemList;
-    }
-
-    public static TradeData createTradeData(JsonObject json) {
-        return json != null ? new TradeData(JsonUtils.pullString(json, "Material"), JsonUtils.pullString(json, "Material_Localised"), JsonUtils.pullString(json, "Category"), JsonUtils.pullString(json, "Category_Localised"), JsonUtils.pullInt(json, "Quantity")) : null;
     }
 
     public static List<FactionBounty> createFactionBountyList(JsonArray array) {
