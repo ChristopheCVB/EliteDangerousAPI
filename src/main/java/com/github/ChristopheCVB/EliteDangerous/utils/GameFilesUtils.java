@@ -33,7 +33,7 @@ public class GameFilesUtils {
         else {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Journal") && getFileExtension(file).equals("log")) {
+                    if (file.getName().startsWith("Journal") && GameFilesUtils.getFileExtension(file).equals("log")) {
                         if (latest == null) {
                             latest = file;
                         }
@@ -57,7 +57,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Shipyard")) {
+                    if (file.getName().startsWith("Shipyard") && GameFilesUtils.getFileExtension(file).equals("json")) {
                         shipyardFile = file;
                     }
                 }
@@ -74,7 +74,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Cargo")) {
+                    if (file.getName().startsWith("Cargo") && GameFilesUtils.getFileExtension(file).equals("json")) {
                         cargoFile = file;
                     }
                 }
@@ -91,7 +91,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Market")) {
+                    if (file.getName().startsWith("Market") && GameFilesUtils.getFileExtension(file).equals("json")) {
                         marketFile = file;
                     }
                 }
@@ -108,7 +108,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("ModulesInfo")) {
+                    if (file.getName().startsWith("ModulesInfo") && GameFilesUtils.getFileExtension(file).equals("json")) {
                         modulesInfoFile = file;
                     }
                 }
@@ -125,7 +125,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Outfitting")) {
+                    if (file.getName().startsWith("Outfitting") && GameFilesUtils.getFileExtension(file).equals("json")) {
                         outfittingFile = file;
                     }
                 }
@@ -142,7 +142,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Status")) {
+                    if (file.getName().startsWith("Status") && GameFilesUtils.getFileExtension(file).equals("json")) {
                         statusFile = file;
                     }
                 }
