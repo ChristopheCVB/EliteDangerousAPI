@@ -11,8 +11,4 @@ public class FetchRemoteModuleEvent extends Event {
 	public String storedItem;
 	public String storedItemLocalised;
 	public String ship;
-	
-	public FetchRemoteModuleEvent(String timestamp) {
-        super(timestamp);
-    }
 }

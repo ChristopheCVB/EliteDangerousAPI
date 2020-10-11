@@ -6,8 +6,4 @@ public class ReceiveTextEvent extends Event {
     public String message;
     public String messageLocalised;
     public String channel;
-
-    public ReceiveTextEvent(String timestamp) {
-        super(timestamp);
-    }
 }

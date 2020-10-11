@@ -11,8 +11,4 @@ import java.util.List;
 
 public class PassengersEvent extends Event {
 	public ArrayList<PassengerManifest> manifest;
-
-	public PassengersEvent(String timestamp) {
-        super(timestamp);
-    }
 }

@@ -16,10 +16,6 @@ public class BountyEvent extends Event {
 	public Long totalReward;
 	public ArrayList<BountyReward> rewards;
 	
-	public BountyEvent(String timestamp) {
-        super(timestamp);
-    }
-
 	public BountyInfo getBountyInfo() {
 		if("Skimmer".equals(target)) {
 			return new SkimmerBounty(faction, target, victimsFaction, reward);

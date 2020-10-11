@@ -10,8 +10,4 @@ public class MissionCompletedEvent extends Event {
 	public String destinationStation;
 	public Long missionID;
 	public Long reward;
-	
-	public MissionCompletedEvent(String timestamp) {
-        super(timestamp);
-    }
 }

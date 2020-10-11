@@ -9,8 +9,4 @@ public class MaterialsEvent extends Event {
 	public ArrayList<Material> raw;
 	public ArrayList<Material> manufactured;
 	public ArrayList<Material> encoded;
-	
-	public MaterialsEvent(String timestamp) {
-        super(timestamp);
-    }
 }

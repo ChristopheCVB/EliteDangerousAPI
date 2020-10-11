@@ -6,8 +6,4 @@ public class ShipyardBuyEvent extends Event {
 	public String shipType, sellOldShip;
 	public Long shipPrice, sellPrice;
 	public Integer sellShipID;
-	
-	public ShipyardBuyEvent(String timestamp) {
-        super(timestamp);
-    }
 }

@@ -4,8 +4,4 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class UnderAttackEvent extends Event {
 	public String target;
-	
-	public UnderAttackEvent(String timestamp) {
-        super(timestamp);
-    }
 }

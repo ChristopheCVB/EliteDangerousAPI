@@ -6,7 +6,6 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.StationEconomy
 import java.util.ArrayList;
 
 public class DockedEvent extends Event {
-	
 	public String stationName;
 	public String stationType;
 	public String starSystem;
@@ -23,8 +22,4 @@ public class DockedEvent extends Event {
 	public Double distFromStarLS;
 	public Boolean activeFine;
 	public ArrayList<String> stationServices;
-
-	public DockedEvent(String timestamp) {
-		super(timestamp);
-    }
 }

@@ -4,8 +4,4 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class ShieldStateEvent extends Event {
 	public Boolean shieldsUp;
-
-	public ShieldStateEvent(String timestamp) {
-        super(timestamp);
-    }
 }

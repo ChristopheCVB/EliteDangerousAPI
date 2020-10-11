@@ -9,8 +9,4 @@ public class StoredModulesEvent extends Event {
 	public Long marketID;
 	public String stationName, starSystem;
 	public List<StoredModule> items;
-
-	public StoredModulesEvent(String timestamp) {
-		super(timestamp);
-	}
 }

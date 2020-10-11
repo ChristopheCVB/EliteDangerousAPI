@@ -12,8 +12,4 @@ public class MissionRedirectedEvent extends Event {
 	public String oldDestinationStation;
 	public String oldDestinationSystem;
 	public Long missionID;
-	
-	public MissionRedirectedEvent(String timestamp) {
-        super(timestamp);
-    }
 }

@@ -7,8 +7,4 @@ import java.util.ArrayList;
 
 public class CargoTransferEvent extends Event {
 	public ArrayList<Transfer> transfers;
-	
-	public CargoTransferEvent(String timestamp) {
-        super(timestamp);
-    }
 }

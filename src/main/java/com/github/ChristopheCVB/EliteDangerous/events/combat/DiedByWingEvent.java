@@ -6,8 +6,4 @@ import java.util.ArrayList;
 
 public class DiedByWingEvent extends DiedEvent {
 	public ArrayList<Killer> killers;
-
-	public DiedByWingEvent(String timestamp) {
-        super(timestamp);
-    }
 }

@@ -6,8 +6,4 @@ public class SetUserShipNameEvent extends Event {
 	public String ship;
 	public Integer shipID;
 	public String userShipName, userShipId;
-	
-	public SetUserShipNameEvent(String timestamp) {
-        super(timestamp);
-    }
 }

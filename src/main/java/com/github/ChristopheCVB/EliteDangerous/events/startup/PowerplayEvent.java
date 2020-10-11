@@ -8,8 +8,4 @@ public class PowerplayEvent extends Event {
 	public Integer merits;
 	public Integer votes;
 	public Integer timePledged;
-	
-	public PowerplayEvent(String timestamp) {
-        super(timestamp);
-    }
 }

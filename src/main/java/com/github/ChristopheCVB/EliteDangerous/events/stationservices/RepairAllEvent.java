@@ -4,8 +4,4 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class RepairAllEvent extends Event {
 	public Long cost;
-
-	public RepairAllEvent(String timestamp) {
-        super(timestamp);
-    }
 }

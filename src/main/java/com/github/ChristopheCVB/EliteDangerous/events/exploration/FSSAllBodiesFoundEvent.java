@@ -6,8 +6,4 @@ public class FSSAllBodiesFoundEvent extends Event {
 	public String systemName;
 	public Long systemAddress;
 	public Integer count;
-	
-	public FSSAllBodiesFoundEvent(String timestamp) {
-        super(timestamp);
-    }
 }

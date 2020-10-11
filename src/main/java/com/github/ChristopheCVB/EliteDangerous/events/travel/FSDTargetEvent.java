@@ -6,8 +6,4 @@ public class FSDTargetEvent extends Event {
 	public String name, starClass;
 	public Long systemAddress;
 	public Integer remainingJumpsInRoute;
-	
-	public FSDTargetEvent(String timestamp) {
-        super(timestamp);
-    }
 }

@@ -10,8 +10,4 @@ public class MassModuleStoreEvent extends Event {
 	public String ship;
 	public Integer shipID;
 	public ArrayList<ModuleItem> items;
-
-	public MassModuleStoreEvent(String timestamp) {
-        super(timestamp);
-    }
 }

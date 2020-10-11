@@ -18,10 +18,6 @@ public class ShipTargetedEvent extends Event {
     public Double shieldHealth, hullHealth;
     public Long bounty;
 
-    public ShipTargetedEvent(String timestamp) {
-        super(timestamp);
-    }
-
     public ScanStageInfo getScanStageInfo() {
     	ScanStageInfo scanStageInfo = null;
 

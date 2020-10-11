@@ -5,8 +5,4 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 public class CarrierFinanceEvent extends Event {
 	public Double taxRate, reservePercent;
 	public Long carrierID, carrierBalance, reserveBalance, availableBalance;
-	
-	public CarrierFinanceEvent(String timestamp) {
-        super(timestamp);
-    }
 }

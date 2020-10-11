@@ -13,10 +13,6 @@ public class RankEvent extends Event {
 	@SerializedName("CQC")
 	public Integer cqc;
 
-	public RankEvent(String timestamp) {
-        super(timestamp);
-    }
-
 	public String getCombatRankName() {
 		return CombatRank.getLocalisedName(this.combat);
 	}

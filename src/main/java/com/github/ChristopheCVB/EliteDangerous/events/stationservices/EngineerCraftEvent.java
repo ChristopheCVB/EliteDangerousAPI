@@ -8,7 +8,6 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 public class EngineerCraftEvent extends Event {
-	
 	public String engineer;
 	public String blueprintName;
 	public String slot;
@@ -19,8 +18,4 @@ public class EngineerCraftEvent extends Event {
 	public Double quality;
 	public ArrayList<Ingredient> ingredients;
 	public ArrayList<Modifier> modifiers;
-	
-	public EngineerCraftEvent(String timestamp) {
-        super(timestamp);
-    }
 }

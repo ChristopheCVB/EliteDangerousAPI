@@ -8,8 +8,4 @@ public class MaterialTradeEvent extends Event {
 	public String traderType;
 	public TradeData paid;
 	public TradeData received;
-
-	public MaterialTradeEvent(String timestamp) {
-        super(timestamp);
-    }
 }

@@ -36,8 +36,4 @@ public class LocationEvent extends Event {
 	private ArrayList<Faction> factions;
 	private ArrayList<String> powers, stationServices;
 	private ArrayList<StationEconomy> stationEconomies;
-	
-	public LocationEvent(String timestamp) {
-		super(timestamp);
-    }
 }

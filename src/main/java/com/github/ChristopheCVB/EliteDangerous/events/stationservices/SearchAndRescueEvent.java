@@ -6,8 +6,4 @@ public class SearchAndRescueEvent extends Event {
 	public Long marketID, reward;
 	public String name, nameLocalised;
 	public Integer count;
-	
-	public SearchAndRescueEvent(String timestamp) {
-        super(timestamp);
-    }
 }

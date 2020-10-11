@@ -6,8 +6,4 @@ public class MaterialCollectedEvent extends Event {
 	public String category, name;
 	public String nameLocalised;
 	public Integer count;
-	
-	public MaterialCollectedEvent(String timestamp) {
-        super(timestamp);
-    }
 }

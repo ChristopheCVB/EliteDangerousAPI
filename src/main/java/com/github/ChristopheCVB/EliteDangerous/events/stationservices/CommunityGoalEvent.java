@@ -18,8 +18,4 @@ public class CommunityGoalEvent extends Event {
 	public Long expiry;
 	public Boolean isComplete;
 	public Boolean playerInTopRank;
-	
-	public CommunityGoalEvent(String timestamp) {
-		super(timestamp);
-    }
 }

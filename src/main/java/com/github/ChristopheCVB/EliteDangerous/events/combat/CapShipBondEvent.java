@@ -6,9 +6,4 @@ public class CapShipBondEvent extends Event {
 	public String victimFaction;
 	public String awardingFaction;
 	public Integer reward;
-	
-	public CapShipBondEvent(String timestamp) {
-        super(timestamp);
-    }
-
 }

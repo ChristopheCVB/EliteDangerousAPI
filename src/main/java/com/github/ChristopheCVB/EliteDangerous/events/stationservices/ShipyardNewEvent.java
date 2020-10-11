@@ -8,8 +8,4 @@ import com.google.gson.JsonObject;
 public class ShipyardNewEvent extends Event {
 	public String shipType;
 	public Integer newShipID;
-	
-	public ShipyardNewEvent(String timestamp) {
-        super(timestamp);
-    }
 }

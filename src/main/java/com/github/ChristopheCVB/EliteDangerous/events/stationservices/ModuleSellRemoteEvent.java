@@ -8,8 +8,4 @@ public class ModuleSellRemoteEvent extends Event {
 	public String sellItemLocalised;
 	public String ship;
 	public Long serverID, sellPrice;
-	
-	public ModuleSellRemoteEvent(String timestamp) {
-        super(timestamp);
-    }
 }

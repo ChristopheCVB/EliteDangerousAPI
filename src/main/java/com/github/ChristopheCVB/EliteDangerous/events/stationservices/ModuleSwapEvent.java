@@ -6,8 +6,4 @@ public class ModuleSwapEvent extends Event {
 	public Long marketID;
 	public String fromSlot, toSlot, fromItem, fromItemLocalised, toItem, toItemLocalised, ship;
 	public Integer shipID;
-	
-	public ModuleSwapEvent(String timestamp) {
-		super(timestamp);
-    }
 }

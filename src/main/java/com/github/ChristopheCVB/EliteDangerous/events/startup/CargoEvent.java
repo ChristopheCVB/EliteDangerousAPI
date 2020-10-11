@@ -9,8 +9,4 @@ public class CargoEvent extends Event {
 	public String vessel;
 	public Integer count;
 	public ArrayList<CargoInventory> inventory;
-	
-	public CargoEvent(String timestamp) {
-        super(timestamp);
-    }
 }

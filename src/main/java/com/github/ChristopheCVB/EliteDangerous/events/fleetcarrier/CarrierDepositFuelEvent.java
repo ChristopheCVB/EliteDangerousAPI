@@ -5,8 +5,4 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 public class CarrierDepositFuelEvent extends Event {
 	public Integer total, amount;
 	public Long carrierID;
-	
-	public CarrierDepositFuelEvent(String timestamp) {
-        super(timestamp);
-    }
 }

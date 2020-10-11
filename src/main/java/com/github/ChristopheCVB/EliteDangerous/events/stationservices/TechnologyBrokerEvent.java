@@ -5,7 +5,4 @@ import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.google.gson.JsonObject;
 
 public class TechnologyBrokerEvent extends Event {
-	public TechnologyBrokerEvent(String timestamp) {
-        super(timestamp);
-    }
 }

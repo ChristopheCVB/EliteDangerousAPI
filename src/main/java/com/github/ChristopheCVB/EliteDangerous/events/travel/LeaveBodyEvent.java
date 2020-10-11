@@ -6,8 +6,4 @@ public class LeaveBodyEvent extends Event {
 	public String starSystem, body;
 	public Long systemAddress;
 	public Integer bodyID;
-	
-	public LeaveBodyEvent(String timestamp) {
-        super(timestamp);
-    }
 }

@@ -6,8 +6,4 @@ public class PayFinesEvent extends Event {
 	public Long amount;
 	public Integer shipID;
 	public Boolean allFines;
-
-	public PayFinesEvent(String timestamp) {
-        super(timestamp);
-    }
 }

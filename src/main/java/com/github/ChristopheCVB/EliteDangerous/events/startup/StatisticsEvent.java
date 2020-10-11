@@ -7,7 +7,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 public class StatisticsEvent extends Event {
-	// TODO: Refactor StatisticsEvent with subclasses
 	@SerializedName("Bank_Account")
 	public BankAccount bankAccount;
 	public Combat combat;
@@ -280,8 +279,4 @@ public class StatisticsEvent extends Event {
 		@SerializedName("CQC_Credits_Earned")
 		public Long cqcCreditsEarned;
 	}
-
-	public StatisticsEvent(String timestamp) {
-		super(timestamp);
-    }
 }

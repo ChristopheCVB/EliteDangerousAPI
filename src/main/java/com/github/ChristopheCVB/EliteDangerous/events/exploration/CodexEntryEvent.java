@@ -15,8 +15,4 @@ public class CodexEntryEvent extends Event {
 	public Boolean isNewEntry;
 	public Boolean newTraitsDiscovered;
 	public String[] traits;
-	
-	public CodexEntryEvent(String timestamp) {
-		super(timestamp);
-    }
 }

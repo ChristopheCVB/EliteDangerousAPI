@@ -15,8 +15,4 @@ public class ModuleBuyEvent extends Event {
 	public Long marketID;
 	public Long sellPrice;
 	public Integer shipID;
-	
-	public ModuleBuyEvent(String timestamp) {
-		super(timestamp);
-    }
 }

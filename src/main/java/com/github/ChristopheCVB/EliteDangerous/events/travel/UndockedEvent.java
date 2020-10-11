@@ -5,8 +5,4 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 public class UndockedEvent extends Event {
 	public String stationName, stationType;
 	public Long marketID;
-	
-	public UndockedEvent(String timestamp) {
-        super(timestamp);
-    }
 }

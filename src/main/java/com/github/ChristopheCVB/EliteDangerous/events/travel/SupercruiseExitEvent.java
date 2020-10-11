@@ -12,8 +12,4 @@ public class SupercruiseExitEvent extends Event {
 	public String bodyType;
 	private Long systemAddress;
 	private Integer bodyID;
-
-	public SupercruiseExitEvent(String timestamp) {
-		super(timestamp);
-	}
 }

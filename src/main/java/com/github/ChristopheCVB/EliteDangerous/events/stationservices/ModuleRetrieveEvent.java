@@ -12,8 +12,4 @@ public class ModuleRetrieveEvent extends Event {
 	public String swapOutItemLocalised;
 	public Integer shipID;
 	public Boolean hot;
-	
-	public ModuleRetrieveEvent(String timestamp) {
-		super(timestamp);
-    }
 }

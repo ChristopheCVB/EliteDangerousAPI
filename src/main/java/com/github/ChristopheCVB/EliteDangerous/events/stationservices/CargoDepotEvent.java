@@ -13,8 +13,4 @@ public class CargoDepotEvent extends Event{
 	public String updateType;
 	public String cargoType;
 	public Double progress;
-	
-	public CargoDepotEvent(String timestamp) {
-		super(timestamp);
-    }
 }

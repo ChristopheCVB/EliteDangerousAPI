@@ -7,11 +7,6 @@ import java.util.ArrayList;
 
 public class EngineerProgressEvent extends Event {
     public ArrayList<Engineer> engineers;
-
     public Integer rank;
     public Double rankProgress;
-
-    public EngineerProgressEvent(String timestamp) {
-        super(timestamp);
-    }
 }

@@ -3,7 +3,6 @@ package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class EngineerContributionEvent extends Event {
-	
 	public String engineer;
 	public String type;
 	public String commodity;
@@ -12,8 +11,4 @@ public class EngineerContributionEvent extends Event {
 	public Integer engineerID;
 	public Integer quantity;
 	public Integer totalQuantity;
-	
-	public EngineerContributionEvent(String timestamp) {
-        super(timestamp);
-    }
 }

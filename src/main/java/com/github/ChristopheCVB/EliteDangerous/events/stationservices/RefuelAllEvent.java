@@ -5,8 +5,4 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 public class RefuelAllEvent extends Event {
 	public Long cost;
 	public Double amount;
-	
-	public RefuelAllEvent(String timestamp) {
-        super(timestamp);
-    }
 }

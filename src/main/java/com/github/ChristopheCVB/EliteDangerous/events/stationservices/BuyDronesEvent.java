@@ -7,8 +7,4 @@ public class BuyDronesEvent extends Event {
 	public Integer buyPrice;
 	public Integer totalCost;
 	public String type;
-	
-	public BuyDronesEvent(String timestamp) {
-        super(timestamp);
-    }
 }

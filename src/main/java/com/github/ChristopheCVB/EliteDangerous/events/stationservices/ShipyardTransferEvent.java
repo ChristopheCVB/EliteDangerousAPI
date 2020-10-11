@@ -7,8 +7,4 @@ public class ShipyardTransferEvent extends Event {
 	public Integer shipID;
 	public Long shipMarketID, transferPrice, transferTime, marketID;
 	public Double distance;
-	
-	public ShipyardTransferEvent(String timestamp) {
-		super(timestamp);
-    }
 }

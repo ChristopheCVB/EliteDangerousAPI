@@ -11,8 +11,4 @@ public class StoredShipsEvent extends Event {
 	public Long marketID;
 	public List<StoredShipHere> shipsHere;
 	public List<StoredShipRemote> shipsRemote;
-	
-	public StoredShipsEvent(String timestamp) {
-        super(timestamp);
-    }
 }

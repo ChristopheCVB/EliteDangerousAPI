@@ -6,10 +6,6 @@ import com.github.ChristopheCVB.EliteDangerous.utils.localiser.Reputation;
 public class ReputationEvent extends Event {
 	public Double empire, federation, alliance, independent;
 
-	public ReputationEvent(String timestamp) {
-        super(timestamp);
-    }
-
 	public String getEmpireReputationReadable() {
 		return Reputation.getReputationReadable(this.empire);
 	}

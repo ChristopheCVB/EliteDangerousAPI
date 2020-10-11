@@ -11,24 +11,20 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ScanEvent extends Event {
-	private String scanType, bodyName, starType, luminosity, terraformState, planetClass, atmosphere, atmosphereType, volcanism, reserveLevel, starSystem;
-	private Double distanceFromArrivalLS, stellarMass, surfaceTemperature, eccentricity, orbitalInclination, periapsis, rotationPeriod, axialTilt, absoluteMagnitude, massEM, surfaceGravity, surfacePressure;
-	private Integer bodyID, subclass;
-	private Long radius, semiMajorAxis, orbitalPeriod;
+	public String scanType, bodyName, starType, luminosity, terraformState, planetClass, atmosphere, atmosphereType, volcanism, reserveLevel, starSystem;
+	public Double distanceFromArrivalLS, stellarMass, surfaceTemperature, eccentricity, orbitalInclination, periapsis, rotationPeriod, axialTilt, absoluteMagnitude, massEM, surfaceGravity, surfacePressure;
+	public Integer bodyID, subclass;
+	public Long radius, semiMajorAxis, orbitalPeriod;
 	@SerializedName("Age_MY")
 	public Long ageMY;
 	public Long systemAddress;
-	private Boolean tidalLock, landable, wasMapped, wasDiscovered;
-	private List<Parent> parents;
-	private List<AtmosphereItem> atmosphereComposition;
-	private List<Ring> rings;
-	private List<Material> materials;
-	private List<Composition> composition;
-	
-	public ScanEvent(String timestamp) {
-        super(timestamp);
-    }
-	
+	public Boolean tidalLock, landable, wasMapped, wasDiscovered;
+	public List<Parent> parents;
+	public List<AtmosphereItem> atmosphereComposition;
+	public List<Ring> rings;
+	public List<Material> materials;
+	public List<Composition> composition;
+
 	public ScanInfo getInfo() {
 		if(this.starType != null) {
 			return new StarScan(scanType, bodyName, starType, luminosity, distanceFromArrivalLS, stellarMass, surfaceTemperature, eccentricity, orbitalInclination, periapsis, rotationPeriod,

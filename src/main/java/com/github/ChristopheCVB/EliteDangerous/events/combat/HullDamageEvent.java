@@ -6,8 +6,4 @@ public class HullDamageEvent extends Event {
 	public Double health;
 	public Boolean playerPilot;
 	public Boolean fighter;
-	
-	public HullDamageEvent(String timestamp) {
-        super(timestamp);
-    }
 }

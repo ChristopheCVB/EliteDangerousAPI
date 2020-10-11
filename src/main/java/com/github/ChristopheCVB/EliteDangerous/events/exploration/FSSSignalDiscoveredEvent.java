@@ -8,6 +8,7 @@ public class FSSSignalDiscoveredEvent extends Event {
 	public String signalNameLocalised;
 	@SerializedName("USSType")
 	public String ussType;
+	@SerializedName("USSType_Localised")
 	public String ussTypeLocalised;
 	public String spawningState;
 	public String spawningStateLocalised;
@@ -17,8 +18,4 @@ public class FSSSignalDiscoveredEvent extends Event {
 	public Long systemAddress;
 	public Double timeRemaining;
 	public Boolean isStation;
-	
-	public FSSSignalDiscoveredEvent(String timestamp) {
-		super(timestamp);
-    }
 }

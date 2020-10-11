@@ -10,8 +10,4 @@ public class ModuleStoreEvent extends Event {
 	public Integer shipID;
 	public Boolean hot;
 	public Long marketID;
-	
-	public ModuleStoreEvent(String timestamp) {
-        super(timestamp);
-    }
 }

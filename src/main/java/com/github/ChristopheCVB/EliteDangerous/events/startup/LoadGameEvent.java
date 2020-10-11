@@ -3,9 +3,8 @@ package com.github.ChristopheCVB.EliteDangerous.events.startup;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class LoadGameEvent extends Event {
-	
 	public String commander;
-	public String FID;
+	public String fID;
 	public String ship;
 	public String shipLocalised;
 	public String shipName;
@@ -18,8 +17,4 @@ public class LoadGameEvent extends Event {
 	public Long credits;
 	public Long loan;
 	public Boolean horizons;
-	
-	public LoadGameEvent(String timestamp) {
-		super(timestamp);
-    }
 }

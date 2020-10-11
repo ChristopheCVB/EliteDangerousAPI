@@ -6,8 +6,4 @@ public class PayBountiesEvent extends Event {
 	public Long amount;
 	public String faction, factionLocalised;
 	public Integer shipID, brokerPercentage;
-	
-	public PayBountiesEvent(String timestamp) {
-        super(timestamp);
-    }
 }

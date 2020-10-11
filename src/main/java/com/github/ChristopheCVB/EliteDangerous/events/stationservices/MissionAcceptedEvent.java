@@ -14,8 +14,4 @@ public class MissionAcceptedEvent extends Event {
 	public Long reward;
 	public Long missionID;
 	public Long expiry;
-	
-	public MissionAcceptedEvent(String timestamp) {
-        super(timestamp);
-    }
 }

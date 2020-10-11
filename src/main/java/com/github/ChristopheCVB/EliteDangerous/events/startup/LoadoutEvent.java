@@ -20,8 +20,4 @@ public class LoadoutEvent extends Event {
 	public Double maxJumpRange;
 	public Double unladenMass;
 	public ArrayList<Module> modules;
-	
-	public LoadoutEvent(String timestamp) {
-		super(timestamp);
-    }
 }

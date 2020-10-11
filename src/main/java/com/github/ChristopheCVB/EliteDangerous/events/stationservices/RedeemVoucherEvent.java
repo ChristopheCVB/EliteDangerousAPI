@@ -10,8 +10,4 @@ public class RedeemVoucherEvent extends Event {
 	public Long totalAmount;
 	public Integer brokerPercentage;
 	public List<FactionBounty> factions;
-	
-	public RedeemVoucherEvent(String timestamp) {
-        super(timestamp);
-    }
 }

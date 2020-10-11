@@ -10,8 +10,4 @@ public class MarketEvent extends Event {
 	public String carrierDockingAccess;
 	public Integer marketID;
 	public transient Market market = Market.load();
-	
-	public MarketEvent(String timestamp) {
-		super(timestamp);
-	}
 }

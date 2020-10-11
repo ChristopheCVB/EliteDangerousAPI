@@ -9,8 +9,4 @@ import com.google.gson.annotations.SerializedName;
 public class SupercruiseEntryEvent extends Event {
 	public String starSystem;
 	public Long systemAddress;
-
-	public SupercruiseEntryEvent(String timestamp) {
-		super(timestamp);
-	}
 }
