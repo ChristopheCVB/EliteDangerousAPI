@@ -1,22 +1,9 @@
 package com.github.ChristopheCVB.EliteDangerous.utils;
 
-import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.AtmosphereItem;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Composition;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Parent;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Ring;
-import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnusedEventDataException;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 public class GameFilesUtils {
@@ -165,27 +152,7 @@ public class GameFilesUtils {
         return statusFile;
     }
 
-    public static String getFormattedDate(long timestamp) {
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
-        Date date = new Date(timestamp);
-        return outputFormat.format(date);
-    }
-
     public static void sendUnprocessedEvent(JsonObject jsonEvent) {
         System.out.println("UNPROCESSED EVENT: " + jsonEvent.toString());
-    }
-
-    public static long getTimeMillis(String timestamp) {
-        long millis = 0;
-
-        try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            millis = inputFormat.parse(timestamp).getTime();
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return millis;
     }
 }
