@@ -16,8 +16,8 @@ public class EventDeserializer implements JsonDeserializer<Event> {
         this.eventTypeRegistry = new HashMap<>();
     }
 
-    public void registerEventType(String eventTypeName, Class<? extends Event> eventType) {
-        this.eventTypeRegistry.put(eventTypeName, eventType);
+    public void registerEventType(Class<? extends Event> eventType) {
+        this.eventTypeRegistry.put(eventType.getSimpleName().replaceFirst("Event$", ""), eventType);
     }
 
     @Override
