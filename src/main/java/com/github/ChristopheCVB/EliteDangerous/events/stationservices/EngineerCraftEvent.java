@@ -3,7 +3,6 @@ package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Modifier;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.engineer.Ingredient;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 

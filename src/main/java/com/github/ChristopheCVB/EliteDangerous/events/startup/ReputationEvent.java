@@ -17,9 +17,9 @@ public class ReputationEvent extends Event {
 	public String getAllianceReputationReadable() {
 		return Reputation.getReputationReadable(this.alliance);
 	}
-	
+
 	public String getIndependentReputationReadable() {
 		return Reputation.getReputationReadable(independent);
 	}
-	
+
 }

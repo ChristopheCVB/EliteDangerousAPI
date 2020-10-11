@@ -3,7 +3,6 @@ package com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.ScanInfo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlanetScan implements ScanInfo {
 	public String scanType, bodyName, terraformState, planetClass, atmosphere, atmosphereType, volcanism, reserveLevel, starSystem;
@@ -16,14 +15,14 @@ public class PlanetScan implements ScanInfo {
 	public ArrayList<Ring> rings;
 	public ArrayList<Material> materials;
 	public Composition composition;
-	
+
 	public PlanetScan(String scanType, String bodyName, String terraformState, String planetClass, String atmosphere,
-                      String atmosphereType, String volcanism, String reserveLevel, Double distanceFromArrivalLS, Double massEM,
-                      Double surfaceGravity, Double surfaceTemperature, Double surfacePressure, Double eccentricity,
-                      Double orbitalInclination, Double periapsis, Double rotationPeriod, Double axialTilt, Integer bodyID,
-                      Long radius, Long semiMajorAxis, Long orbitalPeriod, Boolean tidalLock, Boolean landable, ArrayList<Parent> parents,
+					  String atmosphereType, String volcanism, String reserveLevel, Double distanceFromArrivalLS, Double massEM,
+					  Double surfaceGravity, Double surfaceTemperature, Double surfacePressure, Double eccentricity,
+					  Double orbitalInclination, Double periapsis, Double rotationPeriod, Double axialTilt, Integer bodyID,
+					  Long radius, Long semiMajorAxis, Long orbitalPeriod, Boolean tidalLock, Boolean landable, ArrayList<Parent> parents,
 					  ArrayList<AtmosphereItem> atmosphereComposition, ArrayList<Ring> rings, ArrayList<Material> materials,
-                      Composition composition, Boolean wasMapped, Boolean wasDiscovered, String starSystem, Integer subclass, Long systemAddress) {
+					  Composition composition, Boolean wasMapped, Boolean wasDiscovered, String starSystem, Integer subclass, Long systemAddress) {
 		this.scanType = scanType;
 		this.subclass = subclass;
 		this.systemAddress = systemAddress;

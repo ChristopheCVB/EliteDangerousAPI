@@ -15,9 +15,9 @@ public class BountyEvent extends Event {
 	public Long reward;
 	public Long totalReward;
 	public ArrayList<BountyReward> rewards;
-	
+
 	public BountyInfo getBountyInfo() {
-		if("Skimmer".equals(target)) {
+		if ("Skimmer".equals(target)) {
 			return new SkimmerBounty(faction, target, victimsFaction, reward);
 		}
 		else {

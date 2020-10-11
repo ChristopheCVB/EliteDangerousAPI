@@ -8,20 +8,20 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.S
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.ScanStageInfo;
 
 public class ShipTargetedEvent extends Event {
-    public Integer scanStage;
-    public Boolean targetLocked;
-    public String ship;
-    public String shipLocalised;
-    public String pilotName;
-    public String pilotNameLocalised;
-    public String pilotRank, faction, legalStatus, power;
-    public Double shieldHealth, hullHealth;
-    public Long bounty;
+	public Integer scanStage;
+	public Boolean targetLocked;
+	public String ship;
+	public String shipLocalised;
+	public String pilotName;
+	public String pilotNameLocalised;
+	public String pilotRank, faction, legalStatus, power;
+	public Double shieldHealth, hullHealth;
+	public Long bounty;
 
-    public ScanStageInfo getScanStageInfo() {
-    	ScanStageInfo scanStageInfo = null;
+	public ScanStageInfo getScanStageInfo() {
+		ScanStageInfo scanStageInfo = null;
 
-    	switch (this.scanStage) {
+		switch (this.scanStage) {
 			case 0:
 				scanStageInfo = new ShipScanStage0(targetLocked, ship, scanStage);
 				break;
@@ -39,7 +39,7 @@ public class ShipTargetedEvent extends Event {
 				break;
 		}
 
-        return scanStageInfo;
-    }
+		return scanStageInfo;
+	}
 
 }

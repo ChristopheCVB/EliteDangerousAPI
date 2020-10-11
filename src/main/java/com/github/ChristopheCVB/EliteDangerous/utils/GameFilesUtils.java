@@ -4,6 +4,9 @@ import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 public class GameFilesUtils {
@@ -33,7 +36,7 @@ public class GameFilesUtils {
         else {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().startsWith("Journal") && GameFilesUtils.getFileExtension(file).equals("log")) {
+                    if (file.getName().contains("Journal") && getFileExtension(file).equals("log")) {
                         if (latest == null) {
                             latest = file;
                         }
@@ -57,7 +60,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().startsWith("Shipyard") && GameFilesUtils.getFileExtension(file).equals("json")) {
+                    if (file.getName().contains("Shipyard")) {
                         shipyardFile = file;
                     }
                 }
@@ -74,7 +77,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().startsWith("Cargo") && GameFilesUtils.getFileExtension(file).equals("json")) {
+                    if (file.getName().contains("Cargo")) {
                         cargoFile = file;
                     }
                 }
@@ -91,7 +94,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().startsWith("Market") && GameFilesUtils.getFileExtension(file).equals("json")) {
+                    if (file.getName().contains("Market")) {
                         marketFile = file;
                     }
                 }
@@ -108,7 +111,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().startsWith("ModulesInfo") && GameFilesUtils.getFileExtension(file).equals("json")) {
+                    if (file.getName().contains("ModulesInfo")) {
                         modulesInfoFile = file;
                     }
                 }
@@ -125,7 +128,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().startsWith("Outfitting") && GameFilesUtils.getFileExtension(file).equals("json")) {
+                    if (file.getName().contains("Outfitting")) {
                         outfittingFile = file;
                     }
                 }
@@ -142,7 +145,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().startsWith("Status") && GameFilesUtils.getFileExtension(file).equals("json")) {
+                    if (file.getName().contains("Status")) {
                         statusFile = file;
                     }
                 }
@@ -152,7 +155,27 @@ public class GameFilesUtils {
         return statusFile;
     }
 
+    public static String getFormattedDate(long timestamp) {
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+        Date date = new Date(timestamp);
+        return outputFormat.format(date);
+    }
+
     public static void sendUnprocessedEvent(JsonObject jsonEvent) {
         System.out.println("UNPROCESSED EVENT: " + jsonEvent.toString());
+    }
+
+    public static long getTimeMillis(String timestamp) {
+        long millis = 0;
+
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            millis = inputFormat.parse(timestamp).getTime();
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return millis;
     }
 }

@@ -2,7 +2,7 @@ package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
-public class CargoDepotEvent extends Event{
+public class CargoDepotEvent extends Event {
 	public Long missionID;
 	public Long startMarketID;
 	public Long endMarketID;
