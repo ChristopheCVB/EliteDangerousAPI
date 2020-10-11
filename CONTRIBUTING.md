@@ -7,9 +7,9 @@ Please note we have a code of conduct, please follow it in all your interactions
 
 ## Pull Request Process
 
-1. Open an Issue to discuss about it
+1. Open an Issue to discuss it
 2. Once the matter is settled, ask the owners to add you as a contributor
-3. Make the changes in the code
+3. Make the changes in a new branch
 4. Write the tests linked to your changes
 5. Open the Pull Request
 6. Wait for review

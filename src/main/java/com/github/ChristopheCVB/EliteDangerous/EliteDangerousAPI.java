@@ -4,6 +4,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.MusicEvent;
 import com.github.ChristopheCVB.EliteDangerous.events.ReceiveTextEvent;
 import com.github.ChristopheCVB.EliteDangerous.events.combat.*;
+import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Parent;
 import com.github.ChristopheCVB.EliteDangerous.events.exploration.*;
 import com.github.ChristopheCVB.EliteDangerous.events.fleetcarrier.CarrierBankTransferEvent;
 import com.github.ChristopheCVB.EliteDangerous.events.fleetcarrier.CarrierCrewServicesEvent;
@@ -16,10 +17,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.trade.*;
 import com.github.ChristopheCVB.EliteDangerous.events.travel.*;
 import com.github.ChristopheCVB.EliteDangerous.states.Status;
 import com.github.ChristopheCVB.EliteDangerous.states.StatusListener;
-import com.github.ChristopheCVB.EliteDangerous.utils.DiedEventDeserializer;
-import com.github.ChristopheCVB.EliteDangerous.utils.EventDeserializer;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
-import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
+import com.github.ChristopheCVB.EliteDangerous.utils.*;
 import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnsupportedGameVersion;
 import com.google.gson.*;
 
@@ -243,13 +241,22 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(StoredModulesEvent.class.getSimpleName().replace("Event", ""), StoredModulesEvent.class);
 		eventDeserializer.registerEventType(StoredShipsEvent.class.getSimpleName().replace("Event", ""), StoredShipsEvent.class);
 		eventDeserializer.registerEventType(TechnologyBrokerEvent.class.getSimpleName().replace("Event", ""), TechnologyBrokerEvent.class);
+		eventDeserializer.registerEventType(CarrierBankTransferEvent.class.getSimpleName().replace("Event", ""), CarrierBankTransferEvent.class);
+		eventDeserializer.registerEventType(CarrierCrewServicesEvent.class.getSimpleName().replace("Event", ""), CarrierCrewServicesEvent.class);
+		eventDeserializer.registerEventType(CarrierDepositFuelEvent.class.getSimpleName().replace("Event", ""), CarrierDepositFuelEvent.class);
+		eventDeserializer.registerEventType(CarrierFinanceEvent.class.getSimpleName().replace("Event", ""), CarrierFinanceEvent.class);
+		eventDeserializer.registerEventType(PowerplayEvent.class.getSimpleName().replace("Event", ""), PowerplayEvent.class);
+		eventDeserializer.registerEventType(CargoTransferEvent.class.getSimpleName().replace("Event", ""), CargoTransferEvent.class);
+		eventDeserializer.registerEventType(StatisticsEvent.class.getSimpleName().replace("Event", ""), StatisticsEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
+		ParentDeserializer parentDeserializer = new ParentDeserializer();
 
 		this.gson = new GsonBuilder()
 				.setFieldNamingStrategy(f -> FieldNamingPolicy.UPPER_CAMEL_CASE.translateName(f).replaceFirst("Localised$", "_Localised"))
 				.registerTypeAdapter(Event.class, eventDeserializer)
 				.registerTypeAdapter(DiedEvent.class, diedEventDeserializer)
+				.registerTypeAdapter(Parent.class, parentDeserializer)
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
 				.create();
 	}
@@ -283,43 +290,11 @@ public class EliteDangerousAPI {
 		Event event = null;
 		try {
 			event = this.gson.fromJson(jsonEvent, Event.class);
-			if (event != null) {
-				return event;
-			}
 		}
 		catch (JsonSyntaxException ignored) {}
 
-		String timestamp = JsonUtils.pullString(jsonEvent, "timestamp");
-		String eventName = JsonUtils.pullString(jsonEvent, "event");
-
-		switch (eventName) {
-			case "Powerplay":
-				event = new PowerplayEvent(timestamp, jsonEvent);
-				break;
-			case "Statistics":
-				event = new StatisticsEvent(timestamp, jsonEvent);
-				break;
-			case "Scan":
-				event = new ScanEvent(timestamp, jsonEvent);
-				break;
-			case "CargoTransfer":
-				event = new CargoTransferEvent(timestamp, jsonEvent);
-				break;
-			case "CarrierBankTransfer":
-				event = new CarrierBankTransferEvent(timestamp, jsonEvent);
-				break;
-			case "CarrierCrewServices":
-				event = new CarrierCrewServicesEvent(timestamp, jsonEvent);
-				break;
-			case "CarrierDepositFuel":
-				event = new CarrierDepositFuelEvent(timestamp, jsonEvent);
-				break;
-			case "CarrierFinance":
-				event = new CarrierFinanceEvent(timestamp, jsonEvent);
-				break;
-			default:
-				GameFilesUtils.sendUnprocessedEvent(eventName, jsonEvent);
-				break;
+		if (event == null) {
+			GameFilesUtils.sendUnprocessedEvent(jsonEvent);
 		}
 
 		return event;

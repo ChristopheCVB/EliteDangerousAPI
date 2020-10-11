@@ -12,18 +12,18 @@ public class PlanetScan implements ScanInfo {
 	private Long radius, semiMajorAxis, orbitalPeriod, systemAddress;
 	private Boolean tidalLock, landable, wasMapped, wasDiscovered;
 	private List<Parent> parents;
-	private List<AtmosphereComposition> atmosphereComposition;
+	private List<AtmosphereItem> atmosphereComposition;
 	private List<Ring> rings;
 	private List<Material> materials;
 	private List<Composition> composition;
 	
 	public PlanetScan(String scanType, String bodyName, String terraformState, String planetClass, String atmosphere,
-			String atmosphereType, String volcanism, String reserveLevel, Double distanceFromArrivalLS, Double massEM,
-			Double surfaceGravity, Double surfaceTemperature, Double surfacePressure, Double eccentricity,
-			Double orbitalInclination, Double periapsis, Double rotationPeriod, Double axialTilt, Integer bodyID,
-			Long radius, Long semiMajorAxis, Long orbitalPeriod, Boolean tidalLock, Boolean landable, List<Parent> parents,
-			List<AtmosphereComposition> atmosphereComposition, List<Ring> rings, List<Material> materials,
-			List<Composition> composition, Boolean wasMapped, Boolean wasDiscovered, String starSystem, Integer subclass, Long systemAddress) {
+                      String atmosphereType, String volcanism, String reserveLevel, Double distanceFromArrivalLS, Double massEM,
+                      Double surfaceGravity, Double surfaceTemperature, Double surfacePressure, Double eccentricity,
+                      Double orbitalInclination, Double periapsis, Double rotationPeriod, Double axialTilt, Integer bodyID,
+                      Long radius, Long semiMajorAxis, Long orbitalPeriod, Boolean tidalLock, Boolean landable, List<Parent> parents,
+                      List<AtmosphereItem> atmosphereComposition, List<Ring> rings, List<Material> materials,
+                      List<Composition> composition, Boolean wasMapped, Boolean wasDiscovered, String starSystem, Integer subclass, Long systemAddress) {
 		this.scanType = scanType;
 		this.subclass = subclass;
 		this.systemAddress = systemAddress;
@@ -180,7 +180,7 @@ public class PlanetScan implements ScanInfo {
 		return parents;
 	}
 
-	public List<AtmosphereComposition> getAtmosphereComposition() {
+	public List<AtmosphereItem> getAtmosphereComposition() {
 		return atmosphereComposition;
 	}
 

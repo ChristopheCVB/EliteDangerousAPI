@@ -1,12 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.utils;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Mission;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.StoredModule;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.StoredShipHere;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.StoredShipRemote;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.inventory.Transfer;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.AtmosphereComposition;
+import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.AtmosphereItem;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Composition;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Parent;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Ring;
@@ -176,23 +171,8 @@ public class GameFilesUtils {
         return outputFormat.format(date);
     }
 
-    public static void isAllEventDataProcessed(Event event, JsonObject jsonObject) {
-        try {
-            if (jsonObject.size() > 0) {
-                throw new UnusedEventDataException();
-            }
-        }
-        catch (UnusedEventDataException e) {
-            sendUnusedEventData(event.getClass().getSimpleName(), jsonObject.toString());
-        }
-    }
-
-    public static void sendUnprocessedEvent(String eventName, JsonObject jsonEvent) {
-        System.out.println("UNPROCESSED EVENT: " + eventName + " with Json " + jsonEvent.toString());
-    }
-
-    private static void sendUnusedEventData(String eventName, String s) {
-        System.out.println("UNUSED DATA: " + eventName + " with Data " + s);
+    public static void sendUnprocessedEvent(JsonObject jsonEvent) {
+        System.out.println("UNPROCESSED EVENT: " + jsonEvent.toString());
     }
 
     public static long getTimeMillis(String timestamp) {
@@ -207,99 +187,5 @@ public class GameFilesUtils {
         }
 
         return millis;
-    }
-
-    public static List<com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Material> createMaterialList(JsonArray array) {
-        List<com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Material> materials = null;
-
-        if (array != null) {
-            materials = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                materials.add(new com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Material(JsonUtils.pullString(json, "Name"), JsonUtils.pullDouble(json, "Percent")));
-
-            }
-        }
-
-        return materials;
-    }
-
-    public static List<Parent> createParentList(JsonArray array) {
-        List<Parent> parents = null;
-
-        if (array != null) {
-            parents = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                for (String s : json.keySet()) {
-
-                    parents.add(new Parent(s, json.get(s).getAsInt()));
-                }
-            }
-        }
-
-        return parents;
-    }
-
-    public static List<Ring> createRingsList(JsonArray array) {
-        List<Ring> rings = null;
-
-        if (array != null) {
-            rings = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-                rings.add(new Ring(JsonUtils.pullString(json, "Name"), JsonUtils.pullString(json, "RingClass"), JsonUtils.pullLong(json, "MassMT"), JsonUtils.pullLong(json, "InnerRad"), JsonUtils.pullLong(json, "OuterRad")));
-            }
-        }
-
-        return rings;
-    }
-
-    public static List<Composition> createCompositionList(JsonObject jsonObject) {
-        List<Composition> compositions = null;
-
-        if (jsonObject != null) {
-            compositions = new ArrayList<>();
-
-            for (String s : jsonObject.keySet()) {
-                compositions.add(new Composition(s, jsonObject.get(s).getAsDouble()));
-            }
-        }
-
-        return compositions;
-    }
-
-    public static List<AtmosphereComposition> createAtmosphereCompositionList(JsonArray array) {
-        List<AtmosphereComposition> atmosphereCompositions = null;
-
-        if (array != null) {
-            atmosphereCompositions = new ArrayList<>();
-
-            for (JsonElement comp : array) {
-                JsonObject obj = comp.getAsJsonObject();
-
-                atmosphereCompositions.add(new AtmosphereComposition(JsonUtils.pullString(obj, "Name"), JsonUtils.pullDouble(obj, "Percent")));
-            }
-        }
-
-        return atmosphereCompositions;
-    }
-
-    public static List<Transfer> createTransferList(JsonArray array) {
-        List<Transfer> transferList = null;
-
-        if (array != null) {
-            transferList = new ArrayList<>();
-
-            for (JsonElement o : array) {
-                JsonObject json = o.getAsJsonObject();
-
-                transferList.add(new Transfer(JsonUtils.pullString(json, "Type"), JsonUtils.pullString(json, "Type_Localised"), JsonUtils.pullString(json, "Direction"), JsonUtils.pullInt(json, "Count")));
-            }
-        }
-        return transferList;
     }
 }

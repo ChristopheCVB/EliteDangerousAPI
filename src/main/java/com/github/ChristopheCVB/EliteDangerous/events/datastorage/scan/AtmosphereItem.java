@@ -1,6 +1,6 @@
 package com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan;
 
-public class Material {
+public class AtmosphereItem {
 	public String name;
 	public Double percent;
 }
