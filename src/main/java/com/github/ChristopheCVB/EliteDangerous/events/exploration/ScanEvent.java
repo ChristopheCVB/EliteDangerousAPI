@@ -8,6 +8,7 @@ import com.github.ChristopheCVB.EliteDangerous.utils.JsonUtils;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScanEvent extends Event {
@@ -19,11 +20,11 @@ public class ScanEvent extends Event {
 	public Long ageMY;
 	public Long systemAddress;
 	public Boolean tidalLock, landable, wasMapped, wasDiscovered;
-	public List<Parent> parents;
-	public List<AtmosphereItem> atmosphereComposition;
-	public List<Ring> rings;
-	public List<Material> materials;
-	public List<Composition> composition;
+	public ArrayList<Parent> parents;
+	public ArrayList<AtmosphereItem> atmosphereComposition;
+	public ArrayList<Ring> rings;
+	public ArrayList<Material> materials;
+	public Composition composition;
 
 	public ScanInfo getInfo() {
 		if(this.starType != null) {

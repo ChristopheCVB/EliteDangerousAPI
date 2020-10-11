@@ -1,8 +1,6 @@
 package com.github.ChristopheCVB.EliteDangerous;
 
-import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.MusicEvent;
-import com.github.ChristopheCVB.EliteDangerous.events.ReceiveTextEvent;
+import com.github.ChristopheCVB.EliteDangerous.events.*;
 import com.github.ChristopheCVB.EliteDangerous.events.combat.*;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Parent;
 import com.github.ChristopheCVB.EliteDangerous.events.exploration.*;
@@ -130,6 +128,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(BuyExplorationDataEvent.class.getSimpleName().replace("Event", ""), BuyExplorationDataEvent.class);
 		eventDeserializer.registerEventType(CodexEntryEvent.class.getSimpleName().replace("Event", ""), CodexEntryEvent.class);
 		eventDeserializer.registerEventType(DiscoveryScanEvent.class.getSimpleName().replace("Event", ""), DiscoveryScanEvent.class);
+		eventDeserializer.registerEventType(ScannedEvent.class.getSimpleName().replace("Event", ""), ScannedEvent.class);
 		eventDeserializer.registerEventType(FSSAllBodiesFoundEvent.class.getSimpleName().replace("Event", ""), FSSAllBodiesFoundEvent.class);
 		eventDeserializer.registerEventType(FSSDiscoveryScanEvent.class.getSimpleName().replace("Event", ""), FSSDiscoveryScanEvent.class);
 		eventDeserializer.registerEventType(FSSSignalDiscoveredEvent.class.getSimpleName().replace("Event", ""), FSSSignalDiscoveredEvent.class);
@@ -248,6 +247,13 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(PowerplayEvent.class.getSimpleName().replace("Event", ""), PowerplayEvent.class);
 		eventDeserializer.registerEventType(CargoTransferEvent.class.getSimpleName().replace("Event", ""), CargoTransferEvent.class);
 		eventDeserializer.registerEventType(StatisticsEvent.class.getSimpleName().replace("Event", ""), StatisticsEvent.class);
+		eventDeserializer.registerEventType(ScanEvent.class.getSimpleName().replace("Event", ""), ScanEvent.class);
+		eventDeserializer.registerEventType(NavRouteEvent.class.getSimpleName().replace("Event", ""), NavRouteEvent.class);
+		eventDeserializer.registerEventType(ReservoirReplenishedEvent.class.getSimpleName().replace("Event", ""), ReservoirReplenishedEvent.class);
+		eventDeserializer.registerEventType(ModuleInfoEvent.class.getSimpleName().replace("Event", ""), ModuleInfoEvent.class);
+		eventDeserializer.registerEventType(PromotionEvent.class.getSimpleName().replace("Event", ""), PromotionEvent.class);
+		eventDeserializer.registerEventType(USSDropEvent.class.getSimpleName().replace("Event", ""), USSDropEvent.class);
+		eventDeserializer.registerEventType(ShutdownEvent.class.getSimpleName().replace("Event", ""), ShutdownEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();

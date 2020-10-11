@@ -2,6 +2,8 @@ package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
+import java.util.Date;
+
 public class MissionAcceptedEvent extends Event {
 	public String faction;
 	public String name;
@@ -13,5 +15,5 @@ public class MissionAcceptedEvent extends Event {
 	public String reputation;
 	public Long reward;
 	public Long missionID;
-	public Long expiry;
+	public Date expiry;
 }
