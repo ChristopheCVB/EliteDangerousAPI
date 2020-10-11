@@ -48,7 +48,7 @@ Use the common `gradlew build` task to build your project.
 
 The roadmap can be found [here](https://github.com/ChristopheCVB/EliteDangerousAPI/projects/1)
 
-## Contributors
+## [Contributors](https://github.com/ChristopheCVB/EliteDangerousAPI/graphs/contributors)
 
 Special thanks to:
 
