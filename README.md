@@ -50,7 +50,7 @@ The roadmap can be found [here](https://github.com/ChristopheCVB/EliteDangerousA
 
 ## Contributors
 
-Special thanks to our contributors:
+Special thanks to:
 
 * [ChristopheCVB](https://github.com/ChristopheCVB)
 * [Pjiesco](https://github.com/Pjiesco)
