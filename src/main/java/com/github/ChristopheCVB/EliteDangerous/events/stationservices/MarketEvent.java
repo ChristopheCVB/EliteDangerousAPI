@@ -4,10 +4,19 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.market.Market;
 
 public class MarketEvent extends Event {
-	public String stationName;
-	public String starSystem;
-	public String stationType;
-	public String carrierDockingAccess;
-	public Integer marketID;
-	public transient Market market = Market.load();
+    public String stationName;
+    public String starSystem;
+    public String stationType;
+    public String carrierDockingAccess;
+    public Integer marketID;
+    public transient Market market = Market.load();
+
+    public interface Listener extends Event.Listener {
+        @Override
+        default <T extends Event> void onTriggered(T event) {
+            this.onMarketEventTriggered((MarketEvent) event);
+        }
+
+        void onMarketEventTriggered(MarketEvent marketEvent);
+    }
 }

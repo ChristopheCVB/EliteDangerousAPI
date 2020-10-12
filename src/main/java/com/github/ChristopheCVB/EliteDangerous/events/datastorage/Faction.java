@@ -1,6 +1,6 @@
 package com.github.ChristopheCVB.EliteDangerous.events.datastorage;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Faction {
 	public String name;
@@ -10,9 +10,9 @@ public class Faction {
 	public String happiness;
 	public Double myReputation;
 	public Double influence;
-	public ArrayList<FactionState> activeStates;
-	public ArrayList<FactionState> pendingStates;
-	public ArrayList<FactionState> recoveringStates;
+	public List<FactionState> activeStates;
+	public List<FactionState> pendingStates;
+	public List<FactionState> recoveringStates;
 	public Boolean squadronSystem;
 	public Boolean happiestSystem;
 	public Boolean homeSystem;

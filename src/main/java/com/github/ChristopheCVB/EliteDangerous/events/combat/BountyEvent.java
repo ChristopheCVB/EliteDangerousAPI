@@ -6,7 +6,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.Default
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.SkimmerBounty;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.BountyInfo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BountyEvent extends Event {
 	public String faction;
@@ -14,7 +14,7 @@ public class BountyEvent extends Event {
 	public String victimsFaction;
 	public Long reward;
 	public Long totalReward;
-	public ArrayList<BountyReward> rewards;
+	public List<BountyReward> rewards;
 
 	public BountyInfo getBountyInfo() {
 		if ("Skimmer".equals(target)) {
@@ -23,5 +23,14 @@ public class BountyEvent extends Event {
 		else {
 			return new DefaultBounty(target, victimsFaction, totalReward, rewards);
 		}
+	}
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onBountyEventTriggered((BountyEvent) event);
+		}
+
+		void onBountyEventTriggered(BountyEvent bountyEvent);
 	}
 }

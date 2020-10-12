@@ -15,4 +15,13 @@ public class ModuleBuyEvent extends Event {
 	public Long marketID;
 	public Long sellPrice;
 	public Integer shipID;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onModuleBuyEventTriggered((ModuleBuyEvent) event);
+		}
+
+		void onModuleBuyEventTriggered(ModuleBuyEvent moduleBuyEvent);
+	}
 }

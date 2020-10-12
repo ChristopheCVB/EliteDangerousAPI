@@ -9,4 +9,13 @@ public class USSDropEvent extends Event {
     public String ussTypeLocalised;
     @SerializedName("USSThreat")
     public Integer ussThreat;
+
+    public interface Listener extends Event.Listener {
+        @Override
+        default <T extends Event> void onTriggered(T event) {
+            this.onUSSDropEventTriggered((USSDropEvent) event);
+        }
+
+        void onUSSDropEventTriggered(USSDropEvent ussDropEvent);
+    }
 }

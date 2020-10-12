@@ -2,21 +2,21 @@ package com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan;
 
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.ScanInfo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class StarScan implements ScanInfo {
 	public String scanType, bodyName, starType, luminosity, starSystem;
 	public Double distanceFromArrivalLS, stellarMass, surfaceTemperature, eccentricity, orbitalInclination, periapsis, rotationPeriod, axialTilt, absoluteMagnitude;
 	public Integer bodyID;
 	public Long radius, semiMajorAxis, orbitalPeriod, ageMY, systemAddress;
-	public ArrayList<Parent> parents;
-	public ArrayList<Ring> rings;
+	public List<Parent> parents;
+	public List<Ring> rings;
 	public Boolean wasDiscovered;
 
 	public StarScan(String scanType, String bodyName, String starType, String luminosity, Double distanceFromArrivalLS,
 					Double stellarMass, Double surfaceTemperature, Double eccentricity, Double orbitalInclination,
 					Double periapsis, Double rotationPeriod, Double axialTilt, Double absoluteMagnitude, Integer bodyID,
-					Long radius, Long semiMajorAxis, Long orbitalPeriod, Long ageMY, ArrayList<Parent> parents, ArrayList<Ring> rings,
+					Long radius, Long semiMajorAxis, Long orbitalPeriod, Long ageMY, List<Parent> parents, List<Ring> rings,
 					Boolean wasDiscovered, String starSystem, Long systemAddress) {
 		this.scanType = scanType;
 		this.bodyName = bodyName;

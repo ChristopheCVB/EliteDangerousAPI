@@ -6,4 +6,13 @@ public class ReceiveTextEvent extends Event {
     public String message;
     public String messageLocalised;
     public String channel;
+
+    public interface Listener extends Event.Listener {
+        @Override
+        default <T extends Event> void onTriggered(T event) {
+            this.onReceiveTextEventTriggered((ReceiveTextEvent) event);
+        }
+
+        void onReceiveTextEventTriggered(ReceiveTextEvent receiveTextEvent);
+    }
 }

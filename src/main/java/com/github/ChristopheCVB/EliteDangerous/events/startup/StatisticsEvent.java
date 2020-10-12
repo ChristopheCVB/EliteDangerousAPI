@@ -276,4 +276,13 @@ public class StatisticsEvent extends Event {
 		@SerializedName("CQC_Credits_Earned")
 		public Long cqcCreditsEarned;
 	}
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onStatisticsEventTriggered((StatisticsEvent) event);
+		}
+
+		void onStatisticsEventTriggered(StatisticsEvent statisticsEvent);
+	}
 }

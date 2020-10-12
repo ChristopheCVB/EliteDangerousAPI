@@ -22,4 +22,12 @@ public class ReputationEvent extends Event {
 		return Reputation.getReputationReadable(independent);
 	}
 
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onReputationEventTriggered((ReputationEvent) event);
+		}
+
+		void onReputationEventTriggered(ReputationEvent reputationEvent);
+	}
 }

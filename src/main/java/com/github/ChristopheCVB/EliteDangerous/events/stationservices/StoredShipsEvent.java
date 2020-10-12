@@ -11,4 +11,13 @@ public class StoredShipsEvent extends Event {
 	public Long marketID;
 	public List<StoredShipHere> shipsHere;
 	public List<StoredShipRemote> shipsRemote;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onStoredShipsEventTriggered((StoredShipsEvent) event);
+		}
+
+		void onStoredShipsEventTriggered(StoredShipsEvent storedShipsEvent);
+	}
 }

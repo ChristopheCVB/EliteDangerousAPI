@@ -10,4 +10,13 @@ public class RedeemVoucherEvent extends Event {
 	public Long totalAmount;
 	public Integer brokerPercentage;
 	public List<FactionBounty> factions;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onRedeemVoucherEventTriggered((RedeemVoucherEvent) event);
+		}
+
+		void onRedeemVoucherEventTriggered(RedeemVoucherEvent redeemVoucherEvent);
+	}
 }

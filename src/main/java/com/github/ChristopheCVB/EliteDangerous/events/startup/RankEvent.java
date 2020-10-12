@@ -33,9 +33,16 @@ public class RankEvent extends Event {
 		return FederationRank.getLocalisedName(this.federation);
 	}
 
-
 	public String getCQCRankName() {
 		return CQCRank.getLocalisedName(this.cqc);
 	}
-	
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onRankEventTriggered((RankEvent) event);
+		}
+
+		void onRankEventTriggered(RankEvent rankEvent);
+	}
 }

@@ -4,7 +4,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Faction;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.StationEconomy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class LocationEvent extends Event {
 	public String starSystem;
@@ -33,7 +33,16 @@ public class LocationEvent extends Event {
 	private Long systemAddress, population, marketID;
 	private Integer bodyID;
 	private Boolean docked;
-	private ArrayList<Faction> factions;
-	private ArrayList<String> powers, stationServices;
-	private ArrayList<StationEconomy> stationEconomies;
+	private List<Faction> factions;
+	private List<String> powers, stationServices;
+	private List<StationEconomy> stationEconomies;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onLocationEventTriggered((LocationEvent) event);
+		}
+
+		void onLocationEventTriggered(LocationEvent locationEvent);
+	}
 }

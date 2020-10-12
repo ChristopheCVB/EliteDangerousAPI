@@ -10,4 +10,13 @@ public class ModuleStoreEvent extends Event {
 	public Integer shipID;
 	public Boolean hot;
 	public Long marketID;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onModuleStoreEventTriggered((ModuleStoreEvent) event);
+		}
+
+		void onModuleStoreEventTriggered(ModuleStoreEvent moduleStoreEvent);
+	}
 }

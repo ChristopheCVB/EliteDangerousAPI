@@ -10,6 +10,6 @@ public abstract class Event {
 	public String type;
 
 	public interface Listener {
-		void onTriggered(Event event);
+		<T extends Event> void onTriggered(T event);
 	}
 }

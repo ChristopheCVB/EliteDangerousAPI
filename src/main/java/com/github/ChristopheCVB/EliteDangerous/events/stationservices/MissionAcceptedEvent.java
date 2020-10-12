@@ -16,4 +16,13 @@ public class MissionAcceptedEvent extends Event {
 	public Long reward;
 	public Long missionID;
 	public Date expiry;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onMissionAcceptedEventTriggered((MissionAcceptedEvent) event);
+		}
+
+		void onMissionAcceptedEventTriggered(MissionAcceptedEvent missionAcceptedEvent);
+	}
 }

@@ -13,4 +13,13 @@ public class MarketSellEvent extends Event {
 	public Boolean illegalGoods;
 	public Boolean stolenGoods;
 	public Boolean blackMarket;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onMarketSellEventTriggered((MarketSellEvent) event);
+		}
+
+		void onMarketSellEventTriggered(MarketSellEvent marketSellEvent);
+	}
 }

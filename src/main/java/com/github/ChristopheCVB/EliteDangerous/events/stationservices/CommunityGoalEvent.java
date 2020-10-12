@@ -18,4 +18,13 @@ public class CommunityGoalEvent extends Event {
 	public Long expiry;
 	public Boolean isComplete;
 	public Boolean playerInTopRank;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onCommunityGoalEventTriggered((CommunityGoalEvent) event);
+		}
+
+		void onCommunityGoalEventTriggered(CommunityGoalEvent communityGoalEvent);
+	}
 }

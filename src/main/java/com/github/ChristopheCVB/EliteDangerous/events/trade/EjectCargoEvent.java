@@ -9,4 +9,13 @@ public class EjectCargoEvent extends Event {
 	public Integer count;
 	public Long missionID;
 	public Boolean abandoned;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onEjectCargoEventTriggered((EjectCargoEvent) event);
+		}
+
+		void onEjectCargoEventTriggered(EjectCargoEvent ejectCargoEvent);
+	}
 }

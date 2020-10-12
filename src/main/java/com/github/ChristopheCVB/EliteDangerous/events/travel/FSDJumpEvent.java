@@ -4,7 +4,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Conflict;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Faction;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FSDJumpEvent extends Event {
 	public String starSystem;
@@ -28,8 +28,17 @@ public class FSDJumpEvent extends Event {
 	public Double jumpDistance;
 	public Double fuelUsed;
 	public Double fuelLevel;
-	public ArrayList<Faction> factions;
-	public ArrayList<Conflict> conflicts;
+	public List<Faction> factions;
+	public List<Conflict> conflicts;
 	public Double[] starPos;
-	public ArrayList<String> powers;
+	public List<String> powers;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onFSDJumpEventTriggered((FSDJumpEvent) event);
+		}
+
+		void onFSDJumpEventTriggered(FSDJumpEvent fsdJumpEvent);
+	}
 }

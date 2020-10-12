@@ -7,12 +7,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Market {
     public Integer marketID;
     public String stationName, starSystem;
-    public ArrayList<Item> items;
+    public List<Item> items;
 
     public static Market load() {
         Market market = null;

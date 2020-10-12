@@ -3,10 +3,19 @@ package com.github.ChristopheCVB.EliteDangerous.events.startup;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Mission;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MissionsEvent extends Event {
-	public ArrayList<Mission> active;
-	public ArrayList<Mission> failed;
-	public ArrayList<Mission> complete;
+	public List<Mission> active;
+	public List<Mission> failed;
+	public List<Mission> complete;
+
+	public interface Listener extends Event.Listener {
+		@Override
+		default <T extends Event> void onTriggered(T event) {
+			this.onMissionsEventTriggered((MissionsEvent) event);
+		}
+
+		void onMissionsEventTriggered(MissionsEvent missionsEvent);
+	}
 }
