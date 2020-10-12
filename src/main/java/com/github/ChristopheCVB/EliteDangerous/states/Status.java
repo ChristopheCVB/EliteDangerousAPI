@@ -34,12 +34,25 @@ public class Status {
     private static final int FLAG_FSD_JUMP = 0x40000000;
     private static final int FLAG_SRV_HIGH_BEAM = 0x80000000;
 
+    private static final String[] GUI_FOCUS = {"NoFocus", "InternalPanel", "ExternalPanel", "CommsPanel", "RolePanel", "StationServices", "GalaxyMap", "SystemMap", "Orrery", "FSS mode", "SAA mode", "Codex"};
+
     public Integer flags;
     public Fuel fuel;
     public Double cargo;
     public String legalState;
     public Integer guiFocus;
     public Integer fireGroup;
+    public Integer[] pips;
+    public Double altitude;
+    public Double latitude;
+    public Double longitude;
+    public Double heading;
+    public String bodyName;
+    public Double planetRadius;
+
+    public static String getGUIFocusName(Integer guiFocus) {
+        return GUI_FOCUS[guiFocus];
+    }
 
     public boolean isDocked() {
         return (this.flags & FLAG_DOCKED) != 0;
@@ -174,6 +187,3 @@ public class Status {
         public Double fuelReservoir;
     }
 }
-
-// TODO: Parse Status data
-//{ "timestamp":"2020-10-08T16:52:37Z", "event":"Status", "Pips":[4,8,0] }
