@@ -4,7 +4,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class MaterialDiscoveredEvent extends Event {
     public String category, name;
-    public Integer count;
+    public Integer discoveryNumber;
 
     public interface Listener extends Event.Listener {
         @Override

@@ -14,4 +14,5 @@ public class ShipyardEvent extends Event {
 
         void onShipyardEventTriggered(ShipyardEvent shipyardEvent);
     }
+    // TODO: loadFromFile Shipyard.json
 }

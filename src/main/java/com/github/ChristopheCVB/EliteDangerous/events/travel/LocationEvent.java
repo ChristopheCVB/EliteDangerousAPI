@@ -1,8 +1,9 @@
 package com.github.ChristopheCVB.EliteDangerous.events.travel;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Faction;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.StationEconomy;
+import com.github.ChristopheCVB.EliteDangerous.events.models.Conflict;
+import com.github.ChristopheCVB.EliteDangerous.events.models.Faction;
+import com.github.ChristopheCVB.EliteDangerous.events.models.StationEconomy;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class LocationEvent extends Event {
 	private Integer bodyID;
 	private Boolean docked;
 	private List<Faction> factions;
+	private List<Conflict> conflicts;
 	private List<String> powers, stationServices;
 	private List<StationEconomy> stationEconomies;
 

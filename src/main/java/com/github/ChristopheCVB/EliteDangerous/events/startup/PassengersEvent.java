@@ -1,19 +1,19 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.PassengerManifest;
+import com.github.ChristopheCVB.EliteDangerous.events.models.PassengerRecord;
 
 import java.util.List;
 
 public class PassengersEvent extends Event {
-	public List<PassengerManifest> manifest;
+    public List<PassengerRecord> manifest;
 
-	public interface Listener extends Event.Listener {
-		@Override
-		default <T extends Event> void onTriggered(T event) {
-			this.onPassengersEventTriggered((PassengersEvent) event);
-		}
+    public interface Listener extends Event.Listener {
+        @Override
+        default <T extends Event> void onTriggered(T event) {
+            this.onPassengersEventTriggered((PassengersEvent) event);
+        }
 
-		void onPassengersEventTriggered(PassengersEvent passengersEvent);
-	}
+        void onPassengersEventTriggered(PassengersEvent passengersEvent);
+    }
 }

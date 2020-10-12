@@ -6,7 +6,6 @@ public class SupercruiseExitEvent extends Event {
 	public String starSystem;
 	public String body;
 	public String bodyType;
-	private Long systemAddress;
 	private Integer bodyID;
 
 	public interface Listener extends Event.Listener {

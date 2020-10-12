@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Mission;
+import com.github.ChristopheCVB.EliteDangerous.events.models.Mission;
 
 import java.util.List;
 

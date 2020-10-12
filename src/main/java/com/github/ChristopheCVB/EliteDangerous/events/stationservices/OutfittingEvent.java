@@ -14,4 +14,5 @@ public class OutfittingEvent extends Event {
 
         void onOutfittingEventTriggered(OutfittingEvent outfittingEvent);
     }
+    // TODO: loadFromFile Outfitting.json
 }

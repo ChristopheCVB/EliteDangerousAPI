@@ -1,8 +1,8 @@
 package com.github.ChristopheCVB.EliteDangerous.events.exploration;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.*;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.ScanInfo;
+import com.github.ChristopheCVB.EliteDangerous.events.models.scan.*;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

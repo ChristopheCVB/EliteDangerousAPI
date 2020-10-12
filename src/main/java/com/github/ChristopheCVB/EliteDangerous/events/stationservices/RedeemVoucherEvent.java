@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.FactionBounty;
+import com.github.ChristopheCVB.EliteDangerous.events.models.bounty.FactionBounty;
 
 import java.util.List;
 

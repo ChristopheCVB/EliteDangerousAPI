@@ -1,8 +1,8 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.StoredShipHere;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.StoredShipRemote;
+import com.github.ChristopheCVB.EliteDangerous.events.models.StoredShipHere;
+import com.github.ChristopheCVB.EliteDangerous.events.models.StoredShipRemote;
 
 import java.util.List;
 

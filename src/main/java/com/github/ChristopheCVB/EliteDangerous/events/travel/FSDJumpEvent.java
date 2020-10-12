@@ -1,8 +1,8 @@
 package com.github.ChristopheCVB.EliteDangerous.events.travel;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Conflict;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.Faction;
+import com.github.ChristopheCVB.EliteDangerous.events.models.Conflict;
+import com.github.ChristopheCVB.EliteDangerous.events.models.Faction;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ public class FSDJumpEvent extends Event {
 	public String systemSecurityLocalised;
 	public String body;
 	public String bodyType;
-	public String powerplayState;
 	public Faction systemFaction;
+	public String powerplayState;
 	public Long population;
 	public Long systemAddress;
 	public Long boostUsed;

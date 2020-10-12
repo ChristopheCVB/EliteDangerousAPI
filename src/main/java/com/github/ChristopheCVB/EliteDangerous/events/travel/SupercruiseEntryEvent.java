@@ -4,7 +4,6 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class SupercruiseEntryEvent extends Event {
 	public String starSystem;
-	public Long systemAddress;
 
 	public interface Listener extends Event.Listener {
 		@Override

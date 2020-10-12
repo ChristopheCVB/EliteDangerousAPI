@@ -4,6 +4,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class CodexEntryEvent extends Event {
     public String name;
+    public String nameLocalised;
     public String subCategory;
     public String subCategoryLocalised;
     public String category;
@@ -15,6 +16,8 @@ public class CodexEntryEvent extends Event {
     public Boolean isNewEntry;
     public Boolean newTraitsDiscovered;
     public String[] traits;
+    public String nearestDestination;
+    public String nearestDestinationLocalised;
 
     public interface Listener extends Event.Listener {
         @Override

@@ -1,10 +1,12 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
+import com.google.gson.annotations.SerializedName;
 
 public class ClearSavedGameEvent extends Event {
     public String name;
-    public String FID;
+    @SerializedName("FID")
+    public String fid;
 
     public interface Listener extends Event.Listener {
         @Override

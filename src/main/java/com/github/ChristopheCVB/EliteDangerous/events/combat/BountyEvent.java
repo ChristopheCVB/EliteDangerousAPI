@@ -1,10 +1,10 @@
 package com.github.ChristopheCVB.EliteDangerous.events.combat;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.BountyReward;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.DefaultBounty;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.bounty.SkimmerBounty;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.BountyInfo;
+import com.github.ChristopheCVB.EliteDangerous.events.models.bounty.BountyReward;
+import com.github.ChristopheCVB.EliteDangerous.events.models.bounty.DefaultBounty;
+import com.github.ChristopheCVB.EliteDangerous.events.models.bounty.SkimmerBounty;
 
 import java.util.List;
 

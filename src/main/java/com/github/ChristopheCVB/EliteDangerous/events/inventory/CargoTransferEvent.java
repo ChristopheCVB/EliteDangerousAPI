@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.inventory;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.inventory.Transfer;
+import com.github.ChristopheCVB.EliteDangerous.events.models.inventory.Transfer;
 
 import java.util.List;
 

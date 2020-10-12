@@ -1,14 +1,12 @@
 package com.github.ChristopheCVB.EliteDangerous;
 
-import com.github.ChristopheCVB.EliteDangerous.events.*;
+import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.combat.*;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Parent;
 import com.github.ChristopheCVB.EliteDangerous.events.exploration.*;
-import com.github.ChristopheCVB.EliteDangerous.events.fleetcarrier.CarrierBankTransferEvent;
-import com.github.ChristopheCVB.EliteDangerous.events.fleetcarrier.CarrierCrewServicesEvent;
-import com.github.ChristopheCVB.EliteDangerous.events.fleetcarrier.CarrierDepositFuelEvent;
-import com.github.ChristopheCVB.EliteDangerous.events.fleetcarrier.CarrierFinanceEvent;
+import com.github.ChristopheCVB.EliteDangerous.events.fleetcarriers.*;
 import com.github.ChristopheCVB.EliteDangerous.events.inventory.CargoTransferEvent;
+import com.github.ChristopheCVB.EliteDangerous.events.models.scan.Parent;
+import com.github.ChristopheCVB.EliteDangerous.events.other.*;
 import com.github.ChristopheCVB.EliteDangerous.events.startup.*;
 import com.github.ChristopheCVB.EliteDangerous.events.stationservices.*;
 import com.github.ChristopheCVB.EliteDangerous.events.trade.*;
@@ -147,6 +145,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(DockingDeniedEvent.class);
 		eventDeserializer.registerEventType(DockingGrantedEvent.class);
 		eventDeserializer.registerEventType(DockingRequestedEvent.class);
+		eventDeserializer.registerEventType(DockingTimeoutEvent.class);
 		eventDeserializer.registerEventType(FSDJumpEvent.class);
 		eventDeserializer.registerEventType(FSDTargetEvent.class);
 		eventDeserializer.registerEventType(LeaveBodyEvent.class);
@@ -239,6 +238,9 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(PromotionEvent.class);
 		eventDeserializer.registerEventType(USSDropEvent.class);
 		eventDeserializer.registerEventType(ShutdownEvent.class);
+		eventDeserializer.registerEventType(RouteEvent.class);
+		eventDeserializer.registerEventType(CarrierJumpEvent.class);
+		eventDeserializer.registerEventType(CarrierJumpCancelledEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
@@ -285,7 +287,7 @@ public class EliteDangerousAPI {
 		catch (JsonSyntaxException ignored) {}
 
 		if (event == null) {
-			GameFilesUtils.sendUnprocessedEvent(jsonEvent);
+			GameFilesUtils.onUnprocessedEvent(jsonEvent);
 		}
 
 		return event;

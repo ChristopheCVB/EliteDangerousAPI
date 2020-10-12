@@ -4,9 +4,6 @@ import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 
 public class GameFilesUtils {
@@ -36,7 +33,7 @@ public class GameFilesUtils {
         else {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Journal") && getFileExtension(file).equals("log")) {
+                    if (file.getName().contains("Journal") && "log".equals(getFileExtension(file))) {
                         if (latest == null) {
                             latest = file;
                         }
@@ -60,7 +57,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Shipyard")) {
+                    if (file.getName().contains("Shipyard") && "json".equals(getFileExtension(file))) {
                         shipyardFile = file;
                     }
                 }
@@ -77,7 +74,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Cargo")) {
+                    if (file.getName().contains("Cargo") && "json".equals(getFileExtension(file))) {
                         cargoFile = file;
                     }
                 }
@@ -94,7 +91,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Market")) {
+                    if (file.getName().contains("Market") && "json".equals(getFileExtension(file))) {
                         marketFile = file;
                     }
                 }
@@ -111,7 +108,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("ModulesInfo")) {
+                    if (file.getName().contains("ModulesInfo") && "json".equals(getFileExtension(file))) {
                         modulesInfoFile = file;
                     }
                 }
@@ -128,7 +125,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Outfitting")) {
+                    if (file.getName().contains("Outfitting") && "json".equals(getFileExtension(file))) {
                         outfittingFile = file;
                     }
                 }
@@ -145,7 +142,7 @@ public class GameFilesUtils {
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Status")) {
+                    if (file.getName().contains("Status") && "json".equals(getFileExtension(file))) {
                         statusFile = file;
                     }
                 }
@@ -155,27 +152,7 @@ public class GameFilesUtils {
         return statusFile;
     }
 
-    public static String getFormattedDate(long timestamp) {
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
-        Date date = new Date(timestamp);
-        return outputFormat.format(date);
-    }
-
-    public static void sendUnprocessedEvent(JsonObject jsonEvent) {
+    public static void onUnprocessedEvent(JsonObject jsonEvent) {
         System.out.println("UNPROCESSED EVENT: " + jsonEvent.toString());
-    }
-
-    public static long getTimeMillis(String timestamp) {
-        long millis = 0;
-
-        try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            millis = inputFormat.parse(timestamp).getTime();
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return millis;
     }
 }

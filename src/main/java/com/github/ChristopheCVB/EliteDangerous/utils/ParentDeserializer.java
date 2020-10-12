@@ -1,6 +1,6 @@
 package com.github.ChristopheCVB.EliteDangerous.utils;
 
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.scan.Parent;
+import com.github.ChristopheCVB.EliteDangerous.events.models.scan.Parent;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;

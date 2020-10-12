@@ -1,21 +1,21 @@
 package com.github.ChristopheCVB.EliteDangerous.events.combat;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.ShipScanStage0;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.ShipScanStage1;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.ShipScanStage2;
-import com.github.ChristopheCVB.EliteDangerous.events.datastorage.shiptargeted.ShipScanStage3;
 import com.github.ChristopheCVB.EliteDangerous.events.interfaces.ScanStageInfo;
+import com.github.ChristopheCVB.EliteDangerous.events.models.shiptargeted.ShipScanStage0;
+import com.github.ChristopheCVB.EliteDangerous.events.models.shiptargeted.ShipScanStage1;
+import com.github.ChristopheCVB.EliteDangerous.events.models.shiptargeted.ShipScanStage2;
+import com.github.ChristopheCVB.EliteDangerous.events.models.shiptargeted.ShipScanStage3;
 
 public class ShipTargetedEvent extends Event {
-    public Integer scanStage;
     public Boolean targetLocked;
     public String ship;
+    public Integer scanStage;
     public String shipLocalised;
     public String pilotName;
     public String pilotNameLocalised;
-    public String pilotRank, faction, legalStatus, power;
-    public Double shieldHealth, hullHealth;
+    public String pilotRank, faction, legalStatus, power, subSystem;
+    public Double shieldHealth, hullHealth, subSystemHealth;
     public Long bounty;
 
     public ScanStageInfo getScanStageInfo() {
