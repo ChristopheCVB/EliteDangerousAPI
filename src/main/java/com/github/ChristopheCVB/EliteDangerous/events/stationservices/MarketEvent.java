@@ -19,13 +19,13 @@ public class MarketEvent extends Event {
     public Integer marketID;
     public List<MarketItem> items;
 
-    public MarketEvent loadFromFile() {
+    public static MarketEvent loadFromFile() {
         MarketEvent market = null;
+
         File marketFile = GameFilesUtils.getMarketFile();
         if (marketFile != null && marketFile.exists()) {
             try {
-                String marketFileContent = String.join("", Files.readAllLines(marketFile.toPath(), StandardCharsets.UTF_8));
-                market = new Gson().fromJson(marketFileContent, MarketEvent.class);
+                market = new Gson().fromJson(String.join("", Files.readAllLines(marketFile.toPath(), StandardCharsets.UTF_8)), MarketEvent.class);
             }
             catch (IOException ignored) {}
         }

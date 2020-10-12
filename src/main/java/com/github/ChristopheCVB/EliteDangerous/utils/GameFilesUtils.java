@@ -101,7 +101,7 @@ public class GameFilesUtils {
         return marketFile;
     }
 
-    public static File getModulesInfo() {
+    public static File getModulesInfoFile() {
         File modulesInfoFile = null;
 
         File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();

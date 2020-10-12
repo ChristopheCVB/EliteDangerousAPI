@@ -25,17 +25,15 @@ public class CargoEvent extends Event {
         void onCargoEventTriggered(CargoEvent cargoEvent);
     }
 
-    public CargoEvent loadFromFile() {
-        CargoEvent cargoEvent = this;
+    public static CargoEvent loadFromFile() {
+        CargoEvent cargoEvent = null;
 
-        if (this.inventory == null) {
-            File cargoFile = GameFilesUtils.getCargoFile();
-            if (cargoFile != null && cargoFile.exists()) {
-                try {
-                    cargoEvent = new Gson().fromJson(String.join("", Files.readAllLines(cargoFile.toPath(), StandardCharsets.UTF_8)), CargoEvent.class);
-                }
-                catch (IOException ignored) {}
+        File cargoFile = GameFilesUtils.getCargoFile();
+        if (cargoFile != null && cargoFile.exists()) {
+            try {
+                cargoEvent = new Gson().fromJson(String.join("", Files.readAllLines(cargoFile.toPath(), StandardCharsets.UTF_8)), CargoEvent.class);
             }
+            catch (IOException ignored) {}
         }
 
         return cargoEvent;
