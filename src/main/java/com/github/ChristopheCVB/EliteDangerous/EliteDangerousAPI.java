@@ -76,8 +76,21 @@ public class EliteDangerousAPI {
 							}
 
 							Event event = this.parseEvent(jsonEvent);
-							if (event != null && this.listeners.containsKey(event.getClass())) {
-								this.listeners.get(event.getClass()).onTriggered(event);
+							if (event != null) {
+								Class<? extends Event> eventClass = event.getClass();
+								if (this.listeners.containsKey(eventClass)) {
+									this.listeners.get(eventClass).onTriggered(event);
+								}
+								else {
+									Class<?> eventSuperClass = eventClass.getSuperclass();
+									while (!eventSuperClass.equals(Event.class)) {
+										if (this.listeners.containsKey(eventSuperClass)) {
+											this.listeners.get(eventSuperClass).onTriggered(event);
+											break;
+										}
+										eventSuperClass = eventSuperClass.getSuperclass();
+									}
+								}
 							}
 						}
 					}
