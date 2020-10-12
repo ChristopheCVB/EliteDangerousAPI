@@ -13,7 +13,10 @@ import com.github.ChristopheCVB.EliteDangerous.events.trade.*;
 import com.github.ChristopheCVB.EliteDangerous.events.travel.*;
 import com.github.ChristopheCVB.EliteDangerous.states.Status;
 import com.github.ChristopheCVB.EliteDangerous.states.StatusListener;
-import com.github.ChristopheCVB.EliteDangerous.utils.*;
+import com.github.ChristopheCVB.EliteDangerous.utils.DiedEventDeserializer;
+import com.github.ChristopheCVB.EliteDangerous.utils.EventDeserializer;
+import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
+import com.github.ChristopheCVB.EliteDangerous.utils.ParentDeserializer;
 import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnsupportedGameVersion;
 import com.google.gson.*;
 
@@ -269,8 +272,8 @@ public class EliteDangerousAPI {
 		}
 	}
 
-	private Boolean isGameVersionSupported(JsonObject json) {
-		String gameVersionName = JsonUtils.pullString(json, "gameversion");
+	private Boolean isGameVersionSupported(JsonObject jsonEvent) {
+		String gameVersionName = jsonEvent.get("gameversion").getAsString();
 		for (String version : SUPPORTED_VERSIONS) {
 			if (version.equalsIgnoreCase(gameVersionName)) {
 				return true;
