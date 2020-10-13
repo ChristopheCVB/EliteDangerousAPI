@@ -6,7 +6,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-public class GameFilesUtils {
+public class GameFiles {
     public static String getFileExtension(File file) {
         String extension = null;
         if (file != null) {
@@ -26,7 +26,7 @@ public class GameFilesUtils {
     public static File getLatestJournalFile() {
         File latest = null;
 
-        File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();
+        File[] edFiles = GameFiles.getJournalDirectory().listFiles();
         if (edFiles == null) {
             System.out.println("No PlayerJournals were found, waiting for game.");
         }
@@ -53,7 +53,7 @@ public class GameFilesUtils {
     private static File getGameFile(String namePrefix, String extension) {
         File gameFile = null;
 
-        File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();
+        File[] edFiles = GameFiles.getJournalDirectory().listFiles();
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
@@ -68,31 +68,31 @@ public class GameFilesUtils {
     }
 
     public static File getShipyardFile() {
-        return GameFilesUtils.getGameFile("Shipyard", "json");
+        return GameFiles.getGameFile("Shipyard", "json");
     }
 
     public static File getCargoFile() {
-        return GameFilesUtils.getGameFile("Cargo", "json");
+        return GameFiles.getGameFile("Cargo", "json");
     }
 
     public static File getMarketFile() {
-        return GameFilesUtils.getGameFile("Market", "json");
+        return GameFiles.getGameFile("Market", "json");
     }
 
     public static File getModulesInfoFile() {
-        return GameFilesUtils.getGameFile("ModulesInfo", "json");
+        return GameFiles.getGameFile("ModulesInfo", "json");
     }
 
     public static File getOutfittingFile() {
-        return GameFilesUtils.getGameFile("Outfitting", "json");
+        return GameFiles.getGameFile("Outfitting", "json");
     }
 
     public static File getStatusFile() {
-        return GameFilesUtils.getGameFile("Status", "json");
+        return GameFiles.getGameFile("Status", "json");
     }
 
     public static File getRouteFile() {
-        return GameFilesUtils.getGameFile("Route", "json");
+        return GameFiles.getGameFile("Route", "json");
     }
 
     public static void onUnprocessedEvent(JsonObject jsonEvent) {

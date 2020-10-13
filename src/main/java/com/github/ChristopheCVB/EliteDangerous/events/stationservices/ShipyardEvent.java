@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
+import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public class ShipyardEvent extends Event {
     public static ShipyardEvent loadFromFile() {
         ShipyardEvent moduleInfoEvent = null;
 
-        File shipyardFile = GameFilesUtils.getShipyardFile();
+        File shipyardFile = GameFiles.getShipyardFile();
         if (shipyardFile != null && shipyardFile.exists()) {
             try {
                 moduleInfoEvent = new Gson().fromJson(String.join("", Files.readAllLines(shipyardFile.toPath(), StandardCharsets.UTF_8)), ShipyardEvent.class);

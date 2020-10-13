@@ -11,9 +11,8 @@ import com.github.ChristopheCVB.EliteDangerous.events.stationservices.*;
 import com.github.ChristopheCVB.EliteDangerous.events.trade.*;
 import com.github.ChristopheCVB.EliteDangerous.events.travel.*;
 import com.github.ChristopheCVB.EliteDangerous.models.scan.Parent;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
+import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
 import com.github.ChristopheCVB.EliteDangerous.utils.deserializer.*;
-import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnsupportedGameVersion;
 import com.google.gson.*;
 
 import java.io.File;
@@ -39,7 +38,7 @@ public class EliteDangerousAPI {
 	private Thread createReaderThread() {
 		return new Thread(() -> {
 			while (this.active) {
-				File latestJournalFile = GameFilesUtils.getLatestJournalFile();
+				File latestJournalFile = GameFiles.getLatestJournalFile();
 				if (latestJournalFile != null && !latestJournalFile.equals(this.journalFile)) {
 					this.journalFile = latestJournalFile;
 					this.randomAccessFile = null;
@@ -66,7 +65,7 @@ public class EliteDangerousAPI {
 							if (this.isFirstLine) {
 								this.isFirstLine = false;
 								if (!isGameVersionSupported(jsonEvent)) {
-									throw new UnsupportedGameVersion();
+									throw new UnsupportedOperationException("Game Version [" + jsonEvent.get("gameversion").getAsString() + "] is not supported");
 								}
 							}
 
@@ -94,15 +93,16 @@ public class EliteDangerousAPI {
 					}
 
 					if (this.listeners.containsKey(StatusEvent.class)) {
-						File statusFile = GameFilesUtils.getStatusFile();
+						File statusFile = GameFiles.getStatusFile();
 						if (statusFile != null) {
 							String statusFileContent = new String(Files.readAllBytes(statusFile.toPath()), StandardCharsets.UTF_8);
 							this.listeners.get(StatusEvent.class).onTriggered(this.gson.fromJson(statusFileContent, StatusEvent.class));
 						}
 					}
 				}
-				catch (UnsupportedGameVersion unsupportedGameVersion) {
+				catch (UnsupportedOperationException unsupportedOperationException) {
 					System.out.println(this.journalFile.getName() + " was created by an unsupported version, skipping for now...");
+					EliteDangerousAPI.this.stop();
 				}
 				catch (IOException | JsonSyntaxException e) {
 					e.printStackTrace();
@@ -271,6 +271,10 @@ public class EliteDangerousAPI {
 				.create();
 	}
 
+	public boolean isActive() {
+		return this.active && this.readerThread != null && this.readerThread.isAlive();
+	}
+
 	public void stop() {
 		this.active = false;
 		this.readerThread = null;
@@ -304,7 +308,7 @@ public class EliteDangerousAPI {
 		catch (JsonSyntaxException ignored) {}
 
 		if (event == null) {
-			GameFilesUtils.onUnprocessedEvent(jsonEvent);
+			GameFiles.onUnprocessedEvent(jsonEvent);
 		}
 
 		return event;

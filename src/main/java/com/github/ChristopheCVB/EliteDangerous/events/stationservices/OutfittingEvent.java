@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
+import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public class OutfittingEvent extends Event {
     public static OutfittingEvent loadFromFile() {
         OutfittingEvent moduleInfoEvent = null;
 
-        File outfittingFile = GameFilesUtils.getOutfittingFile();
+        File outfittingFile = GameFiles.getOutfittingFile();
         if (outfittingFile != null && outfittingFile.exists()) {
             try {
                 moduleInfoEvent = new Gson().fromJson(String.join("", Files.readAllLines(outfittingFile.toPath(), StandardCharsets.UTF_8)), OutfittingEvent.class);

@@ -2,7 +2,7 @@ package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.models.CargoItem;
-import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
+import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -28,7 +28,7 @@ public class CargoEvent extends Event {
     public static CargoEvent loadFromFile() {
         CargoEvent cargoEvent = null;
 
-        File cargoFile = GameFilesUtils.getCargoFile();
+        File cargoFile = GameFiles.getCargoFile();
         if (cargoFile != null && cargoFile.exists()) {
             try {
                 cargoEvent = new Gson().fromJson(String.join("", Files.readAllLines(cargoFile.toPath(), StandardCharsets.UTF_8)), CargoEvent.class);
