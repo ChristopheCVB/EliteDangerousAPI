@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.StoredModule;
+import com.github.ChristopheCVB.EliteDangerous.models.StoredModule;
 
 import java.util.List;
 

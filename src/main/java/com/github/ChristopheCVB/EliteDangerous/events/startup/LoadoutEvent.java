@@ -1,8 +1,8 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.FuelCapacity;
-import com.github.ChristopheCVB.EliteDangerous.events.models.Module;
+import com.github.ChristopheCVB.EliteDangerous.models.FuelCapacity;
+import com.github.ChristopheCVB.EliteDangerous.models.Module;
 
 import java.util.List;
 

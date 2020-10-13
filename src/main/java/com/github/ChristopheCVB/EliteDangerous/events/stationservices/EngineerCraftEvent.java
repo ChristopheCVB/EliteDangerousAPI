@@ -1,8 +1,8 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.Modification;
-import com.github.ChristopheCVB.EliteDangerous.events.models.engineer.Ingredient;
+import com.github.ChristopheCVB.EliteDangerous.models.Modification;
+import com.github.ChristopheCVB.EliteDangerous.models.engineer.Ingredient;
 
 import java.util.List;
 

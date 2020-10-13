@@ -1,38 +1,24 @@
 package com.github.ChristopheCVB.EliteDangerous.events.exploration;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.interfaces.ScanInfo;
-import com.github.ChristopheCVB.EliteDangerous.events.models.scan.*;
-import com.google.gson.annotations.SerializedName;
+import com.github.ChristopheCVB.EliteDangerous.models.scan.Ring;
 
 import java.util.List;
 
-public class ScanEvent extends Event {
-    // TODO: Separate this Event in 2 (ScanStarEvent and ScanPlanetOrMoonEvent)
-    public String scanType, bodyName, starType, luminosity, terraformState, planetClass, atmosphere, atmosphereType, volcanism, reserveLevel, starSystem;
-    public Double distanceFromArrivalLS, stellarMass, surfaceTemperature, eccentricity, orbitalInclination, periapsis, rotationPeriod, axialTilt, absoluteMagnitude, massEM, surfaceGravity, surfacePressure;
-    public Integer bodyID, subclass;
-    public Long radius, semiMajorAxis, orbitalPeriod;
-    @SerializedName("Age_MY")
-    public Long ageMY;
-    public Long systemAddress;
-    public Boolean tidalLock, landable, wasMapped, wasDiscovered;
-    public List<Parent> parents;
-    public List<AtmosphereItem> atmosphereComposition;
+public abstract class ScanEvent extends Event {
+    public String scanType;
+    public String bodyName;
+    public Integer bodyID;
+    public String starSystem;
+    public Double distanceFromArrivalLS;
+    public Double rotationPeriod;
+    public Double surfaceTemperature;
     public List<Ring> rings;
-    public List<Material> materials;
-    public Composition composition;
-
-    public ScanInfo getInfo() {
-        if (this.starType != null) {
-            return new StarScan(scanType, bodyName, starType, luminosity, distanceFromArrivalLS, stellarMass, surfaceTemperature, eccentricity, orbitalInclination, periapsis, rotationPeriod,
-                    axialTilt, absoluteMagnitude, bodyID, radius, semiMajorAxis, orbitalPeriod, ageMY, parents, rings, wasDiscovered, starSystem, systemAddress);
-        }
-
-        return new PlanetScan(scanType, bodyName, terraformState, planetClass, atmosphere, atmosphereType, volcanism, reserveLevel, distanceFromArrivalLS, massEM, surfaceGravity,
-                surfaceTemperature, surfacePressure, eccentricity, orbitalInclination, periapsis, rotationPeriod, axialTilt, bodyID, radius, semiMajorAxis, orbitalPeriod, tidalLock, landable,
-                parents, atmosphereComposition, rings, materials, composition, wasMapped, wasDiscovered, starSystem, subclass, systemAddress);
-    }
+    public Long semiMajorAxis;
+    public Double eccentricity;
+    public Double orbitalInclination;
+    public Double periapsis;
+    public Long orbitalPeriod;
 
     public interface Listener extends Event.Listener {
         @Override

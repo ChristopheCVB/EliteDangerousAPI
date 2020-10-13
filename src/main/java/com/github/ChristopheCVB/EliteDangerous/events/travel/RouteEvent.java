@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.travel;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.RouteItem;
+import com.github.ChristopheCVB.EliteDangerous.models.RouteItem;
 
 import java.util.List;
 

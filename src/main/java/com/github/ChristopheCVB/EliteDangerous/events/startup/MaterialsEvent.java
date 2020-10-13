@@ -1,16 +1,16 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.material.EncodedItem;
-import com.github.ChristopheCVB.EliteDangerous.events.models.material.ManufacturedItem;
-import com.github.ChristopheCVB.EliteDangerous.events.models.material.Material;
+import com.github.ChristopheCVB.EliteDangerous.models.material.Encoded;
+import com.github.ChristopheCVB.EliteDangerous.models.material.Manufactured;
+import com.github.ChristopheCVB.EliteDangerous.models.material.Material;
 
 import java.util.List;
 
 public class MaterialsEvent extends Event {
     public List<Material> raw;
-    public List<ManufacturedItem> manufactured;
-    public List<EncodedItem> encoded;
+    public List<Manufactured> manufactured;
+    public List<Encoded> encoded;
 
     public interface Listener extends Event.Listener {
         @Override

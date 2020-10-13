@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.exploration;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.station.Discovered;
+import com.github.ChristopheCVB.EliteDangerous.models.station.Discovered;
 
 import java.util.List;
 

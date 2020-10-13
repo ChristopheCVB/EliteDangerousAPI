@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.other;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.Module;
+import com.github.ChristopheCVB.EliteDangerous.models.Module;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.google.gson.Gson;
 

@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.exploration;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.SAASignal;
+import com.github.ChristopheCVB.EliteDangerous.models.SAASignal;
 
 import java.util.List;
 

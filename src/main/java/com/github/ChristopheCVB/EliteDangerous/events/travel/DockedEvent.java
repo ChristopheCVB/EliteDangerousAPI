@@ -1,8 +1,8 @@
 package com.github.ChristopheCVB.EliteDangerous.events.travel;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.Faction;
-import com.github.ChristopheCVB.EliteDangerous.events.models.StationEconomy;
+import com.github.ChristopheCVB.EliteDangerous.models.Faction;
+import com.github.ChristopheCVB.EliteDangerous.models.StationEconomy;
 
 import java.util.List;
 

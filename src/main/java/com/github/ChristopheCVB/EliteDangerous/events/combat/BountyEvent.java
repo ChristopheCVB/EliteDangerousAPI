@@ -1,29 +1,10 @@
 package com.github.ChristopheCVB.EliteDangerous.events.combat;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.interfaces.BountyInfo;
-import com.github.ChristopheCVB.EliteDangerous.events.models.bounty.BountyReward;
-import com.github.ChristopheCVB.EliteDangerous.events.models.bounty.DefaultBounty;
-import com.github.ChristopheCVB.EliteDangerous.events.models.bounty.SkimmerBounty;
 
-import java.util.List;
-
-public class BountyEvent extends Event {
-	public String faction;
+public abstract class BountyEvent extends Event {
 	public String target;
-	public String victimsFaction;
-	public Long reward;
-	public Long totalReward;
-	public List<BountyReward> rewards;
-
-	public BountyInfo getBountyInfo() {
-		if ("Skimmer".equals(target)) {
-			return new SkimmerBounty(faction, target, victimsFaction, reward);
-		}
-		else {
-			return new DefaultBounty(target, victimsFaction, totalReward, rewards);
-		}
-	}
+	public String victimFaction;
 
 	public interface Listener extends Event.Listener {
 		@Override

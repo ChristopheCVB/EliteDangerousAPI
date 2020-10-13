@@ -44,5 +44,4 @@ public abstract class NotImplemented {
     // TODO: #winginvite WingInvite
     // TODO: #wingjoin WingJoin
     // TODO: #wingleave WingLeave
-    // TODO: #cargotransfer CargoTransfer
 }

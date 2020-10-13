@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.utils.localiser.*;
+import com.github.ChristopheCVB.EliteDangerous.models.toreadable.*;
 import com.google.gson.annotations.SerializedName;
 
 public class RankEvent extends Event {
@@ -14,27 +14,27 @@ public class RankEvent extends Event {
 	public Integer cqc;
 
 	public String getCombatRankName() {
-		return CombatRank.getLocalisedName(this.combat);
+		return CombatRank.getReadableName(this.combat);
 	}
 
 	public String getTradeRankName() {
-		return TradeRank.getLocalisedName(this.trade);
+		return TradeRank.getReadableName(this.trade);
 	}
 
 	public String getExplorerRankName() {
-		return ExplorationRank.getLocalisedName(this.explore);
+		return ExplorationRank.getReadableName(this.explore);
 	}
 
 	public String getEmpireRankName() {
-		return EmpireRank.getLocalisedName(this.empire);
+		return EmpireRank.getReadableName(this.empire);
 	}
 
 	public String getFederationRankName() {
-		return FederationRank.getLocalisedName(this.federation);
+		return FederationRank.getReadableName(this.federation);
 	}
 
 	public String getCQCRankName() {
-		return CQCRank.getLocalisedName(this.cqc);
+		return CQCRank.getReadableName(this.cqc);
 	}
 
 	public interface Listener extends Event.Listener {

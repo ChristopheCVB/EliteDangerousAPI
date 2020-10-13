@@ -33,7 +33,7 @@ public class GameFilesUtils {
         else {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Journal") && "log".equals(getFileExtension(file))) {
+                    if (file.getName().startsWith("Journal") && "log".equals(getFileExtension(file))) {
                         if (latest == null) {
                             latest = file;
                         }
@@ -50,106 +50,49 @@ public class GameFilesUtils {
         return latest;
     }
 
-    public static File getShipyardFile() {
-        File shipyardFile = null;
+    private static File getGameFile(String namePrefix, String extension) {
+        File gameFile = null;
 
         File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {
-                    if (file.getName().contains("Shipyard") && "json".equals(getFileExtension(file))) {
-                        shipyardFile = file;
+                    if (file.getName().startsWith(namePrefix) && extension.equals(getFileExtension(file))) {
+                        gameFile = file;
                     }
                 }
             }
         }
 
-        return shipyardFile;
+        return gameFile;
+    }
+
+    public static File getShipyardFile() {
+        return GameFilesUtils.getGameFile("Shipyard", "json");
     }
 
     public static File getCargoFile() {
-        File cargoFile = null;
-
-        File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();
-        if (edFiles != null) {
-            for (File file : edFiles) {
-                if (!file.isDirectory()) {
-                    if (file.getName().contains("Cargo") && "json".equals(getFileExtension(file))) {
-                        cargoFile = file;
-                    }
-                }
-            }
-        }
-
-        return cargoFile;
+        return GameFilesUtils.getGameFile("Cargo", "json");
     }
 
     public static File getMarketFile() {
-        File marketFile = null;
-
-        File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();
-        if (edFiles != null) {
-            for (File file : edFiles) {
-                if (!file.isDirectory()) {
-                    if (file.getName().contains("Market") && "json".equals(getFileExtension(file))) {
-                        marketFile = file;
-                    }
-                }
-            }
-        }
-
-        return marketFile;
+        return GameFilesUtils.getGameFile("Market", "json");
     }
 
     public static File getModulesInfoFile() {
-        File modulesInfoFile = null;
-
-        File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();
-        if (edFiles != null) {
-            for (File file : edFiles) {
-                if (!file.isDirectory()) {
-                    if (file.getName().contains("ModulesInfo") && "json".equals(getFileExtension(file))) {
-                        modulesInfoFile = file;
-                    }
-                }
-            }
-        }
-
-        return modulesInfoFile;
+        return GameFilesUtils.getGameFile("ModulesInfo", "json");
     }
 
     public static File getOutfittingFile() {
-        File outfittingFile = null;
-
-        File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();
-        if (edFiles != null) {
-            for (File file : edFiles) {
-                if (!file.isDirectory()) {
-                    if (file.getName().contains("Outfitting") && "json".equals(getFileExtension(file))) {
-                        outfittingFile = file;
-                    }
-                }
-            }
-        }
-
-        return outfittingFile;
+        return GameFilesUtils.getGameFile("Outfitting", "json");
     }
 
     public static File getStatusFile() {
-        File statusFile = null;
+        return GameFilesUtils.getGameFile("Status", "json");
+    }
 
-        File[] edFiles = GameFilesUtils.getJournalDirectory().listFiles();
-        if (edFiles != null) {
-            for (File file : edFiles) {
-                if (!file.isDirectory()) {
-                    if (file.getName().contains("Status") && "json".equals(getFileExtension(file))) {
-                        statusFile = file;
-                    }
-                }
-            }
-        }
-
-        return statusFile;
+    public static File getRouteFile() {
+        return GameFilesUtils.getGameFile("Route", "json");
     }
 
     public static void onUnprocessedEvent(JsonObject jsonEvent) {

@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.CargoItem;
+import com.github.ChristopheCVB.EliteDangerous.models.CargoItem;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
 import com.google.gson.Gson;
 

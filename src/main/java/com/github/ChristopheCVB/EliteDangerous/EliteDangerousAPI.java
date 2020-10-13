@@ -1,22 +1,18 @@
 package com.github.ChristopheCVB.EliteDangerous;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
+import com.github.ChristopheCVB.EliteDangerous.events.StatusEvent;
 import com.github.ChristopheCVB.EliteDangerous.events.combat.*;
 import com.github.ChristopheCVB.EliteDangerous.events.exploration.*;
 import com.github.ChristopheCVB.EliteDangerous.events.fleetcarriers.*;
-import com.github.ChristopheCVB.EliteDangerous.events.inventory.CargoTransferEvent;
-import com.github.ChristopheCVB.EliteDangerous.events.models.scan.Parent;
 import com.github.ChristopheCVB.EliteDangerous.events.other.*;
 import com.github.ChristopheCVB.EliteDangerous.events.startup.*;
 import com.github.ChristopheCVB.EliteDangerous.events.stationservices.*;
 import com.github.ChristopheCVB.EliteDangerous.events.trade.*;
 import com.github.ChristopheCVB.EliteDangerous.events.travel.*;
-import com.github.ChristopheCVB.EliteDangerous.states.Status;
-import com.github.ChristopheCVB.EliteDangerous.states.StatusListener;
-import com.github.ChristopheCVB.EliteDangerous.utils.DiedEventDeserializer;
-import com.github.ChristopheCVB.EliteDangerous.utils.EventDeserializer;
+import com.github.ChristopheCVB.EliteDangerous.models.scan.Parent;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFilesUtils;
-import com.github.ChristopheCVB.EliteDangerous.utils.ParentDeserializer;
+import com.github.ChristopheCVB.EliteDangerous.utils.deserializer.*;
 import com.github.ChristopheCVB.EliteDangerous.utils.exceptions.UnsupportedGameVersion;
 import com.google.gson.*;
 
@@ -39,7 +35,6 @@ public class EliteDangerousAPI {
 	private final Gson gson;
 	private Thread readerThread;
 	private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
-	private StatusListener statusListener;
 
 	private Thread createReaderThread() {
 		return new Thread(() -> {
@@ -98,11 +93,11 @@ public class EliteDangerousAPI {
 						System.out.println("RandomAccessFile File cannot be created");
 					}
 
-					if (this.statusListener != null) {
+					if (this.listeners.containsKey(StatusEvent.class)) {
 						File statusFile = GameFilesUtils.getStatusFile();
 						if (statusFile != null) {
 							String statusFileContent = new String(Files.readAllBytes(statusFile.toPath()), StandardCharsets.UTF_8);
-							this.statusListener.onStatus(this.gson.fromJson(statusFileContent, Status.class));
+							this.listeners.get(StatusEvent.class).onTriggered(this.gson.fromJson(statusFileContent, StatusEvent.class));
 						}
 					}
 				}
@@ -134,7 +129,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(InterdictionEvent.class);
 		eventDeserializer.registerEventType(PvPKillEvent.class);
 		eventDeserializer.registerEventType(ShieldStateEvent.class);
-		eventDeserializer.registerEventType(ShipTargetedEvent.class);
+		eventDeserializer.registerEventType(ShipTargettedEvent.class);
 		eventDeserializer.registerEventType(SRVDestroyedEvent.class);
 		eventDeserializer.registerEventType(UnderAttackEvent.class);
 		eventDeserializer.registerEventType(MusicEvent.class);
@@ -260,12 +255,18 @@ public class EliteDangerousAPI {
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
+		BountyEventDeserializer bountyEventDeserializer = new BountyEventDeserializer();
+		ScanEventDeserializer scanEventDeserializer = new ScanEventDeserializer();
+		ShipTargettedEventDeserializer shipTargettedEventDeserializer = new ShipTargettedEventDeserializer();
 
 		this.gson = new GsonBuilder()
 				.setFieldNamingStrategy(f -> FieldNamingPolicy.UPPER_CAMEL_CASE.translateName(f).replaceFirst("Localised$", "_Localised"))
 				.registerTypeAdapter(Event.class, eventDeserializer)
 				.registerTypeAdapter(DiedEvent.class, diedEventDeserializer)
 				.registerTypeAdapter(Parent.class, parentDeserializer)
+				.registerTypeAdapter(BountyEvent.class, bountyEventDeserializer)
+				.registerTypeAdapter(ScanEvent.class, scanEventDeserializer)
+				.registerTypeAdapter(ShipTargettedEvent.class, shipTargettedEventDeserializer)
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
 				.create();
 	}
@@ -311,16 +312,9 @@ public class EliteDangerousAPI {
 
 	public static class Builder {
 		private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
-		private StatusListener statusListener;
 
 		public <T extends Event> Builder addEventListener(Class<T> eventClass, T.Listener listener) {
 			this.listeners.put(eventClass, listener);
-
-			return this;
-		}
-
-		public Builder setStatusListener(StatusListener statusListener) {
-			this.statusListener = statusListener;
 
 			return this;
 		}
@@ -334,7 +328,6 @@ public class EliteDangerousAPI {
 			EliteDangerousAPI eliteDangerousAPI = new EliteDangerousAPI();
 
 			eliteDangerousAPI.listeners.putAll(this.listeners);
-			eliteDangerousAPI.statusListener = this.statusListener;
 
 			return eliteDangerousAPI;
 		}

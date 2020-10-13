@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.TradeData;
+import com.github.ChristopheCVB.EliteDangerous.models.TradeData;
 
 public class MaterialTradeEvent extends Event {
     public Long marketID;

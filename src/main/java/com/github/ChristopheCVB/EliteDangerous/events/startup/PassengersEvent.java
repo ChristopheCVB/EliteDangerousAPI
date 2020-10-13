@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.PassengerRecord;
+import com.github.ChristopheCVB.EliteDangerous.models.PassengerRecord;
 
 import java.util.List;
 

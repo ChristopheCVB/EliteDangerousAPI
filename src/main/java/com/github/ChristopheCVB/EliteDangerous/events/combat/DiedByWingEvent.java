@@ -1,7 +1,7 @@
 package com.github.ChristopheCVB.EliteDangerous.events.combat;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.events.models.Killer;
+import com.github.ChristopheCVB.EliteDangerous.models.Killer;
 
 import java.util.List;
 
