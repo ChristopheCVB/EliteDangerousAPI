@@ -2,13 +2,7 @@ package com.github.ChristopheCVB.EliteDangerous.events.fleetcarriers;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
-public class CarrierShipPackEvent extends Event {
-    public Long carrierID;
-    public String operation;
-    public String packTheme;
-    public Integer packTier;
-    public Integer cost;
-
+public class CarrierShipPackEvent extends CarrierPackEvent {
     public interface Listener extends Event.Listener {
         @Override
         default <T extends Event> void onTriggered(T event) {
