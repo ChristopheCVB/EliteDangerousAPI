@@ -2,13 +2,16 @@ package com.github.ChristopheCVB.EliteDangerous.events.powerplay;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
-public class PowerplayCollectEvent extends PowerplayDistributionEvent{
+public class PowerplayFastTrackEvent extends Event {
+    public String power;
+    public Integer cost;
+
     public interface Listener extends Event.Listener {
         @Override
         default <T extends Event> void onTriggered(T event) {
-            this.onPowerplayCollectEventTriggered((PowerplayCollectEvent) event);
+            this.onPowerplayFastTrackTriggered((PowerplayFastTrackEvent) event);
         }
 
-        void onPowerplayCollectEventTriggered(PowerplayCollectEvent powerplayCollectEvent);
+        void onPowerplayFastTrackTriggered(PowerplayFastTrackEvent powerplayFastTrackEvent);
     }
 }

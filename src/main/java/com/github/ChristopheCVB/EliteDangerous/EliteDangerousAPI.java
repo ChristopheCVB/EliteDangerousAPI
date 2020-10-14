@@ -277,6 +277,14 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(CarrierDockingPermissionEvent.class);
 		eventDeserializer.registerEventType(CarrierNameChangedEvent.class);
 		eventDeserializer.registerEventType(PowerplayCollectEvent.class);
+		eventDeserializer.registerEventType(PowerplayDefectEvent.class);
+		eventDeserializer.registerEventType(PowerplayDeliverEvent.class);
+		eventDeserializer.registerEventType(PowerplayFastTrackEvent.class);
+		eventDeserializer.registerEventType(PowerplayJoinEvent.class);
+		eventDeserializer.registerEventType(PowerplayLeaveEvent.class);
+		eventDeserializer.registerEventType(PowerplaySalaryEvent.class);
+		eventDeserializer.registerEventType(PowerplayVoteEvent.class);
+		eventDeserializer.registerEventType(PowerplayVoucherEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
