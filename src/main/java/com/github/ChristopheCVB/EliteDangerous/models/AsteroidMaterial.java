@@ -1,4 +1,4 @@
 package com.github.ChristopheCVB.EliteDangerous.models;
 
-public class StationEconomy extends ProportionalItem {
+public class AsteroidMaterial extends ProportionalItem {
 }
