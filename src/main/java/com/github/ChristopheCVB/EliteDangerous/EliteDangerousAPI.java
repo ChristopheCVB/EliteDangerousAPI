@@ -6,6 +6,7 @@ import com.github.ChristopheCVB.EliteDangerous.events.combat.*;
 import com.github.ChristopheCVB.EliteDangerous.events.exploration.*;
 import com.github.ChristopheCVB.EliteDangerous.events.fleetcarriers.*;
 import com.github.ChristopheCVB.EliteDangerous.events.other.*;
+import com.github.ChristopheCVB.EliteDangerous.events.powerplay.*;
 import com.github.ChristopheCVB.EliteDangerous.events.squadron.*;
 import com.github.ChristopheCVB.EliteDangerous.events.startup.*;
 import com.github.ChristopheCVB.EliteDangerous.events.stationservices.*;
@@ -275,6 +276,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(CarrierTradeOrderEvent.class);
 		eventDeserializer.registerEventType(CarrierDockingPermissionEvent.class);
 		eventDeserializer.registerEventType(CarrierNameChangedEvent.class);
+		eventDeserializer.registerEventType(PowerplayCollectEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
