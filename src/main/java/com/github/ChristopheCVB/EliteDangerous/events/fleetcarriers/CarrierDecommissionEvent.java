@@ -4,8 +4,8 @@ import com.github.ChristopheCVB.EliteDangerous.events.Event;
 
 public class CarrierDecommissionEvent extends Event {
     public Long carrierID;
-    public Integer scrapRefund;
-    public Integer scrapTime;
+    public Long scrapRefund;
+    public Long scrapTime;
 
     public interface Listener extends Event.Listener {
         @Override

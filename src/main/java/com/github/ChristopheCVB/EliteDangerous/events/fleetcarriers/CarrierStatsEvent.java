@@ -18,8 +18,8 @@ public class CarrierStatsEvent extends Event{
     public SpaceUsage spaceUsage;
     public Finance finance;
     public List<CrewItem> crew;
-    public List<ShipPacksItem> shipPacks;
-    public List<ModulePacksItem> modulePacks;
+    public List<Pack> shipPacks;
+    public List<Pack> modulePacks;
 
     public interface Listener extends Event.Listener {
         @Override

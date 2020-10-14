@@ -1,6 +1,6 @@
 package com.github.ChristopheCVB.EliteDangerous.models;
 
-public class ModulePacksItem {
+public class Pack {
     public String packTheme;
     public Integer packTier;
 }
