@@ -1,9 +1,9 @@
 package com.github.ChristopheCVB.EliteDangerous.events.startup;
 
+import com.github.ChristopheCVB.EliteDangerous.EliteDangerousAPI;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.models.CargoItem;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class CargoEvent extends Event {
         File cargoFile = GameFiles.getCargoFile();
         if (cargoFile != null && cargoFile.exists()) {
             try {
-                cargoEvent = new Gson().fromJson(String.join("", Files.readAllLines(cargoFile.toPath(), StandardCharsets.UTF_8)), CargoEvent.class);
+                cargoEvent = EliteDangerousAPI.GSON.fromJson(String.join("", Files.readAllLines(cargoFile.toPath(), StandardCharsets.UTF_8)), CargoEvent.class);
             }
             catch (IOException ignored) {}
         }

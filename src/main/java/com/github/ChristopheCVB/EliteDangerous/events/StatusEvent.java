@@ -1,5 +1,13 @@
 package com.github.ChristopheCVB.EliteDangerous.events;
 
+import com.github.ChristopheCVB.EliteDangerous.EliteDangerousAPI;
+import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+
 public class StatusEvent extends Event {
     private static final int FLAG_DOCKED = 0x00000001;
     private static final int FLAG_LANDED = 0x00000002;
@@ -49,6 +57,20 @@ public class StatusEvent extends Event {
     public Double heading;
     public String bodyName;
     public Double planetRadius;
+
+    public static StatusEvent loadFromFile() {
+        StatusEvent statusEvent = null;
+
+        File statusFile = GameFiles.getStatusFile();
+        if (statusFile != null && statusFile.exists()) {
+            try {
+                statusEvent = EliteDangerousAPI.GSON.fromJson(String.join("", Files.readAllLines(statusFile.toPath(), StandardCharsets.UTF_8)), StatusEvent.class);
+            }
+            catch (IOException ignored) {}
+        }
+
+        return statusEvent;
+    }
 
     public static String getGUIFocusName(Integer guiFocus) {
         return GUI_FOCUS[guiFocus];

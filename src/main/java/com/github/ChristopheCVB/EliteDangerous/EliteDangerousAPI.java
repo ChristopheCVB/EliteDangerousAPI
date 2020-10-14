@@ -22,99 +22,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EliteDangerousAPI {
-	private final String[] SUPPORTED_VERSIONS = new String[]{"Fleet Carriers Update", "Fleet Carriers Update - Update 1", "Fleet Carriers Update - Patch 5"};
+	private static final String[] SUPPORTED_VERSIONS = new String[]{"Fleet Carriers Update", "Fleet Carriers Update - Update 1", "Fleet Carriers Update - Patch 5"};
+	public static Gson GSON;// TODO: I don't like this GSON being static
 
-	private boolean active = false;
-	private boolean isFirstLine = true;
-	private File journalFile;
-	private RandomAccessFile randomAccessFile;
-	private final Gson gson;
-	private Thread readerThread;
-	private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
-
-	private Thread createReaderThread() {
-		return new Thread(() -> {
-			while (this.active) {
-				File latestJournalFile = GameFiles.getLatestJournalFile();
-				if (latestJournalFile != null && !latestJournalFile.equals(this.journalFile)) {
-					this.journalFile = latestJournalFile;
-					this.randomAccessFile = null;
-				}
-
-				if (this.randomAccessFile == null) {
-					if (this.journalFile != null) {
-						try {
-							this.randomAccessFile = new RandomAccessFile(this.journalFile, "r");
-						}
-						catch (FileNotFoundException ignored) {}
-					}
-					else {
-						System.out.println("Journal File does not exists");
-					}
-				}
-
-				try {
-					if (this.randomAccessFile != null) {
-						String rawEvent = this.randomAccessFile.readLine();
-						if (rawEvent != null) {
-							JsonObject jsonEvent = JsonParser.parseString(new String(rawEvent.getBytes(StandardCharsets.UTF_8))).getAsJsonObject();
-
-							if (this.isFirstLine) {
-								this.isFirstLine = false;
-								if (!isGameVersionSupported(jsonEvent)) {
-									throw new UnsupportedOperationException("Game Version [" + jsonEvent.get("gameversion").getAsString() + "] is not supported");
-								}
-							}
-
-							Event event = this.parseEvent(jsonEvent);
-							if (event != null) {
-								Class<? extends Event> eventClass = event.getClass();
-								if (this.listeners.containsKey(eventClass)) {
-									this.listeners.get(eventClass).onTriggered(event);
-								}
-								else {
-									Class<?> eventSuperClass = eventClass.getSuperclass();
-									while (!eventSuperClass.equals(Event.class)) {
-										if (this.listeners.containsKey(eventSuperClass)) {
-											this.listeners.get(eventSuperClass).onTriggered(event);
-											break;
-										}
-										eventSuperClass = eventSuperClass.getSuperclass();
-									}
-								}
-							}
-						}
-					}
-					else {
-						System.out.println("RandomAccessFile File cannot be created");
-					}
-
-					if (this.listeners.containsKey(StatusEvent.class)) {
-						File statusFile = GameFiles.getStatusFile();
-						if (statusFile != null) {
-							String statusFileContent = new String(Files.readAllBytes(statusFile.toPath()), StandardCharsets.UTF_8);
-							this.listeners.get(StatusEvent.class).onTriggered(this.gson.fromJson(statusFileContent, StatusEvent.class));
-						}
-					}
-				}
-				catch (UnsupportedOperationException unsupportedOperationException) {
-					System.out.println(this.journalFile.getName() + " was created by an unsupported version, skipping for now...");
-					EliteDangerousAPI.this.stop();
-				}
-				catch (IOException | JsonSyntaxException e) {
-					e.printStackTrace();
-				}
-
-			}
-		});
-	}
-
-	private EliteDangerousAPI() {
+	static {
 		EventDeserializer eventDeserializer = new EventDeserializer("event");
 		eventDeserializer.registerEventType(SupercruiseEntryEvent.class);
 		eventDeserializer.registerEventType(SupercruiseExitEvent.class);
@@ -334,7 +249,7 @@ public class EliteDangerousAPI {
 		ScanEventDeserializer scanEventDeserializer = new ScanEventDeserializer();
 		ShipTargettedEventDeserializer shipTargettedEventDeserializer = new ShipTargettedEventDeserializer();
 
-		this.gson = new GsonBuilder()
+		EliteDangerousAPI.GSON = new GsonBuilder()
 				.setFieldNamingStrategy(f -> FieldNamingPolicy.UPPER_CAMEL_CASE.translateName(f).replaceFirst("Localised$", "_Localised"))
 				.registerTypeAdapter(Event.class, eventDeserializer)
 				.registerTypeAdapter(DiedEvent.class, diedEventDeserializer)
@@ -344,6 +259,92 @@ public class EliteDangerousAPI {
 				.registerTypeAdapter(ShipTargettedEvent.class, shipTargettedEventDeserializer)
 				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
 				.create();
+	}
+
+	private boolean active = false;
+	private boolean isFirstLine = true;
+	private File journalFile;
+	private RandomAccessFile randomAccessFile;
+	private Thread readerThread;
+	private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
+
+	private Thread createReaderThread() {
+		return new Thread(() -> {
+			while (this.active) {
+				File latestJournalFile = GameFiles.getLatestJournalFile();
+				if (latestJournalFile != null && !latestJournalFile.equals(this.journalFile)) {
+					this.journalFile = latestJournalFile;
+					this.randomAccessFile = null;
+				}
+
+				if (this.randomAccessFile == null) {
+					if (this.journalFile != null) {
+						try {
+							this.randomAccessFile = new RandomAccessFile(this.journalFile, "r");
+						}
+						catch (FileNotFoundException ignored) {}
+					}
+					else {
+						System.out.println("Journal File does not exists");
+					}
+				}
+
+				try {
+					if (this.randomAccessFile != null) {
+						String rawEvent = this.randomAccessFile.readLine();
+						if (rawEvent != null) {
+							JsonObject jsonEvent = JsonParser.parseString(new String(rawEvent.getBytes(StandardCharsets.UTF_8))).getAsJsonObject();
+
+							if (this.isFirstLine) {
+								this.isFirstLine = false;
+								if (!isGameVersionSupported(jsonEvent)) {
+									throw new UnsupportedOperationException("Game Version [" + jsonEvent.get("gameversion").getAsString() + "] is not supported");
+								}
+							}
+
+							Event event = this.parseEvent(jsonEvent);
+							if (event != null) {
+								Class<? extends Event> eventClass = event.getClass();
+								if (this.listeners.containsKey(eventClass)) {
+									this.listeners.get(eventClass).onTriggered(event);
+								}
+								else {
+									Class<?> eventSuperClass = eventClass.getSuperclass();
+									while (!eventSuperClass.equals(Event.class)) {
+										if (this.listeners.containsKey(eventSuperClass)) {
+											this.listeners.get(eventSuperClass).onTriggered(event);
+											break;
+										}
+										eventSuperClass = eventSuperClass.getSuperclass();
+									}
+								}
+							}
+						}
+					}
+					else {
+						System.out.println("RandomAccessFile File cannot be created");
+					}
+
+					if (this.listeners.containsKey(StatusEvent.class)) {
+						StatusEvent statusEvent = StatusEvent.loadFromFile();
+						if (statusEvent != null) {
+							this.listeners.get(StatusEvent.class).onTriggered(statusEvent);
+						}
+					}
+				}
+				catch (UnsupportedOperationException unsupportedOperationException) {
+					System.out.println(this.journalFile.getName() + " was created by an unsupported version, skipping for now...");
+					EliteDangerousAPI.this.stop();
+				}
+				catch (IOException | JsonSyntaxException e) {
+					e.printStackTrace();
+				}
+
+			}
+		});
+	}
+
+	private EliteDangerousAPI() {
 	}
 
 	public boolean isActive() {
@@ -378,7 +379,7 @@ public class EliteDangerousAPI {
 	private Event parseEvent(JsonObject jsonEvent) {
 		Event event = null;
 		try {
-			event = this.gson.fromJson(jsonEvent, Event.class);
+			event = EliteDangerousAPI.GSON.fromJson(jsonEvent, Event.class);
 		}
 		catch (JsonSyntaxException ignored) {}
 

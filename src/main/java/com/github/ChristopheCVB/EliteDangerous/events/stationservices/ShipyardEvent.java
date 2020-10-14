@@ -1,8 +1,8 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
+import com.github.ChristopheCVB.EliteDangerous.EliteDangerousAPI;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,16 +23,16 @@ public class ShipyardEvent extends Event {
     }
 
     public static ShipyardEvent loadFromFile() {
-        ShipyardEvent moduleInfoEvent = null;
+        ShipyardEvent shipyardEvent = null;
 
         File shipyardFile = GameFiles.getShipyardFile();
         if (shipyardFile != null && shipyardFile.exists()) {
             try {
-                moduleInfoEvent = new Gson().fromJson(String.join("", Files.readAllLines(shipyardFile.toPath(), StandardCharsets.UTF_8)), ShipyardEvent.class);
+                shipyardEvent = EliteDangerousAPI.GSON.fromJson(String.join("", Files.readAllLines(shipyardFile.toPath(), StandardCharsets.UTF_8)), ShipyardEvent.class);
             }
             catch (IOException ignored) {}
         }
 
-        return moduleInfoEvent;
+        return shipyardEvent;
     }
 }

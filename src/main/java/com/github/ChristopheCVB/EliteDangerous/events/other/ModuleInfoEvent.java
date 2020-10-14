@@ -1,9 +1,9 @@
 package com.github.ChristopheCVB.EliteDangerous.events.other;
 
+import com.github.ChristopheCVB.EliteDangerous.EliteDangerousAPI;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.models.Module;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class ModuleInfoEvent extends Event {
         File modulesInfoFile = GameFiles.getModulesInfoFile();
         if (modulesInfoFile != null && modulesInfoFile.exists()) {
             try {
-                moduleInfoEvent = new Gson().fromJson(String.join("", Files.readAllLines(modulesInfoFile.toPath(), StandardCharsets.UTF_8)), ModuleInfoEvent.class);
+                moduleInfoEvent = EliteDangerousAPI.GSON.fromJson(String.join("", Files.readAllLines(modulesInfoFile.toPath(), StandardCharsets.UTF_8)), ModuleInfoEvent.class);
             }
             catch (IOException ignored) {}
         }

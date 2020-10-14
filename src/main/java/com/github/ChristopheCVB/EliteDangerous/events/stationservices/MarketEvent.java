@@ -1,9 +1,9 @@
 package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 
+import com.github.ChristopheCVB.EliteDangerous.EliteDangerousAPI;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.models.market.MarketItem;
 import com.github.ChristopheCVB.EliteDangerous.utils.GameFiles;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,17 +20,17 @@ public class MarketEvent extends Event {
     public List<MarketItem> items;
 
     public static MarketEvent loadFromFile() {
-        MarketEvent market = null;
+        MarketEvent marketEvent = null;
 
         File marketFile = GameFiles.getMarketFile();
         if (marketFile != null && marketFile.exists()) {
             try {
-                market = new Gson().fromJson(String.join("", Files.readAllLines(marketFile.toPath(), StandardCharsets.UTF_8)), MarketEvent.class);
+                marketEvent = EliteDangerousAPI.GSON.fromJson(String.join("", Files.readAllLines(marketFile.toPath(), StandardCharsets.UTF_8)), MarketEvent.class);
             }
             catch (IOException ignored) {}
         }
 
-        return market;
+        return marketEvent;
     }
 
     public interface Listener extends Event.Listener {
