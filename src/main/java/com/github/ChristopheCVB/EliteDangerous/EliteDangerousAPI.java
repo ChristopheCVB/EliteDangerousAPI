@@ -258,6 +258,10 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(CarrierDecommissionEvent.class);
 		eventDeserializer.registerEventType(CarrierCancelDecommissionEvent.class);
 		eventDeserializer.registerEventType(CarrierShipPackEvent.class);
+		eventDeserializer.registerEventType(CarrierModulePackEvent.class);
+		eventDeserializer.registerEventType(CarrierTradeOrderEvent.class);
+		eventDeserializer.registerEventType(CarrierDockingPermissionEvent.class);
+		eventDeserializer.registerEventType(CarrierNameChangedEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
