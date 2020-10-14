@@ -3,6 +3,8 @@ package com.github.ChristopheCVB.EliteDangerous.events.stationservices;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class CommunityGoalEvent extends Event {
 	@SerializedName("CGID")
 	public Integer cgid;
@@ -15,7 +17,7 @@ public class CommunityGoalEvent extends Event {
 	public String systemName;
 	public String marketName;
 	public String tierReached;
-	public Long expiry;
+	public Date expiry;
 	public Boolean isComplete;
 	public Boolean playerInTopRank;
 
