@@ -9,6 +9,8 @@ public class PromotionEvent extends Event {
     public Integer explore;
     @SerializedName("CQC")
     public Integer cqc;
+    public Integer federation;
+    public Integer empire;
 
     public interface Listener extends Event.Listener {
         @Override
