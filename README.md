@@ -52,5 +52,6 @@ The roadmap can be found [here](https://github.com/ChristopheCVB/EliteDangerousA
 
 Special thanks to:
 
-* [ChristopheCVB](https://github.com/ChristopheCVB)
-* [Pjiesco](https://github.com/Pjiesco)
+* [ChristopheCVB](https://github.com/ChristopheCVB) Owner
+* [Pjiesco](https://github.com/Pjiesco) Events Data parsing
+* [XenoPyax](https://github.com/XenoPyax) Initial project completely refactored
