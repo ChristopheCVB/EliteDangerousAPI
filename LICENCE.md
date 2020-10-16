@@ -1,6 +1,7 @@
 MIT License
 
 Copyright (c) 2020 Xeno Pyax
+
 Copyright (c) 2020 Christophe Carvalho Vilas-Boas
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
