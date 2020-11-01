@@ -24,9 +24,11 @@ import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class EliteDangerousAPI {
-	private static final String[] SUPPORTED_VERSIONS = new String[]{"Fleet Carriers Update", "Fleet Carriers Update - Update 1", "Fleet Carriers Update - Patch 5", "Fleet Carriers Update - Patch 6"};
 	public static Gson GSON;// TODO: I don't like this GSON being static
 
 	static {
@@ -262,13 +264,13 @@ public class EliteDangerousAPI {
 	}
 
 	private boolean active = false;
-	private boolean isFirstLine = true;
 	private File journalFile;
 	private RandomAccessFile randomAccessFile;
-	private Thread readerThread;
+	private Thread journalReaderThread;
+	private ScheduledExecutorService scheduledExecutorService;
 	private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
 
-	private Thread createReaderThread() {
+	private Thread createJournalReaderThread() {
 		return new Thread(() -> {
 			while (this.active) {
 				File latestJournalFile = GameFiles.getLatestJournalFile();
@@ -295,13 +297,6 @@ public class EliteDangerousAPI {
 						if (rawEvent != null) {
 							JsonObject jsonEvent = JsonParser.parseString(new String(rawEvent.getBytes(StandardCharsets.UTF_8))).getAsJsonObject();
 
-							if (this.isFirstLine) {
-								this.isFirstLine = false;
-								if (!isGameVersionSupported(jsonEvent)) {
-									throw new UnsupportedOperationException("Game Version [" + jsonEvent.get("gameversion").getAsString() + "] is not supported");
-								}
-							}
-
 							Event event = this.parseEvent(jsonEvent);
 							if (event != null) {
 								Class<? extends Event> eventClass = event.getClass();
@@ -324,17 +319,6 @@ public class EliteDangerousAPI {
 					else {
 						System.out.println("RandomAccessFile File cannot be created");
 					}
-
-					if (this.listeners.containsKey(StatusEvent.class)) {
-						StatusEvent statusEvent = StatusEvent.loadFromFile();
-						if (statusEvent != null) {
-							this.listeners.get(StatusEvent.class).onTriggered(statusEvent);
-						}
-					}
-				}
-				catch (UnsupportedOperationException unsupportedOperationException) {
-					System.out.println(this.journalFile.getName() + " was created by an unsupported version, skipping for now...");
-					EliteDangerousAPI.this.stop();
 				}
 				catch (IOException | JsonSyntaxException e) {
 					e.printStackTrace();
@@ -344,36 +328,44 @@ public class EliteDangerousAPI {
 		});
 	}
 
+	private void triggerStatusEventIfNeeded() {
+		if (this.listeners.containsKey(StatusEvent.class)) {
+			StatusEvent statusEvent = StatusEvent.loadFromFile();
+			if (statusEvent != null) {
+				this.listeners.get(StatusEvent.class).onTriggered(statusEvent);
+			}
+		}
+	}
+
 	private EliteDangerousAPI() {
 	}
 
 	public boolean isActive() {
-		return this.active && this.readerThread != null && this.readerThread.isAlive();
+		return this.active && this.journalReaderThread != null && this.journalReaderThread.isAlive();
 	}
 
 	public void stop() {
 		this.active = false;
-		this.readerThread = null;
+		this.journalReaderThread = null;
+		if (this.scheduledExecutorService != null) {
+			this.scheduledExecutorService.shutdownNow();
+			this.scheduledExecutorService = null;
+		}
 	}
 
 	public void start() {
 		this.active = true;
-		if (this.readerThread == null) {
-			this.readerThread = this.createReaderThread();
+		if (this.journalReaderThread == null) {
+			this.journalReaderThread = this.createJournalReaderThread();
 		}
-		if (!this.readerThread.isAlive()) {
-			this.readerThread.start();
+		if (!this.journalReaderThread.isAlive()) {
+			this.journalReaderThread.start();
 		}
-	}
-
-	private Boolean isGameVersionSupported(JsonObject jsonEvent) {
-		String gameVersionName = jsonEvent.get("gameversion").getAsString();
-		for (String version : SUPPORTED_VERSIONS) {
-			if (version.equalsIgnoreCase(gameVersionName)) {
-				return true;
-			}
+		if (this.scheduledExecutorService != null) {
+			this.scheduledExecutorService.shutdownNow();
 		}
-		return false;
+		this.scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+		this.scheduledExecutorService.scheduleWithFixedDelay(this::triggerStatusEventIfNeeded, 0, 500, TimeUnit.MILLISECONDS);
 	}
 
 	private Event parseEvent(JsonObject jsonEvent) {
