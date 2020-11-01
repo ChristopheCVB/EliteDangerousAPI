@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EliteDangerousAPI {
-	private static final String[] SUPPORTED_VERSIONS = new String[]{"Fleet Carriers Update", "Fleet Carriers Update - Update 1", "Fleet Carriers Update - Patch 5"};
+	private static final String[] SUPPORTED_VERSIONS = new String[]{"Fleet Carriers Update", "Fleet Carriers Update - Update 1", "Fleet Carriers Update - Patch 5", "Fleet Carriers Update - Patch 6"};
 	public static Gson GSON;// TODO: I don't like this GSON being static
 
 	static {
