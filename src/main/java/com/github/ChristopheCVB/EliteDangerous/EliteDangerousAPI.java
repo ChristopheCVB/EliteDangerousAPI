@@ -329,7 +329,6 @@ public class EliteDangerousAPI {
 				catch (IOException | JsonSyntaxException e) {
 					e.printStackTrace();
 				}
-
 			}
 		});
 	}
