@@ -73,7 +73,11 @@ public class StatusEvent extends Event {
     }
 
     public static String getGUIFocusName(Integer guiFocus) {
-        return GUI_FOCUS[guiFocus];
+        String guiFocusName = null;
+        if (guiFocus != null) {
+            guiFocusName = GUI_FOCUS[guiFocus];
+        }
+        return guiFocusName;
     }
 
     public boolean isDocked() {

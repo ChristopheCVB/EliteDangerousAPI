@@ -315,6 +315,12 @@ public class EliteDangerousAPI {
 								}
 							}
 						}
+						else {
+							try {
+								Thread.sleep(500);
+							}
+							catch (InterruptedException ignored) {}
+						}
 					}
 					else {
 						System.out.println("RandomAccessFile File cannot be created");
