@@ -37,7 +37,7 @@ public enum AtmosphereClass {
 		String name = "null";
 		for (AtmosphereClass atmosphereClass : values()) {
 			if (atmosphereClass.getAtmosphereClassIdentifier().equals(identifier)) {
-				name = atmosphereClass.name().replace("_", " ").replace("$", "-");
+				name = atmosphereClass.name().replace("_", " ").replaceAll("\\$", "-");
 			}
 		}
 		return name;

@@ -18,7 +18,7 @@ public class GameFiles {
         }
         return extension;
     }
-    
+
     public static File getJournalDirectory() {
         return Paths.get(System.getProperty("user.home") + "/Saved Games/Frontier Developments/Elite Dangerous/").toFile();
     }

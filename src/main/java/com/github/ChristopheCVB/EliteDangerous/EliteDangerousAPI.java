@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -269,6 +270,7 @@ public class EliteDangerousAPI {
 	private Thread journalReaderThread;
 	private ScheduledExecutorService scheduledExecutorService;
 	private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
+	private Date triggerEventsSince;
 
 	private Thread createJournalReaderThread() {
 		return new Thread(() -> {
@@ -299,18 +301,20 @@ public class EliteDangerousAPI {
 
 							Event event = this.parseEvent(jsonEvent);
 							if (event != null) {
-								Class<? extends Event> eventClass = event.getClass();
-								if (this.listeners.containsKey(eventClass)) {
-									this.listeners.get(eventClass).onTriggered(event);
-								}
-								else {
-									Class<?> eventSuperClass = eventClass.getSuperclass();
-									while (!eventSuperClass.equals(Event.class)) {
-										if (this.listeners.containsKey(eventSuperClass)) {
-											this.listeners.get(eventSuperClass).onTriggered(event);
-											break;
+								if (event.timestamp.after(this.triggerEventsSince)) {
+									Class<? extends Event> eventClass = event.getClass();
+									if (this.listeners.containsKey(eventClass)) {
+										this.listeners.get(eventClass).onTriggered(event);
+									}
+									else {
+										Class<?> eventSuperClass = eventClass.getSuperclass();
+										while (!eventSuperClass.equals(Event.class)) {
+											if (this.listeners.containsKey(eventSuperClass)) {
+												this.listeners.get(eventSuperClass).onTriggered(event);
+												break;
+											}
+											eventSuperClass = eventSuperClass.getSuperclass();
 										}
-										eventSuperClass = eventSuperClass.getSuperclass();
 									}
 								}
 							}
@@ -389,7 +393,19 @@ public class EliteDangerousAPI {
 
 	public static class Builder {
 		private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
+		private Date triggerEventsSince = new Date(0);
 
+		public Builder() {
+		}
+
+		/**
+		 * Add an {@link Event} Listener
+		 *
+		 * @param eventClass Class&lt;T&gt;
+		 * @param listener   T.Listener
+		 * @param <T>        Class&lt;T extends Event&gt;
+		 * @return Builder builder
+		 */
 		public <T extends Event> Builder addEventListener(Class<T> eventClass, T.Listener listener) {
 			this.listeners.put(eventClass, listener);
 
@@ -397,7 +413,19 @@ public class EliteDangerousAPI {
 		}
 
 		/**
-		 * Populates the {@link EliteDangerousAPI} class and returns it for further use.
+		 * Set the Trigger Events Since
+		 *
+		 * @param triggerEventsSince Date
+		 * @return Builder builder
+		 */
+		public Builder setTriggerEventsSince(Date triggerEventsSince) {
+			this.triggerEventsSince = triggerEventsSince;
+
+			return this;
+		}
+
+		/**
+		 * Instantiate the {@link EliteDangerousAPI} class and returns it for further use.
 		 *
 		 * @return The populated {@link EliteDangerousAPI} class
 		 */
@@ -405,6 +433,7 @@ public class EliteDangerousAPI {
 			EliteDangerousAPI eliteDangerousAPI = new EliteDangerousAPI();
 
 			eliteDangerousAPI.listeners.putAll(this.listeners);
+			eliteDangerousAPI.triggerEventsSince = this.triggerEventsSince;
 
 			return eliteDangerousAPI;
 		}

@@ -1,11 +1,14 @@
 package com.github.ChristopheCVB.EliteDangerous.events.fleetcarriers;
 
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
-import com.github.ChristopheCVB.EliteDangerous.models.*;
+import com.github.ChristopheCVB.EliteDangerous.models.CrewItem;
+import com.github.ChristopheCVB.EliteDangerous.models.Finance;
+import com.github.ChristopheCVB.EliteDangerous.models.Pack;
+import com.github.ChristopheCVB.EliteDangerous.models.SpaceUsage;
 
 import java.util.List;
 
-public class CarrierStatsEvent extends Event{
+public class CarrierStatsEvent extends Event {
     public Long carrierID;
     public String callsign;
     public String name;
