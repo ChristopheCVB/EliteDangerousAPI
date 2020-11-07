@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 public abstract class Event {
+	@SerializedName("timestamp")
 	public Date timestamp;
 	@SerializedName("event")
 	public String type;
