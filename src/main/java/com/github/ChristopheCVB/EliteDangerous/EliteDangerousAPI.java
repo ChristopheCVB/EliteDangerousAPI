@@ -276,62 +276,68 @@ public class EliteDangerousAPI {
 		return new Thread(() -> {
 			while (this.active) {
 				File latestJournalFile = GameFiles.getLatestJournalFile();
-				if (latestJournalFile != null && !latestJournalFile.equals(this.journalFile)) {
-					this.journalFile = latestJournalFile;
-					this.randomAccessFile = null;
+				if (latestJournalFile == null) {
+					File gameFilesDirectory = GameFiles.geDirectory();
+					System.out.println("Game Files Directory exists: " + gameFilesDirectory.exists());
+					System.out.println("Journal File does not exists in: " + GameFiles.geDirectory().getAbsolutePath());
+					try {
+						Thread.sleep(4000);
+					}
+					catch (InterruptedException ignored) {}
 				}
+				else {
+					if (!latestJournalFile.equals(this.journalFile)) {
+						this.journalFile = latestJournalFile;
+						this.randomAccessFile = null;
+					}
 
-				if (this.randomAccessFile == null) {
-					if (this.journalFile != null) {
+					if (this.randomAccessFile == null) {
 						try {
 							this.randomAccessFile = new RandomAccessFile(this.journalFile, "r");
 						}
 						catch (FileNotFoundException ignored) {}
 					}
-					else {
-						System.out.println("Journal File does not exists");
-					}
-				}
 
-				try {
-					if (this.randomAccessFile != null) {
-						String rawEvent = this.randomAccessFile.readLine();
-						if (rawEvent != null) {
-							JsonObject jsonEvent = JsonParser.parseString(new String(rawEvent.getBytes(StandardCharsets.UTF_8))).getAsJsonObject();
+					try {
+						if (this.randomAccessFile != null) {
+							String rawEvent = this.randomAccessFile.readLine();
+							if (rawEvent != null) {
+								JsonObject jsonEvent = JsonParser.parseString(new String(rawEvent.getBytes(StandardCharsets.UTF_8))).getAsJsonObject();
 
-							Event event = this.parseEvent(jsonEvent);
-							if (event != null) {
-								if (event.timestamp.after(this.triggerEventsSince)) {
-									Class<? extends Event> eventClass = event.getClass();
-									if (this.listeners.containsKey(eventClass)) {
-										this.listeners.get(eventClass).onTriggered(event);
-									}
-									else {
-										Class<?> eventSuperClass = eventClass.getSuperclass();
-										while (!eventSuperClass.equals(Event.class)) {
-											if (this.listeners.containsKey(eventSuperClass)) {
-												this.listeners.get(eventSuperClass).onTriggered(event);
-												break;
+								Event event = this.parseEvent(jsonEvent);
+								if (event != null) {
+									if (event.timestamp.after(this.triggerEventsSince)) {
+										Class<? extends Event> eventClass = event.getClass();
+										if (this.listeners.containsKey(eventClass)) {
+											this.listeners.get(eventClass).onTriggered(event);
+										}
+										else {
+											Class<?> eventSuperClass = eventClass.getSuperclass();
+											while (!eventSuperClass.equals(Event.class)) {
+												if (this.listeners.containsKey(eventSuperClass)) {
+													this.listeners.get(eventSuperClass).onTriggered(event);
+													break;
+												}
+												eventSuperClass = eventSuperClass.getSuperclass();
 											}
-											eventSuperClass = eventSuperClass.getSuperclass();
 										}
 									}
 								}
 							}
+							else {
+								try {
+									Thread.sleep(500);
+								}
+								catch (InterruptedException ignored) {}
+							}
 						}
 						else {
-							try {
-								Thread.sleep(500);
-							}
-							catch (InterruptedException ignored) {}
+							System.out.println("RandomAccessFile File could not be created");
 						}
 					}
-					else {
-						System.out.println("RandomAccessFile File cannot be created");
+					catch (IOException | JsonSyntaxException e) {
+						e.printStackTrace();
 					}
-				}
-				catch (IOException | JsonSyntaxException e) {
-					e.printStackTrace();
 				}
 			}
 		});
