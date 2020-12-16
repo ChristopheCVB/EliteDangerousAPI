@@ -19,14 +19,14 @@ public class GameFiles {
         return extension;
     }
 
-    public static File geDirectory() {
+    public static File getDirectory() {
         return Paths.get(System.getProperty("user.home") + "/Saved Games/Frontier Developments/Elite Dangerous/").toFile();
     }
 
     public static File getLatestJournalFile() {
         File latest = null;
 
-        File[] edFiles = GameFiles.geDirectory().listFiles();
+        File[] edFiles = GameFiles.getDirectory().listFiles();
         if (edFiles == null) {
             System.out.println("No PlayerJournals were found, waiting for game.");
         }
@@ -53,7 +53,7 @@ public class GameFiles {
     private static File getGameFile(String namePrefix, String extension) {
         File gameFile = null;
 
-        File[] edFiles = GameFiles.geDirectory().listFiles();
+        File[] edFiles = GameFiles.getDirectory().listFiles();
         if (edFiles != null) {
             for (File file : edFiles) {
                 if (!file.isDirectory()) {

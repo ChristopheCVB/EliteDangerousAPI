@@ -277,9 +277,9 @@ public class EliteDangerousAPI {
 			while (this.active) {
 				File latestJournalFile = GameFiles.getLatestJournalFile();
 				if (latestJournalFile == null) {
-					File gameFilesDirectory = GameFiles.geDirectory();
+					File gameFilesDirectory = GameFiles.getDirectory();
 					System.out.println("Game Files Directory exists: " + gameFilesDirectory.exists());
-					System.out.println("Journal File does not exists in: " + GameFiles.geDirectory().getAbsolutePath());
+					System.out.println("Journal File does not exists in: " + gameFilesDirectory.getAbsolutePath());
 					try {
 						Thread.sleep(4000);
 					}
