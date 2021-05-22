@@ -42,9 +42,28 @@ public class StatusEvent extends Event {
     private static final int FLAG_FSD_JUMP = 0x40000000;
     private static final int FLAG_SRV_HIGH_BEAM = 0x80000000;
 
+    private static final int FLAG2_ON_FOOT = 0x0001;
+    private static final int FLAG2_IN_TAXI = 0x0002;
+    private static final int FLAG2_IN_MULTICREW = 0x0004;
+    private static final int FLAG2_ON_FOOT_IN_STATION = 0x0008;
+    private static final int FLAG2_ON_FOOT_ON_PLANET = 0x0010;
+    private static final int FLAG2_AIM_DOWN_SIGHT = 0x0020;
+    private static final int FLAG2_LOW_OXYGEN = 0x0040;
+    private static final int FLAG2_LOW_HEALTH = 0x0080;
+    private static final int FLAG2_COLD = 0x0100;
+    private static final int FLAG2_HOT = 0x0200;
+    private static final int FLAG2_VERY_COLD = 0x0400;
+    private static final int FLAG2_VERY_HOT = 0x0800;
+    private static final int FLAG2_GLIDE_MODE = 0x1000;
+    private static final int FLAG2_ON_FOOT_IN_HANGAR = 0x2000;
+    private static final int FLAG2_ON_FOOT_SOCIAL_SPACE = 0x4000;
+    private static final int FLAG2_ON_FOOT_EXTERIOR = 0x8000;
+    private static final int FLAG2_BREATHABLE_ATMOSPHERE = 0x00010000;
+
     private static final String[] GUI_FOCUS = {"NoFocus", "InternalPanel", "ExternalPanel", "CommsPanel", "RolePanel", "StationServices", "GalaxyMap", "SystemMap", "Orrery", "FSS mode", "SAA mode", "Codex"};
 
     public Integer flags;
+    public Integer flags2;
     public Fuel fuel;
     public Double cargo;
     public String legalState;
@@ -57,6 +76,11 @@ public class StatusEvent extends Event {
     public Double heading;
     public String bodyName;
     public Double planetRadius;
+    public Float oxygen;
+    public Float health;
+    public Float temperature;
+    public String selectedWeapon;
+    public Double gravity;
 
     public static StatusEvent loadFromFile() {
         StatusEvent statusEvent = null;
@@ -65,8 +89,8 @@ public class StatusEvent extends Event {
         if (statusFile != null && statusFile.exists()) {
             try {
                 statusEvent = EliteDangerousAPI.GSON.fromJson(String.join("", Files.readAllLines(statusFile.toPath(), StandardCharsets.UTF_8)), StatusEvent.class);
+            } catch (IOException ignored) {
             }
-            catch (IOException ignored) {}
         }
 
         return statusEvent;
@@ -206,6 +230,74 @@ public class StatusEvent extends Event {
 
     public boolean isSRVHighBeam() {
         return (this.flags & FLAG_SRV_HIGH_BEAM) != 0;
+    }
+
+    public boolean isOnFoot() {
+        return (this.flags2 & FLAG2_ON_FOOT) != 0;
+    }
+
+    public boolean isInTaxi() {
+        return (this.flags2 & FLAG2_IN_TAXI) != 0;
+    }
+
+    public boolean isInMulticrew() {
+        return (this.flags2 & FLAG2_IN_MULTICREW) != 0;
+    }
+
+    public boolean isOnFootInStation() {
+        return (this.flags2 & FLAG2_ON_FOOT_IN_STATION) != 0;
+    }
+
+    public boolean isOnFootOnPlanet() {
+        return (this.flags2 & FLAG2_ON_FOOT_ON_PLANET) != 0;
+    }
+
+    public boolean isAimDownSight() {
+        return (this.flags2 & FLAG2_AIM_DOWN_SIGHT) != 0;
+    }
+
+    public boolean isLowOxygen() {
+        return (this.flags2 & FLAG2_LOW_OXYGEN) != 0;
+    }
+
+    public boolean isLowHealth() {
+        return (this.flags2 & FLAG2_LOW_HEALTH) != 0;
+    }
+
+    public boolean isCold() {
+        return (this.flags2 & FLAG2_COLD) != 0;
+    }
+
+    public boolean isHot() {
+        return (this.flags2 & FLAG2_HOT) != 0;
+    }
+
+    public boolean isVeryCold() {
+        return (this.flags2 & FLAG2_VERY_COLD) != 0;
+    }
+
+    public boolean isVeryHot() {
+        return (this.flags2 & FLAG2_VERY_HOT) != 0;
+    }
+
+    public boolean isGlideMode() {
+        return (this.flags2 & FLAG2_GLIDE_MODE) != 0;
+    }
+
+    public boolean isOnFootInHangar() {
+        return (this.flags2 & FLAG2_ON_FOOT_IN_HANGAR) != 0;
+    }
+
+    public boolean isOnFootSocialSpace() {
+        return (this.flags2 & FLAG2_ON_FOOT_SOCIAL_SPACE) != 0;
+    }
+
+    public boolean isOnFootExterior() {
+        return (this.flags2 & FLAG2_ON_FOOT_EXTERIOR) != 0;
+    }
+
+    public boolean isBreathableAtmosphere() {
+        return (this.flags2 & FLAG2_BREATHABLE_ATMOSPHERE) != 0;
     }
 
     public static class Fuel {
