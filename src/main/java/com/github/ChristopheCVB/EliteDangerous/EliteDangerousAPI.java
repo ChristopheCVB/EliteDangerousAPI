@@ -3,6 +3,8 @@ package com.github.ChristopheCVB.EliteDangerous;
 import com.github.ChristopheCVB.EliteDangerous.events.backpack.BackpackEvent;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.StatusEvent;
+import com.github.ChristopheCVB.EliteDangerous.events.book.BookDropshipEvent;
+import com.github.ChristopheCVB.EliteDangerous.events.book.BookTaxiEvent;
 import com.github.ChristopheCVB.EliteDangerous.events.combat.*;
 import com.github.ChristopheCVB.EliteDangerous.events.exploration.*;
 import com.github.ChristopheCVB.EliteDangerous.events.fleetcarriers.*;
@@ -247,6 +249,8 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(WingJoinEvent.class);
 		eventDeserializer.registerEventType(WingLeaveEvent.class);
 		eventDeserializer.registerEventType(BackpackEvent.class);
+		eventDeserializer.registerEventType(BookDropshipEvent.class);
+		eventDeserializer.registerEventType(BookTaxiEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
