@@ -24,6 +24,8 @@ public class DockedEvent extends Event {
     public List<String> stationServices;
     public Boolean activeFine;
     public Boolean wanted;
+    public Boolean taxi;
+    public Boolean multicrew;
 
     public interface Listener extends Event.Listener {
         @Override
