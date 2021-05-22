@@ -8,10 +8,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.List;
 
 public class ShipyardEvent extends Event {
     public Long marketID;
     public String stationName, starSystem;
+    public Boolean horizons;
+    public Boolean allowCobraMkIV;
+    public List<PriceItem> priceList;
 
     public interface Listener extends Event.Listener {
         @Override
@@ -34,5 +38,12 @@ public class ShipyardEvent extends Event {
         }
 
         return shipyardEvent;
+    }
+
+    public static class PriceItem {
+        public Long id;
+        public String shipType;
+        public String shipTypeLocalised;
+        public Long shipPrice;
     }
 }
