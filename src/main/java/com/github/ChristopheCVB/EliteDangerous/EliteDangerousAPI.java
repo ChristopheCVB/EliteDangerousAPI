@@ -1,5 +1,6 @@
 package com.github.ChristopheCVB.EliteDangerous;
 
+import com.github.ChristopheCVB.EliteDangerous.events.backpack.BackpackEvent;
 import com.github.ChristopheCVB.EliteDangerous.events.Event;
 import com.github.ChristopheCVB.EliteDangerous.events.StatusEvent;
 import com.github.ChristopheCVB.EliteDangerous.events.combat.*;
@@ -245,6 +246,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(WingInviteEvent.class);
 		eventDeserializer.registerEventType(WingJoinEvent.class);
 		eventDeserializer.registerEventType(WingLeaveEvent.class);
+		eventDeserializer.registerEventType(BackpackEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();

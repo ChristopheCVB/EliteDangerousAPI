@@ -91,6 +91,10 @@ public class GameFiles {
         return GameFiles.getGameFile("Status", "json");
     }
 
+    public static File getBackpackFile() {
+        return GameFiles.getGameFile("Backpack", "json");
+    }
+
     public static File getRouteFile() {
         return GameFiles.getGameFile("Route", "json");
     }
