@@ -6,6 +6,7 @@ import com.christophecvb.elitedangerous.events.backpack.BackpackEvent;
 import com.christophecvb.elitedangerous.events.book.BookDropshipEvent;
 import com.christophecvb.elitedangerous.events.book.BookTaxiEvent;
 import com.christophecvb.elitedangerous.events.buysell.BuyMicroResourcesEvent;
+import com.christophecvb.elitedangerous.events.buysell.BuySuitEvent;
 import com.christophecvb.elitedangerous.events.combat.*;
 import com.christophecvb.elitedangerous.events.exploration.*;
 import com.christophecvb.elitedangerous.events.fleetcarriers.*;
@@ -253,6 +254,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(BookDropshipEvent.class);
 		eventDeserializer.registerEventType(BookTaxiEvent.class);
 		eventDeserializer.registerEventType(BuyMicroResourcesEvent.class);
+		eventDeserializer.registerEventType(BuySuitEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
