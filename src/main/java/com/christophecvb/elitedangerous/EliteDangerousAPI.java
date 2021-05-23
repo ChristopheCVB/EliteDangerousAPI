@@ -3,11 +3,10 @@ package com.christophecvb.elitedangerous;
 import com.christophecvb.elitedangerous.events.Event;
 import com.christophecvb.elitedangerous.events.StatusEvent;
 import com.christophecvb.elitedangerous.events.backpack.BackpackEvent;
+import com.christophecvb.elitedangerous.events.backpack.UseConsumableEvent;
 import com.christophecvb.elitedangerous.events.book.BookDropshipEvent;
 import com.christophecvb.elitedangerous.events.book.BookTaxiEvent;
-import com.christophecvb.elitedangerous.events.buysell.BuyMicroResourcesEvent;
-import com.christophecvb.elitedangerous.events.buysell.BuySuitEvent;
-import com.christophecvb.elitedangerous.events.buysell.BuyWeaponEvent;
+import com.christophecvb.elitedangerous.events.buysell.*;
 import com.christophecvb.elitedangerous.events.combat.*;
 import com.christophecvb.elitedangerous.events.exploration.*;
 import com.christophecvb.elitedangerous.events.fleetcarriers.*;
@@ -257,6 +256,12 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(BuyMicroResourcesEvent.class);
 		eventDeserializer.registerEventType(BuySuitEvent.class);
 		eventDeserializer.registerEventType(BuyWeaponEvent.class);
+		eventDeserializer.registerEventType(UseConsumableEvent.class);
+		eventDeserializer.registerEventType(UpgradeWeaponEvent.class);
+		eventDeserializer.registerEventType(UpgradeSuitEvent.class);
+		eventDeserializer.registerEventType(TradeMicroResourcesEvent.class);
+		eventDeserializer.registerEventType(SellSuitEvent.class);
+		eventDeserializer.registerEventType(SellWeaponEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
