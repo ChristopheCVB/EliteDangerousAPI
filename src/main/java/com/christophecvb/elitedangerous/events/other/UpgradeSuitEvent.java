@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class UpgradeSuitEvent extends Event {
     public String name;
-    public String suitID;
+    public String nameLocalised;
+    public Long suitID;
     @SerializedName("Class")
     public Integer suitClass;
     public Long cost;
