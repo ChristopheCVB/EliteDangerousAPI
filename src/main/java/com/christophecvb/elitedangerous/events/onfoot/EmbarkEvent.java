@@ -1,4 +1,4 @@
-package com.christophecvb.elitedangerous.events.other;
+package com.christophecvb.elitedangerous.events.onfoot;
 
 import com.christophecvb.elitedangerous.events.Event;
 import com.google.gson.annotations.SerializedName;

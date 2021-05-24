@@ -1,4 +1,4 @@
-package com.christophecvb.elitedangerous.events.loadout;
+package com.christophecvb.elitedangerous.events.suit;
 
 import com.christophecvb.elitedangerous.events.Event;
 

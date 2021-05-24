@@ -1,4 +1,4 @@
-package com.christophecvb.elitedangerous.events.loadout;
+package com.christophecvb.elitedangerous.events.suit;
 
 public abstract class SuitLoadoutModuleEvent extends SuitLoadoutEvent {
     public String slotName;

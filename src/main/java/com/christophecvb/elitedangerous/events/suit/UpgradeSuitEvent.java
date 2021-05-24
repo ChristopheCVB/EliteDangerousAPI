@@ -1,13 +1,13 @@
-package com.christophecvb.elitedangerous.events.other;
+package com.christophecvb.elitedangerous.events.suit;
 
 import com.christophecvb.elitedangerous.events.Event;
 import com.google.gson.annotations.SerializedName;
 
-public class UpgradeWeaponEvent extends Event {
+public class UpgradeSuitEvent extends Event {
     public String name;
     public String nameLocalised;
-    public Long suitModuleID;
+    public Long suitID;
     @SerializedName("Class")
-    public Integer weaponClass;
+    public Integer suitClass;
     public Long cost;
 }

@@ -1,4 +1,4 @@
-package com.christophecvb.elitedangerous.events.exploration;
+package com.christophecvb.elitedangerous.events.onfoot;
 
 import com.christophecvb.elitedangerous.events.Event;
 

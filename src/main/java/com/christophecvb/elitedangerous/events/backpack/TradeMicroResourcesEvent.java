@@ -1,4 +1,4 @@
-package com.christophecvb.elitedangerous.events.trade;
+package com.christophecvb.elitedangerous.events.backpack;
 
 import com.christophecvb.elitedangerous.events.Event;
 import com.christophecvb.elitedangerous.models.MicroResource;
