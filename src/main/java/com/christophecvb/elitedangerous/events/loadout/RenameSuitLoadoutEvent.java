@@ -1,4 +1,4 @@
 package com.christophecvb.elitedangerous.events.loadout;
 
-public class RenameSuitLoadoutEvent extends LoadoutEvent {
+public class RenameSuitLoadoutEvent extends SuitLoadoutEvent {
 }
