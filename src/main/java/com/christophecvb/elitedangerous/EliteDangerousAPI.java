@@ -5,6 +5,7 @@ import com.christophecvb.elitedangerous.events.StatusEvent;
 import com.christophecvb.elitedangerous.events.backpack.BackpackChangeEvent;
 import com.christophecvb.elitedangerous.events.backpack.BackpackEvent;
 import com.christophecvb.elitedangerous.events.backpack.CollectItemsEvent;
+import com.christophecvb.elitedangerous.events.backpack.DropItemsEvent;
 import com.christophecvb.elitedangerous.events.book.BookDropshipEvent;
 import com.christophecvb.elitedangerous.events.book.BookTaxiEvent;
 import com.christophecvb.elitedangerous.events.book.CancelDropshipEvent;
@@ -259,6 +260,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(BackpackEvent.class);
 		eventDeserializer.registerEventType(BackpackChangeEvent.class);
 		eventDeserializer.registerEventType(CollectItemsEvent.class);
+		eventDeserializer.registerEventType(DropItemsEvent.class);
 		eventDeserializer.registerEventType(BookDropshipEvent.class);
 		eventDeserializer.registerEventType(BookTaxiEvent.class);
 		eventDeserializer.registerEventType(CancelDropshipEvent.class);
