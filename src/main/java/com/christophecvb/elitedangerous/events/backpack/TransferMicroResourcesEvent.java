@@ -3,12 +3,12 @@ package com.christophecvb.elitedangerous.events.backpack;
 import com.christophecvb.elitedangerous.events.Event;
 import com.christophecvb.elitedangerous.models.MicroResource;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TransferMicroResourcesEvent extends Event {
-    public ArrayList<transfer> transfers;
+    public List<MicroResourceTransfer> transfers;
 
-    public static class transfer extends MicroResource {
+    public static class MicroResourceTransfer extends MicroResource {
         public String direction;
     }
 }

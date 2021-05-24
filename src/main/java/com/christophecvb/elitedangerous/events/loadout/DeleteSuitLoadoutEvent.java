@@ -1,4 +1,4 @@
 package com.christophecvb.elitedangerous.events.loadout;
 
-public class DeleteSuitLoadoutEvent extends LoadoutBaseEvent{
+public class DeleteSuitLoadoutEvent extends LoadoutEvent {
 }

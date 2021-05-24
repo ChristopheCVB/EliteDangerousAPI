@@ -1,13 +1,9 @@
 package com.christophecvb.elitedangerous.events.loadout;
 
+import com.christophecvb.elitedangerous.models.LoadoutModule;
+
 import java.util.ArrayList;
 
-public class SwitchSuitLoadoutEvent extends LoadoutBaseEvent {
-    public ArrayList<Module> modules;
-
-    public static class Module {
-        public String slotName;
-        public Long suitModuleID;
-        public String moduleName;
-    }
+public class SwitchSuitLoadoutEvent extends LoadoutEvent {
+    public ArrayList<LoadoutModule> modules;
 }

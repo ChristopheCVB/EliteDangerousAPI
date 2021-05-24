@@ -10,5 +10,6 @@ public class TradeMicroResourcesEvent extends Event {
     public String received;
     public Integer count;
     public Long marketID;
+    public MicroResource.Category category;
 }
 

@@ -1,12 +1,15 @@
 package com.christophecvb.elitedangerous.events.other;
 
 import com.christophecvb.elitedangerous.events.Event;
+import com.google.gson.annotations.SerializedName;
 
 public class EmbarkEvent extends Event {
-    public Boolean SRV;
+    @SerializedName("SRV")
+    public Boolean srv;
     public Boolean taxi;
     public Boolean multicrew;
-    public Long ID;
+    @SerializedName("ID")
+    public Long id;
     public String starSystem;
     public Long systemAddress;
     public String body;

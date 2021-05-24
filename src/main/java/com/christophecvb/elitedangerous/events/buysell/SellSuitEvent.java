@@ -6,4 +6,5 @@ public class SellSuitEvent extends Event {
     public String name;
     public String nameLocalised;
     public Long price;
+    public Long suitID;
 }
