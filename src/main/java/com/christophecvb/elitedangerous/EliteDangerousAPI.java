@@ -12,6 +12,7 @@ import com.christophecvb.elitedangerous.events.combat.*;
 import com.christophecvb.elitedangerous.events.exploration.*;
 import com.christophecvb.elitedangerous.events.fleetcarriers.*;
 import com.christophecvb.elitedangerous.events.onfoot.DisembarkEvent;
+import com.christophecvb.elitedangerous.events.onfoot.DropShipDeployEvent;
 import com.christophecvb.elitedangerous.events.onfoot.EmbarkEvent;
 import com.christophecvb.elitedangerous.events.onfoot.ScanOrganicEvent;
 import com.christophecvb.elitedangerous.events.other.*;
@@ -267,6 +268,8 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(BuySuitEvent.class);
 		eventDeserializer.registerEventType(BuyWeaponEvent.class);
 		eventDeserializer.registerEventType(DisembarkEvent.class);
+		eventDeserializer.registerEventType(EmbarkEvent.class);
+		eventDeserializer.registerEventType(DropShipDeployEvent.class);
 		eventDeserializer.registerEventType(UseConsumableEvent.class);
 		eventDeserializer.registerEventType(UpgradeWeaponEvent.class);
 		eventDeserializer.registerEventType(UpgradeSuitEvent.class);
@@ -275,7 +278,6 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(SellWeaponEvent.class);
 		eventDeserializer.registerEventType(CreateSuitLoadoutEvent.class);
 		eventDeserializer.registerEventType(DeleteSuitLoadoutEvent.class);
-		eventDeserializer.registerEventType(EmbarkEvent.class);
 		eventDeserializer.registerEventType(LoadoutEquipModuleEvent.class);
 		eventDeserializer.registerEventType(LoadoutRemoveModuleEvent.class);
 		eventDeserializer.registerEventType(RenameSuitLoadoutEvent.class);
