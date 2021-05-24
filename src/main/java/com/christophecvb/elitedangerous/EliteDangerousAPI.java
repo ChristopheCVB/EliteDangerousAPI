@@ -15,6 +15,7 @@ import com.christophecvb.elitedangerous.events.buysell.BuyWeaponEvent;
 import com.christophecvb.elitedangerous.events.combat.*;
 import com.christophecvb.elitedangerous.events.exploration.*;
 import com.christophecvb.elitedangerous.events.fleetcarriers.*;
+import com.christophecvb.elitedangerous.events.onfoot.DisembarkEvent;
 import com.christophecvb.elitedangerous.events.other.*;
 import com.christophecvb.elitedangerous.events.powerplay.*;
 import com.christophecvb.elitedangerous.events.squadron.*;
@@ -265,6 +266,7 @@ public class EliteDangerousAPI {
 		eventDeserializer.registerEventType(BuyMicroResourcesEvent.class);
 		eventDeserializer.registerEventType(BuySuitEvent.class);
 		eventDeserializer.registerEventType(BuyWeaponEvent.class);
+		eventDeserializer.registerEventType(DisembarkEvent.class);
 
 		DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
 		ParentDeserializer parentDeserializer = new ParentDeserializer();
