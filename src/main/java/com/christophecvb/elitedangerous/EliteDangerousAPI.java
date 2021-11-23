@@ -348,25 +348,11 @@ public class EliteDangerousAPI {
 
 								Event event = this.parseEvent(jsonEvent);
 								if (event != null) {
-									if (event.timestamp.after(this.triggerEventsSince)) {
-										Class<? extends Event> eventClass = event.getClass();
-										if (this.listeners.containsKey(eventClass)) {
-											this.listeners.get(eventClass).onTriggered(event);
-										}
-										else {
-											Class<?> eventSuperClass = eventClass.getSuperclass();
-											while (!eventSuperClass.equals(Event.class)) {
-												if (this.listeners.containsKey(eventSuperClass)) {
-													this.listeners.get(eventSuperClass).onTriggered(event);
-													break;
-												}
-												eventSuperClass = eventSuperClass.getSuperclass();
-											}
-										}
-									}
+									this.triggerEventIfNeededSafely(event);
 								}
 							}
 							else {
+								// Game is creating another file, give it some time
 								try {
 									Thread.sleep(500);
 								}
@@ -385,11 +371,36 @@ public class EliteDangerousAPI {
 		});
 	}
 
+	private <T extends Event> void triggerEventIfNeededSafely(T event) {
+		if (event.timestamp.after(this.triggerEventsSince)) {
+			Class<? extends Event> eventClass = event.getClass();
+			if (this.listeners.containsKey(eventClass)) {
+				try {
+					this.listeners.get(event.getClass()).onTriggered(event);
+				}
+				catch (Exception ignored) {}
+			}
+			else {
+				Class<?> eventSuperClass = eventClass.getSuperclass();
+				while (!eventSuperClass.equals(Event.class)) {
+					if (this.listeners.containsKey(eventSuperClass)) {
+						try {
+							this.listeners.get(eventSuperClass).onTriggered(event);
+						}
+						catch (Exception ignored) {}
+						break;
+					}
+					eventSuperClass = eventSuperClass.getSuperclass();
+				}
+			}
+		}
+	}
+
 	private void triggerStatusEventIfNeeded() {
 		if (this.listeners.containsKey(StatusEvent.class)) {
 			StatusEvent statusEvent = StatusEvent.loadFromFile();
 			if (statusEvent != null) {
-				this.listeners.get(StatusEvent.class).onTriggered(statusEvent);
+				this.triggerEventIfNeededSafely(statusEvent);
 			}
 		}
 	}
