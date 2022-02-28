@@ -23,7 +23,7 @@ public enum AtmosphereClass {
 	Argon("Argon"),
 	Oxygen("Oxygen");
 
-	private String identifier;
+	private final String identifier;
 
 	AtmosphereClass(String identifier) {
 		this.identifier = identifier;

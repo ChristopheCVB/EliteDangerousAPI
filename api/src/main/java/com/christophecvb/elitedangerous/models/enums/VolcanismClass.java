@@ -17,7 +17,7 @@ public enum VolcanismClass {
 	Helium_Geysers("Helium Geysers"),
 	Silicate_Vapour_Geysers("Silicate Vapour Geysers");
 
-	private String identifier;
+	private final String identifier;
 
 	VolcanismClass(String identifier) {
 		this.identifier = identifier;

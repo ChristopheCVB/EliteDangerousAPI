@@ -20,7 +20,7 @@ public enum CrimeType {
 	Collided_At_Speed_In_No_FireZone("CollidedAtSpeedInNoFireZone"),
 	Collided_At_Speed_In_No_FireZone_HullDamage("CollidedAtSpeedInNoFireZone_HullDamage");
 
-	private String identifier;
+	private final String identifier;
 
 	CrimeType(String identifier) {
 		this.identifier = identifier;

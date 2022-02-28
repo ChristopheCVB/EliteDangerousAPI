@@ -15,7 +15,7 @@ public enum AtmosphereCompositionType {
 	Silicates("Silicates"),
 	Iron("Iron");
 
-	private String identifier;
+	private final String identifier;
 
 	AtmosphereCompositionType(String identifier) {
 		this.identifier = identifier;

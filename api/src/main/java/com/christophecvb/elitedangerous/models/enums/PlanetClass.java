@@ -21,7 +21,7 @@ public enum PlanetClass {
 	Helium_Rich_Gas_Giant("Helium rich gas giant"),
 	Helium_Gas_Giant("Helium gas giant");
 
-	private String identifier;
+	private final String identifier;
 
 	PlanetClass(String identifier) {
 		this.identifier = identifier;

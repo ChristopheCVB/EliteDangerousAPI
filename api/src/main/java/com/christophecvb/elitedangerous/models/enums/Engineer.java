@@ -22,7 +22,7 @@ public enum Engineer {
 	Tod_$The_Blaster$_McQuinn(300260),
 	Tiana_Fortune(300270);
 
-	private int identifier;
+	private final int identifier;
 
 	Engineer(int identifier) {
 		this.identifier = identifier;

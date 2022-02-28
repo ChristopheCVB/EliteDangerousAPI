@@ -19,7 +19,7 @@ public enum StarClass {
 	Nebula("Nebula"),
 	Stellar_Remnant_Nebula("StellarRemnantNebula");
 
-	private String[] identifiers;
+	private final String[] identifiers;
 
 	StarClass(String... identifiers) {
 		this.identifiers = identifiers;

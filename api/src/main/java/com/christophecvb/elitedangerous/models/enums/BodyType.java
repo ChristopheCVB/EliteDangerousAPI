@@ -9,7 +9,7 @@ public enum BodyType {
 	Station("Station"),
 	Asteroid_Cluster("AsteroidCluster");
 
-	private String identifier;
+	private final String identifier;
 
 	BodyType(String identifier) {
 		this.identifier = identifier;

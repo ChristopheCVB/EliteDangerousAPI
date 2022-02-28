@@ -1,7 +1,7 @@
 package com.christophecvb.elitedangerous.models.toreadable;
 
 public class TradeRank {
-	private static String[] LOCALISED_NAMES = {"Penniless", "Mostly Pennliess", "Peddler", "Dealer", "Merchant", "Broker", "Entrepreneur", "Tycoon", "Elite"};
+	private static final String[] LOCALISED_NAMES = {"Penniless", "Mostly Pennliess", "Peddler", "Dealer", "Merchant", "Broker", "Entrepreneur", "Tycoon", "Elite"};
 
 	public static String getReadableName(int rank) {
 		return LOCALISED_NAMES[rank];
