@@ -1,0 +1,87 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+}
+
+group 'com.christophecvb.elitedangerous'
+def localArchiveBaseName = 'api'
+version versionName
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = localArchiveBaseName
+            from components.java
+            pom {
+                name = 'Elite Dangerous API'
+                description = 'This Project is an API that extracts Elite Dangerous data from its log files'
+                url = 'https://github.com/ChristopheCVB/EliteDangerousAPI'
+                inceptionYear = '2020'
+
+                scm {
+                    url = 'https://github.com/ChristopheCVB/EliteDangerousAPI'
+                    connection = 'scm:https://github.com/ChristopheCVB/EliteDangerousAPI.git'
+                    developerConnection = 'scm:git://github.com/ChristopheCVB/EliteDangerousAPI.git'
+                }
+
+                licenses {
+                    license {
+                        name = 'GNU General Public License v3.0'
+                        url = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'ChristopheCVB'
+                        name = 'Christophe Carvalho Vilas-Boas'
+                        email = 'christophe.carvalhovilasboas@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = version.endsWith('SNAPSHOT') ? 'https://s01.oss.sonatype.org/content/repositories/snapshots/' : 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username = envOrPropOrEmpty('OSSRH_USERNAME')
+                password = envOrPropOrEmpty('OSSRH_PASSWORD')
+            }
+        }
+    }
+}
+
+signing {
+    def signingKey = envOrPropOrEmpty('PGP_KEY')
+    def signingPassword = envOrPropOrEmpty('PGP_PWD')
+
+    useInMemoryPgpKeys(signingKey, signingPassword)
+
+    if (signingKey != '') {
+        sign publishing.publications.mavenJava
+    }
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
