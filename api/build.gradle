@@ -2,6 +2,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
+    id 'jacoco'
 }
 
 group 'com.christophecvb.elitedangerous'
@@ -83,5 +84,11 @@ signing {
 javadoc {
     if(JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
     }
 }
