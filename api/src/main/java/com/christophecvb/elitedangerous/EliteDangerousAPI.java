@@ -371,7 +371,7 @@ public class EliteDangerousAPI {
 		});
 	}
 
-	private <T extends Event> void triggerEventIfNeededSafely(T event) {
+	protected  <T extends Event> void triggerEventIfNeededSafely(T event) {
 		if (event.timestamp.after(this.triggerEventsSince)) {
 			Class<? extends Event> eventClass = event.getClass();
 			if (this.listeners.containsKey(eventClass)) {
@@ -436,7 +436,7 @@ public class EliteDangerousAPI {
 		this.scheduledExecutorService.scheduleWithFixedDelay(this::triggerStatusEventIfNeeded, 0, 500, TimeUnit.MILLISECONDS);
 	}
 
-	private Event parseEvent(JsonObject jsonEvent) {
+	protected Event parseEvent(JsonObject jsonEvent) {
 		Event event = null;
 		try {
 			event = EliteDangerousAPI.GSON.fromJson(jsonEvent, Event.class);
@@ -448,6 +448,10 @@ public class EliteDangerousAPI {
 		}
 
 		return event;
+	}
+
+	public Date getTriggerEventsSince() {
+		return this.triggerEventsSince;
 	}
 
 	public static class Builder {
