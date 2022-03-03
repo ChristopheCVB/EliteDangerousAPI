@@ -545,7 +545,7 @@ public class EliteDangerousAPI {
   private Thread journalReaderThread;
   private ScheduledExecutorService scheduledExecutorService;
   private final Map<Class<? extends Event>, Event.Listener> listeners = new HashMap<>();
-  private Date triggerEventsSince;
+  private final Date triggerEventsSince;
 
   private Thread createJournalReaderThread() {
     return new Thread(() -> {
@@ -648,7 +648,10 @@ public class EliteDangerousAPI {
 
   public void stop() {
     this.active = false;
-    this.journalReaderThread = null;
+    if (this.journalReaderThread != null && !this.journalReaderThread.isInterrupted()) {
+      this.journalReaderThread.interrupt();
+      this.journalReaderThread = null;
+    }
     if (this.scheduledExecutorService != null) {
       this.scheduledExecutorService.shutdownNow();
       this.scheduledExecutorService = null;
@@ -742,10 +745,11 @@ public class EliteDangerousAPI {
      * @return The populated {@link EliteDangerousAPI} class
      */
     public EliteDangerousAPI build() {
-      EliteDangerousAPI eliteDangerousAPI = new EliteDangerousAPI(this.gameFilesDirectory,
-          this.triggerEventsSince, this.listeners);
-
-      return eliteDangerousAPI;
+      return new EliteDangerousAPI(
+          this.gameFilesDirectory,
+          this.triggerEventsSince,
+          this.listeners
+      );
     }
   }
 }
