@@ -15,6 +15,18 @@ Execute `gradle javaDoc`
 
 Go to [releases](https://github.com/ChristopheCVB/EliteDangerousAPI/releases)
 
+### Maven Central
+
+Latest version is `1.0.0`
+
+#### Gradle
+
+```groovy
+dependencies {
+  implementation 'com.christophecvb.elitedangerous:api:1.0.0'
+}
+```
+
 ## Get Started
 
 ```java
