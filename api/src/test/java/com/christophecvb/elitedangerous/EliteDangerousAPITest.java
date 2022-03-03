@@ -9,6 +9,7 @@ import com.christophecvb.elitedangerous.events.startup.MaterialsEvent;
 import com.christophecvb.elitedangerous.events.startup.ProgressEvent;
 import com.christophecvb.elitedangerous.events.startup.RankEvent;
 import com.christophecvb.elitedangerous.events.startup.ReputationEvent;
+import com.christophecvb.elitedangerous.utils.GameFiles;
 import com.google.gson.JsonParser;
 import java.io.File;
 import java.text.ParseException;
@@ -40,6 +41,8 @@ public class EliteDangerousAPITest {
     if (this.eliteDangerousAPI != null && this.eliteDangerousAPI.isActive()) {
       this.eliteDangerousAPI.stop();
     }
+    // Reset GameFiles instance to default
+    GameFiles.getInstance(null);
   }
 
   @Test
@@ -59,6 +62,20 @@ public class EliteDangerousAPITest {
   @Test
   public void testWrongGameFilesDirectory() throws InterruptedException {
     this.eliteDangerousAPIBuilder.setGameFilesDirectory(new File("./"));
+    this.build();
+
+    this.eliteDangerousAPI.start();
+    Assert.assertTrue(this.eliteDangerousAPI.isActive());
+
+    Thread.sleep(100);
+
+    this.eliteDangerousAPI.stop();
+    Assert.assertFalse(this.eliteDangerousAPI.isActive());
+  }
+
+  @Test
+  public void testNotExistingGameFilesDirectory() throws InterruptedException {
+    this.eliteDangerousAPIBuilder.setGameFilesDirectory(new File("./gibberish"));
     this.build();
 
     this.eliteDangerousAPI.start();
