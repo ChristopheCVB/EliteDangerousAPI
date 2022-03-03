@@ -1,105 +1,137 @@
 package com.christophecvb.elitedangerous.utils;
 
 import com.google.gson.JsonObject;
-
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Optional;
 
 public class GameFiles {
-    public static String getFileExtension(File file) {
-        String extension = null;
-        if (file != null) {
-            String filename = file.getName();
-            extension = Optional.of(filename)
-                    .filter(f -> f.contains("."))
-                    .map(f -> f.substring(filename.lastIndexOf(".") + 1))
-                    .orElse(null);
-        }
-        return extension;
+
+  private static final String GAME_FILE_EXTENSION = "json";
+
+  private static GameFiles instance = null;
+
+  public static GameFiles getInstance(File directory) {
+    if (GameFiles.instance == null || !GameFiles.instance.directory.equals(directory)) {
+      GameFiles.instance = new GameFiles();
+      if (directory != null && directory.exists()) {
+        GameFiles.instance.directory = directory;
+      } else {
+        GameFiles.instance.directory = Paths.get(
+                System.getProperty("user.home") + "/Saved Games/Frontier Developments/Elite Dangerous/")
+            .toFile();
+      }
     }
 
-    public static File getDirectory() {
-        return Paths.get(System.getProperty("user.home") + "/Saved Games/Frontier Developments/Elite Dangerous/").toFile();
-    }
+    return GameFiles.instance;
+  }
 
-    public static File getLatestJournalFile() {
-        File latest = null;
+  public static GameFiles getExistingInstance() {
+    return GameFiles.instance;
+  }
 
-        File[] edFiles = GameFiles.getDirectory().listFiles();
-        if (edFiles == null) {
-            System.out.println("No PlayerJournals were found, waiting for game.");
-        }
-        else {
-            for (File file : edFiles) {
-                if (!file.isDirectory()) {
-                    if (file.getName().startsWith("Journal") && "log".equals(getFileExtension(file))) {
-                        if (latest == null) {
-                            latest = file;
-                        }
-                        else {
-                            if (latest.lastModified() < file.lastModified()) {
-                                latest = file;
-                            }
-                        }
-                    }
-                }
+  private File directory = null;
+
+  public File getDirectory() {
+    return this.directory;
+  }
+
+  public File getLatestJournalFile() {
+    File latest = null;
+
+    File[] edFiles = this.getDirectory().listFiles();
+    if (edFiles == null) {
+      System.out.println("No PlayerJournals were found, waiting for game.");
+    } else {
+      for (File file : edFiles) {
+        if (!file.isDirectory()) {
+          if (file.getName().startsWith("Journal") && "log".equals(getFileExtension(file))) {
+            if (latest == null) {
+              latest = file;
+            } else {
+              if (latest.lastModified() < file.lastModified()) {
+                latest = file;
+              }
             }
+          }
         }
-
-        return latest;
+      }
     }
 
-    private static File getGameFile(String namePrefix, String extension) {
-        File gameFile = null;
+    return latest;
+  }
 
-        File[] edFiles = GameFiles.getDirectory().listFiles();
-        if (edFiles != null) {
-            for (File file : edFiles) {
-                if (!file.isDirectory()) {
-                    if (file.getName().startsWith(namePrefix) && extension.equals(getFileExtension(file))) {
-                        gameFile = file;
-                    }
-                }
-            }
+  private File getGameFile(String namePrefix) {
+    File gameFile = null;
+
+    File[] edFiles = this.getDirectory().listFiles();
+    if (edFiles != null) {
+      for (File file : edFiles) {
+        if (!file.isDirectory()) {
+          if (file.getName().startsWith(namePrefix) && GameFiles.GAME_FILE_EXTENSION.equals(
+              getFileExtension(file))) {
+            gameFile = file;
+          }
         }
-
-        return gameFile;
+      }
     }
 
-    public static File getShipyardFile() {
-        return GameFiles.getGameFile("Shipyard", "json");
-    }
+    return gameFile;
+  }
 
-    public static File getCargoFile() {
-        return GameFiles.getGameFile("Cargo", "json");
-    }
+  public File getShipyardFile() {
+    return this.getGameFile("Shipyard");
+  }
 
-    public static File getMarketFile() {
-        return GameFiles.getGameFile("Market", "json");
-    }
+  public File getCargoFile() {
+    return this.getGameFile("Cargo");
+  }
 
-    public static File getModulesInfoFile() {
-        return GameFiles.getGameFile("ModulesInfo", "json");
-    }
+  public File getMarketFile() {
+    return this.getGameFile("Market");
+  }
 
-    public static File getOutfittingFile() {
-        return GameFiles.getGameFile("Outfitting", "json");
-    }
+  public File getModulesInfoFile() {
+    return this.getGameFile("ModulesInfo");
+  }
 
-    public static File getStatusFile() {
-        return GameFiles.getGameFile("Status", "json");
-    }
+  public File getOutfittingFile() {
+    return this.getGameFile("Outfitting");
+  }
 
-    public static File getBackpackFile() {
-        return GameFiles.getGameFile("Backpack", "json");
-    }
+  public File getStatusFile() {
+    return this.getGameFile("Status");
+  }
 
-    public static File getRouteFile() {
-        return GameFiles.getGameFile("Route", "json");
-    }
+  public File getBackpackFile() {
+    return this.getGameFile("Backpack");
+  }
 
-    public static void onUnprocessedEvent(JsonObject jsonEvent) {
-        System.out.println("UNPROCESSED EVENT: " + jsonEvent.toString());
+  public File getRouteFile() {
+    return this.getGameFile("Route");
+  }
+
+  public static void onUnprocessedEvent(JsonObject jsonEvent) {
+    System.out.println("UNPROCESSED EVENT: " + jsonEvent.toString());
+  }
+
+  private static String getFileExtension(File file) {
+    String extension = null;
+    if (file != null) {
+      String filename = file.getName();
+      extension = GameFiles.getFileNameExtension(filename);
     }
+    return extension;
+  }
+
+  private static String getFileNameExtension(String filename) {
+    String extension = null;
+    if (filename != null) {
+      extension = Optional.of(filename)
+          .filter(f -> f.contains("."))
+          .map(f -> f.substring(filename.lastIndexOf(".") + 1))
+          .orElse(null);
+    }
+    return extension;
+  }
 }

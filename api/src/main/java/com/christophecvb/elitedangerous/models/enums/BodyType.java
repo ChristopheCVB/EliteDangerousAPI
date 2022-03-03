@@ -1,31 +1,31 @@
 package com.christophecvb.elitedangerous.models.enums;
 
 public enum BodyType {
-	Null("Null"),
-	Star("Star"),
-	Planet("Planet"),
-	Planetary_Ring("PlanetaryRing"),
-	Stellar_Ring("StellarRing"),
-	Station("Station"),
-	Asteroid_Cluster("AsteroidCluster");
+  Null("Null"),
+  Star("Star"),
+  Planet("Planet"),
+  Planetary_Ring("PlanetaryRing"),
+  Stellar_Ring("StellarRing"),
+  Station("Station"),
+  Asteroid_Cluster("AsteroidCluster");
 
-	private final String identifier;
+  private final String identifier;
 
-	BodyType(String identifier) {
-		this.identifier = identifier;
-	}
+  BodyType(String identifier) {
+    this.identifier = identifier;
+  }
 
-	public String getBodyTypeIdentifier() {
-		return this.identifier;
-	}
+  public String getBodyTypeIdentifier() {
+    return this.identifier;
+  }
 
-	public String getBodyTypeName(String identifier) {
-		String name = "null";
-		for (BodyType bodyType : values()) {
-			if (bodyType.getBodyTypeIdentifier().equals(identifier)) {
-				name = bodyType.name().replaceAll("_", " ").replaceAll("\\$", "-");
-			}
-		}
-		return name;
-	}
+  public String getBodyTypeName(String identifier) {
+    String name = "null";
+    for (BodyType bodyType : values()) {
+      if (bodyType.getBodyTypeIdentifier().equals(identifier)) {
+        name = bodyType.name().replaceAll("_", " ").replaceAll("\\$", "-");
+      }
+    }
+    return name;
+  }
 }

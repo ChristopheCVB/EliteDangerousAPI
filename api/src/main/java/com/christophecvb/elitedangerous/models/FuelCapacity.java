@@ -1,6 +1,7 @@
 package com.christophecvb.elitedangerous.models;
 
 public class FuelCapacity {
-    public Integer main;
-    public Double reserve;
+
+  public Integer main;
+  public Double reserve;
 }

@@ -3,17 +3,20 @@ package com.christophecvb.elitedangerous.events.other;
 import com.christophecvb.elitedangerous.events.Event;
 
 public class FriendsEvent extends Event {
-    public static final String[] STATUS = {"Requested", "Declined", "Added", "Lost", "Offline", "Online"};
 
-    public String status;
-    public String name;
+  public static final String[] STATUS = {"Requested", "Declined", "Added", "Lost", "Offline",
+      "Online"};
 
-    public interface Listener extends Event.Listener {
-        @Override
-        default <T extends Event> void onTriggered(T event) {
-            this.onFriendsEventTriggered((FriendsEvent) event);
-        }
+  public String status;
+  public String name;
 
-        void onFriendsEventTriggered(FriendsEvent friendsEvent);
+  public interface Listener extends Event.Listener {
+
+    @Override
+    default <T extends Event> void onTriggered(T event) {
+      this.onFriendsEventTriggered((FriendsEvent) event);
     }
+
+    void onFriendsEventTriggered(FriendsEvent friendsEvent);
+  }
 }
