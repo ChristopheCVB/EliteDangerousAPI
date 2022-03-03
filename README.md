@@ -1,17 +1,17 @@
 # [Elite Dangerous](https://www.elitedangerous.com/) API
 
-
-[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/ChristopheCVB/EliteDangerousAPI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ChristopheCVB/EliteDangerousAPI/context:java)
+[![Build, Coverage and Publish Release](https://github.com/ChristopheCVB/EliteDangerousAPI/workflows/Build,%20Coverage%20and%20Publish%20Release/badge.svg)](#Elite-Dangerous-API)
+[![Build and Publish Snapshot](https://github.com/ChristopheCVB/EliteDangerousAPI/workflows/Build%20and%20Publish%20Snapshot/badge.svg)](#Elite-Dangerous-API)
+[![Code Coverage](https://codecov.io/gh/ChristopheCVB/EliteDangerousAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/ChristopheCVB/EliteDangerousAPI)
+[![Language gradle: Java](https://img.shields.io/lgtm/grade/java/g/ChristopheCVB/EliteDangerousAPI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ChristopheCVB/EliteDangerousAPI/context:java)
 
 This Project is an API that extracts Elite Dangerous data from its log files
 
 ## Documentation
 
-TODO
+Execute `gradle javaDoc`
 
 ## Releases
-
-TODO
 
 Go to [releases](https://github.com/ChristopheCVB/EliteDangerousAPI/releases)
 
@@ -27,7 +27,7 @@ public class EliteDangerousExtractor {
                 .addEventListener(SupercruiseExitEvent.class, event -> {
                     // Do something
                 })
-                .setStatusListener(status -> {
+                .addEventListener(StatusEvent.class, event -> {
                     // Do something
                 })
                 .build();
