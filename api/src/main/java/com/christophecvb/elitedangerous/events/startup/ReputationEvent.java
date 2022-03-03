@@ -4,30 +4,32 @@ import com.christophecvb.elitedangerous.events.Event;
 import com.christophecvb.elitedangerous.models.toreadable.Reputation;
 
 public class ReputationEvent extends Event {
-	public Double empire, federation, alliance, independent;
 
-	public String getEmpireReputationReadable() {
-		return Reputation.getReadableName(this.empire);
-	}
+  public Double empire, federation, alliance, independent;
 
-	public String getFederationReputationReadable() {
-		return Reputation.getReadableName(this.federation);
-	}
+  public String getEmpireReputationReadable() {
+    return Reputation.getReadableName(this.empire);
+  }
 
-	public String getAllianceReputationReadable() {
-		return Reputation.getReadableName(this.alliance);
-	}
+  public String getFederationReputationReadable() {
+    return Reputation.getReadableName(this.federation);
+  }
 
-	public String getIndependentReputationReadable() {
-		return Reputation.getReadableName(independent);
-	}
+  public String getAllianceReputationReadable() {
+    return Reputation.getReadableName(this.alliance);
+  }
 
-	public interface Listener extends Event.Listener {
-		@Override
-		default <T extends Event> void onTriggered(T event) {
-			this.onReputationEventTriggered((ReputationEvent) event);
-		}
+  public String getIndependentReputationReadable() {
+    return Reputation.getReadableName(independent);
+  }
 
-		void onReputationEventTriggered(ReputationEvent reputationEvent);
-	}
+  public interface Listener extends Event.Listener {
+
+    @Override
+    default <T extends Event> void onTriggered(T event) {
+      this.onReputationEventTriggered((ReputationEvent) event);
+    }
+
+    void onReputationEventTriggered(ReputationEvent reputationEvent);
+  }
 }

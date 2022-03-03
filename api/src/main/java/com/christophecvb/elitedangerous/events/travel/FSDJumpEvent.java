@@ -3,42 +3,43 @@ package com.christophecvb.elitedangerous.events.travel;
 import com.christophecvb.elitedangerous.events.Event;
 import com.christophecvb.elitedangerous.models.Conflict;
 import com.christophecvb.elitedangerous.models.Faction;
-
 import java.util.List;
 
 public class FSDJumpEvent extends Event {
-	public String starSystem;
-	public String systemAllegiance;
-	public String systemEconomy;
-	public String systemEconomyLocalised;
-	public String systemSecondEconomy;
-	public String systemSecondEconomyLocalised;
-	public String systemGovernment;
-	public String systemGovernmentLocalised;
-	public String systemSecurity;
-	public String systemSecurityLocalised;
-	public String body;
-	public String bodyType;
-	public Faction systemFaction;
-	public String powerplayState;
-	public Long population;
-	public Long systemAddress;
-	public Long boostUsed;
-	public Integer bodyId;
-	public Double jumpDistance;
-	public Double fuelUsed;
-	public Double fuelLevel;
-	public List<Faction> factions;
-	public List<Conflict> conflicts;
-	public Double[] starPos;
-	public List<String> powers;
 
-	public interface Listener extends Event.Listener {
-		@Override
-		default <T extends Event> void onTriggered(T event) {
-			this.onFSDJumpEventTriggered((FSDJumpEvent) event);
-		}
+  public String starSystem;
+  public String systemAllegiance;
+  public String systemEconomy;
+  public String systemEconomyLocalised;
+  public String systemSecondEconomy;
+  public String systemSecondEconomyLocalised;
+  public String systemGovernment;
+  public String systemGovernmentLocalised;
+  public String systemSecurity;
+  public String systemSecurityLocalised;
+  public String body;
+  public String bodyType;
+  public Faction systemFaction;
+  public String powerplayState;
+  public Long population;
+  public Long systemAddress;
+  public Long boostUsed;
+  public Integer bodyId;
+  public Double jumpDistance;
+  public Double fuelUsed;
+  public Double fuelLevel;
+  public List<Faction> factions;
+  public List<Conflict> conflicts;
+  public Double[] starPos;
+  public List<String> powers;
 
-		void onFSDJumpEventTriggered(FSDJumpEvent fsdJumpEvent);
-	}
+  public interface Listener extends Event.Listener {
+
+    @Override
+    default <T extends Event> void onTriggered(T event) {
+      this.onFSDJumpEventTriggered((FSDJumpEvent) event);
+    }
+
+    void onFSDJumpEventTriggered(FSDJumpEvent fsdJumpEvent);
+  }
 }

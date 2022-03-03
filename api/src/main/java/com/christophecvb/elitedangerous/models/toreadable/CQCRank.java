@@ -1,21 +1,23 @@
 package com.christophecvb.elitedangerous.models.toreadable;
 
 public class CQCRank {
-	private static final String[] LOCALISED_NAMES = {"Helpless", "Mostly Helpless", "Amateur", "Semi Professional", "Professional", "Champion", "Hero", "Legend", "Elite"};
 
-	public static String getReadableName(int rank) {
-		return LOCALISED_NAMES[rank];
-	}
+  private static final String[] LOCALISED_NAMES = {"Helpless", "Mostly Helpless", "Amateur",
+      "Semi Professional", "Professional", "Champion", "Hero", "Legend", "Elite"};
 
-	public static int getRank(String rankName) {
-		int rank = 0;
+  public static String getReadableName(int rank) {
+    return LOCALISED_NAMES[rank];
+  }
 
-		for (int i = 0; i < LOCALISED_NAMES.length; i++) {
-			if (LOCALISED_NAMES[i].equals(rankName)) {
-				rank = i;
-			}
-		}
+  public static int getRank(String rankName) {
+    int rank = 0;
 
-		return rank;
-	}
+    for (int i = 0; i < LOCALISED_NAMES.length; i++) {
+      if (LOCALISED_NAMES[i].equals(rankName)) {
+        rank = i;
+      }
+    }
+
+    return rank;
+  }
 }
