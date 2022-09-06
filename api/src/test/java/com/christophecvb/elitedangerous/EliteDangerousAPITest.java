@@ -2,6 +2,7 @@ package com.christophecvb.elitedangerous;
 
 import com.christophecvb.elitedangerous.events.Event;
 import com.christophecvb.elitedangerous.events.StatusEvent;
+import com.christophecvb.elitedangerous.events.exploration.ScanPlanetOrMoonEvent;
 import com.christophecvb.elitedangerous.events.other.FriendsEvent;
 import com.christophecvb.elitedangerous.events.other.MusicEvent;
 import com.christophecvb.elitedangerous.events.startup.CommanderEvent;
@@ -354,5 +355,21 @@ public class EliteDangerousAPITest {
     Assert.assertNotNull(resultEvent.get());
     Assert.assertEquals("type", "Music", resultEvent.get().type);
     Assert.assertEquals("empire", "NoTrack", resultEvent.get().musicTrack);
+  }
+
+  @Test
+  public void testScanEvent() {
+    AtomicReference<ScanPlanetOrMoonEvent> resultEvent = new AtomicReference<>(null);
+    this.eliteDangerousAPIBuilder.addEventListener(ScanPlanetOrMoonEvent.class,
+        (ScanPlanetOrMoonEvent.Listener) resultEvent::set);
+    this.build();
+    Event event = this.eliteDangerousAPI.parseEvent(JsonParser.parseString(
+            "{ \"timestamp\":\"2022-02-06T19:02:57Z\", \"event\":\"Scan\", \"ScanType\":\"NavBeaconDetail\", \"BodyName\":\"Nemehi B 4 c\", \"BodyID\":60, \"Parents\":[ {\"Planet\":56}, {\"Star\":2}, {\"Null\":0} ], \"StarSystem\":\"Nemehi\", \"SystemAddress\":4511619877227, \"DistanceFromArrivalLS\":54173.102216, \"TidalLock\":true, \"TerraformState\":\"\", \"PlanetClass\":\"Icy body\", \"Atmosphere\":\"thin methane atmosphere\", \"AtmosphereType\":\"Methane\", \"AtmosphereComposition\":[ { \"Name\":\"Methane\", \"Percent\":100.000000 } ], \"Volcanism\":\"\", \"MassEM\":0.000147, \"Radius\":467427.750000, \"SurfaceGravity\":0.268696, \"SurfaceTemperature\":90.584389, \"SurfacePressure\":3631.814697, \"Landable\":false, \"Composition\":{ \"Ice\":0.824755, \"Rock\":0.159551, \"Metal\":0.015694 }, \"SemiMajorAxis\":1033000946.044922, \"Eccentricity\":0.000874, \"OrbitalInclination\":0.012871, \"Periapsis\":191.573354, \"OrbitalPeriod\":1686286.747456, \"RotationPeriod\":1657780.955823, \"AxialTilt\":0.252460, \"WasDiscovered\":false, \"WasMapped\":true }\n")
+        .getAsJsonObject());
+    this.eliteDangerousAPI.triggerEventIfNeededSafely(event);
+
+    Assert.assertNotNull(resultEvent.get());
+    Assert.assertEquals("type", "Scan", resultEvent.get().type);
+    Assert.assertEquals("systemAddress", 4511619877227L, resultEvent.get().systemAddress.longValue());
   }
 }
