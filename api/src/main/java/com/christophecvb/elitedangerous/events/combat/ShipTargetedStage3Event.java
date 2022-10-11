@@ -6,9 +6,9 @@ public class ShipTargetedStage3Event extends ShipTargetedStage2Event {
 
   public String faction;
   public String legalStatus;
-  public String subSystem;
+  public String subsystem;
   public String subsystemLocalised;
-  public Double subSystemHealth;
+  public Double subsystemHealth;
   public String power;
   public Long bounty;
 
