@@ -2,7 +2,7 @@ package com.christophecvb.elitedangerous.events.combat;
 
 import com.christophecvb.elitedangerous.events.Event;
 
-public class ShipTargettedStage0Event extends ShipTargettedEvent {
+public class ShipTargetedStage0Event extends ShipTargetedEvent {
 
   public String ship;
   public String shipLocalised;
@@ -12,9 +12,9 @@ public class ShipTargettedStage0Event extends ShipTargettedEvent {
 
     @Override
     default <T extends Event> void onTriggered(T event) {
-      this.onShipTargettedStage0EventTriggered((ShipTargettedStage0Event) event);
+      this.onShipTargettedStage0EventTriggered((ShipTargetedStage0Event) event);
     }
 
-    void onShipTargettedStage0EventTriggered(ShipTargettedStage0Event shipTargettedStage0Event);
+    void onShipTargettedStage0EventTriggered(ShipTargetedStage0Event shipTargettedStage0Event);
   }
 }

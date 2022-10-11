@@ -35,7 +35,7 @@ import com.christophecvb.elitedangerous.events.combat.InterdictionEvent;
 import com.christophecvb.elitedangerous.events.combat.PvPKillEvent;
 import com.christophecvb.elitedangerous.events.combat.SRVDestroyedEvent;
 import com.christophecvb.elitedangerous.events.combat.ShieldStateEvent;
-import com.christophecvb.elitedangerous.events.combat.ShipTargettedEvent;
+import com.christophecvb.elitedangerous.events.combat.ShipTargetedEvent;
 import com.christophecvb.elitedangerous.events.combat.UnderAttackEvent;
 import com.christophecvb.elitedangerous.events.exploration.BuyExplorationDataEvent;
 import com.christophecvb.elitedangerous.events.exploration.CodexEntryEvent;
@@ -252,7 +252,7 @@ import com.christophecvb.elitedangerous.utils.deserializer.DiedEventDeserializer
 import com.christophecvb.elitedangerous.utils.deserializer.EventDeserializer;
 import com.christophecvb.elitedangerous.utils.deserializer.ParentDeserializer;
 import com.christophecvb.elitedangerous.utils.deserializer.ScanEventDeserializer;
-import com.christophecvb.elitedangerous.utils.deserializer.ShipTargettedEventDeserializer;
+import com.christophecvb.elitedangerous.utils.deserializer.ShipTargetedEventDeserializer;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -292,7 +292,7 @@ public class EliteDangerousAPI {
     eventDeserializer.registerEventType(InterdictionEvent.class);
     eventDeserializer.registerEventType(PvPKillEvent.class);
     eventDeserializer.registerEventType(ShieldStateEvent.class);
-    eventDeserializer.registerEventType(ShipTargettedEvent.class);
+    eventDeserializer.registerEventType(ShipTargetedEvent.class);
     eventDeserializer.registerEventType(SRVDestroyedEvent.class);
     eventDeserializer.registerEventType(UnderAttackEvent.class);
     eventDeserializer.registerEventType(MusicEvent.class);
@@ -524,7 +524,7 @@ public class EliteDangerousAPI {
     ParentDeserializer parentDeserializer = new ParentDeserializer();
     BountyEventDeserializer bountyEventDeserializer = new BountyEventDeserializer();
     ScanEventDeserializer scanEventDeserializer = new ScanEventDeserializer();
-    ShipTargettedEventDeserializer shipTargettedEventDeserializer = new ShipTargettedEventDeserializer();
+    ShipTargetedEventDeserializer shipTargetedEventDeserializer = new ShipTargetedEventDeserializer();
 
     EliteDangerousAPI.GSON = new GsonBuilder()
         .setFieldNamingStrategy(f -> FieldNamingPolicy.UPPER_CAMEL_CASE.translateName(f)
@@ -534,7 +534,7 @@ public class EliteDangerousAPI {
         .registerTypeAdapter(Parent.class, parentDeserializer)
         .registerTypeAdapter(BountyEvent.class, bountyEventDeserializer)
         .registerTypeAdapter(ScanEvent.class, scanEventDeserializer)
-        .registerTypeAdapter(ShipTargettedEvent.class, shipTargettedEventDeserializer)
+        .registerTypeAdapter(ShipTargetedEvent.class, shipTargetedEventDeserializer)
         .setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
         .create();
   }

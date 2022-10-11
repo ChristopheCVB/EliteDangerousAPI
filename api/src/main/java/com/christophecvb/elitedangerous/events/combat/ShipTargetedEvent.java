@@ -2,7 +2,7 @@ package com.christophecvb.elitedangerous.events.combat;
 
 import com.christophecvb.elitedangerous.events.Event;
 
-public class ShipTargettedEvent extends Event {
+public class ShipTargetedEvent extends Event {
 
   public Boolean targetLocked;
 
@@ -10,9 +10,9 @@ public class ShipTargettedEvent extends Event {
 
     @Override
     default <T extends Event> void onTriggered(T event) {
-      this.onShipTargetedEventTriggered((ShipTargettedEvent) event);
+      this.onShipTargetedEventTriggered((ShipTargetedEvent) event);
     }
 
-    void onShipTargetedEventTriggered(ShipTargettedEvent shipTargettedEvent);
+    void onShipTargetedEventTriggered(ShipTargetedEvent shipTargetedEvent);
   }
 }

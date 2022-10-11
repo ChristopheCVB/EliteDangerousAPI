@@ -2,6 +2,8 @@ package com.christophecvb.elitedangerous;
 
 import com.christophecvb.elitedangerous.events.Event;
 import com.christophecvb.elitedangerous.events.StatusEvent;
+import com.christophecvb.elitedangerous.events.combat.ShipTargetedEvent;
+import com.christophecvb.elitedangerous.events.combat.ShipTargetedStage3Event;
 import com.christophecvb.elitedangerous.events.exploration.ScanPlanetOrMoonEvent;
 import com.christophecvb.elitedangerous.events.other.FriendsEvent;
 import com.christophecvb.elitedangerous.events.other.MusicEvent;
@@ -358,14 +360,60 @@ public class EliteDangerousAPITest {
   }
 
   @Test
+  public void ShipTargetedStage3Event() {
+    AtomicReference<ShipTargetedEvent> resultEvent = new AtomicReference<>(null);
+    this.eliteDangerousAPIBuilder.addEventListener(ShipTargetedEvent.class,
+            (ShipTargetedEvent.Listener) resultEvent::set);
+    this.build();
+    Event event = this.eliteDangerousAPI.parseEvent(JsonParser.parseString(
+                    "{"
+                            + "\"timestamp\":\"2022-10-06T14:23:01Z\","
+                            + "\"event\":\"ShipTargeted\","
+                            + "\"TargetLocked\":true,"
+                            + "\"Ship\":\"viper\","
+                            + "\"Ship_Localised\":\"Viper Mk III\","
+                            + "\"ScanStage\":3,"
+                            + "\"PilotName\":\"$ShipName_Police_Independent;\","
+                            + "\"PilotName_Localised\":\"System Authority Vessel\","
+                            + "\"PilotRank\":\"Master\","
+                            + "\"ShieldHealth\":100.000000,"
+                            + "\"HullHealth\":100.000000,"
+                            + "\"Faction\":\"New HIP 35246 Liberals\","
+                            + "\"LegalStatus\":\"Clean\","
+                            + "\"Subsystem\":\"$int_powerplant_size3_class3_name;\","
+                            + "\"Subsystem_Localised\":\"Power Plant\","
+                            + "\"SubsystemHealth\":100.000000 }")
+            .getAsJsonObject());
+    this.eliteDangerousAPI.triggerEventIfNeededSafely(event);
+
+    Assert.assertNotNull(resultEvent.get());
+    Assert.assertEquals("type", "ShipTargeted", resultEvent.get().type);
+    ShipTargetedStage3Event shipTargetedStage3Event = (ShipTargetedStage3Event) resultEvent.get();
+    Assert.assertEquals("targetLocked", Boolean.TRUE, resultEvent.get().targetLocked);
+    Assert.assertEquals("ship", "viper", shipTargetedStage3Event.ship);
+    Assert.assertEquals("shipLocalised", "Viper Mk III", shipTargetedStage3Event.shipLocalised);
+    Assert.assertEquals("scanStage", new Integer(3), shipTargetedStage3Event.scanStage);
+    Assert.assertEquals("pilotName", "$ShipName_Police_Independent;", shipTargetedStage3Event.pilotName);
+    Assert.assertEquals("pilotNameLocalised", "System Authority Vessel", shipTargetedStage3Event.pilotNameLocalised);
+    Assert.assertEquals("pilotRank", "Master", shipTargetedStage3Event.pilotRank);
+    Assert.assertEquals("shieldHealth", new Double(100), shipTargetedStage3Event.shieldHealth);
+    Assert.assertEquals("hullHealth", new Double(100), shipTargetedStage3Event.hullHealth);
+    Assert.assertEquals("faction", "New HIP 35246 Liberals", shipTargetedStage3Event.faction);
+    Assert.assertEquals("legalStatus", "Clean", shipTargetedStage3Event.legalStatus);
+    Assert.assertEquals("subsystem", "$int_powerplant_size3_class3_name;", shipTargetedStage3Event.subsystem);
+    Assert.assertEquals("subsystemLocalised", "Power Plant", shipTargetedStage3Event.subsystemLocalised);
+    Assert.assertEquals("subsystemHealth", new Double(100), shipTargetedStage3Event.subsystemHealth);
+  }
+
+  @Test
   public void testScanEvent() {
     AtomicReference<ScanPlanetOrMoonEvent> resultEvent = new AtomicReference<>(null);
     this.eliteDangerousAPIBuilder.addEventListener(ScanPlanetOrMoonEvent.class,
-        (ScanPlanetOrMoonEvent.Listener) resultEvent::set);
+            (ScanPlanetOrMoonEvent.Listener) resultEvent::set);
     this.build();
     Event event = this.eliteDangerousAPI.parseEvent(JsonParser.parseString(
-            "{ \"timestamp\":\"2022-02-06T19:02:57Z\", \"event\":\"Scan\", \"ScanType\":\"NavBeaconDetail\", \"BodyName\":\"Nemehi B 4 c\", \"BodyID\":60, \"Parents\":[ {\"Planet\":56}, {\"Star\":2}, {\"Null\":0} ], \"StarSystem\":\"Nemehi\", \"SystemAddress\":4511619877227, \"DistanceFromArrivalLS\":54173.102216, \"TidalLock\":true, \"TerraformState\":\"\", \"PlanetClass\":\"Icy body\", \"Atmosphere\":\"thin methane atmosphere\", \"AtmosphereType\":\"Methane\", \"AtmosphereComposition\":[ { \"Name\":\"Methane\", \"Percent\":100.000000 } ], \"Volcanism\":\"\", \"MassEM\":0.000147, \"Radius\":467427.750000, \"SurfaceGravity\":0.268696, \"SurfaceTemperature\":90.584389, \"SurfacePressure\":3631.814697, \"Landable\":false, \"Composition\":{ \"Ice\":0.824755, \"Rock\":0.159551, \"Metal\":0.015694 }, \"SemiMajorAxis\":1033000946.044922, \"Eccentricity\":0.000874, \"OrbitalInclination\":0.012871, \"Periapsis\":191.573354, \"OrbitalPeriod\":1686286.747456, \"RotationPeriod\":1657780.955823, \"AxialTilt\":0.252460, \"WasDiscovered\":false, \"WasMapped\":true }\n")
-        .getAsJsonObject());
+                    "{ \"timestamp\":\"2022-02-06T19:02:57Z\", \"event\":\"Scan\", \"ScanType\":\"NavBeaconDetail\", \"BodyName\":\"Nemehi B 4 c\", \"BodyID\":60, \"Parents\":[ {\"Planet\":56}, {\"Star\":2}, {\"Null\":0} ], \"StarSystem\":\"Nemehi\", \"SystemAddress\":4511619877227, \"DistanceFromArrivalLS\":54173.102216, \"TidalLock\":true, \"TerraformState\":\"\", \"PlanetClass\":\"Icy body\", \"Atmosphere\":\"thin methane atmosphere\", \"AtmosphereType\":\"Methane\", \"AtmosphereComposition\":[ { \"Name\":\"Methane\", \"Percent\":100.000000 } ], \"Volcanism\":\"\", \"MassEM\":0.000147, \"Radius\":467427.750000, \"SurfaceGravity\":0.268696, \"SurfaceTemperature\":90.584389, \"SurfacePressure\":3631.814697, \"Landable\":false, \"Composition\":{ \"Ice\":0.824755, \"Rock\":0.159551, \"Metal\":0.015694 }, \"SemiMajorAxis\":1033000946.044922, \"Eccentricity\":0.000874, \"OrbitalInclination\":0.012871, \"Periapsis\":191.573354, \"OrbitalPeriod\":1686286.747456, \"RotationPeriod\":1657780.955823, \"AxialTilt\":0.252460, \"WasDiscovered\":false, \"WasMapped\":true }\n")
+            .getAsJsonObject());
     this.eliteDangerousAPI.triggerEventIfNeededSafely(event);
 
     Assert.assertNotNull(resultEvent.get());
