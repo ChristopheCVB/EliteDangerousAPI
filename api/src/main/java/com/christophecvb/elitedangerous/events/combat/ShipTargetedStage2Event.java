@@ -2,7 +2,7 @@ package com.christophecvb.elitedangerous.events.combat;
 
 import com.christophecvb.elitedangerous.events.Event;
 
-public class ShipTargettedStage2Event extends ShipTargettedStage1Event {
+public class ShipTargetedStage2Event extends ShipTargetedStage1Event {
 
   public Double shieldHealth;
   public Double hullHealth;
@@ -11,9 +11,9 @@ public class ShipTargettedStage2Event extends ShipTargettedStage1Event {
 
     @Override
     default <T extends Event> void onTriggered(T event) {
-      this.onShipTargettedStage2EventTriggered((ShipTargettedStage2Event) event);
+      this.onShipTargettedStage2EventTriggered((ShipTargetedStage2Event) event);
     }
 
-    void onShipTargettedStage2EventTriggered(ShipTargettedStage2Event shipTargettedStage2Event);
+    void onShipTargettedStage2EventTriggered(ShipTargetedStage2Event shipTargettedStage2Event);
   }
 }
