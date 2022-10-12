@@ -6,6 +6,7 @@ import com.christophecvb.elitedangerous.events.combat.ShipTargetedEvent;
 import com.christophecvb.elitedangerous.events.combat.ShipTargetedStage3Event;
 import com.christophecvb.elitedangerous.events.other.FriendsEvent;
 import com.christophecvb.elitedangerous.events.other.MusicEvent;
+import com.christophecvb.elitedangerous.events.other.ShutdownEvent;
 import com.christophecvb.elitedangerous.events.startup.CommanderEvent;
 import com.christophecvb.elitedangerous.events.startup.MaterialsEvent;
 import com.christophecvb.elitedangerous.events.startup.ProgressEvent;
@@ -45,6 +46,31 @@ public class EliteDangerousAPITest {
     }
     // Reset GameFiles instance to default
     GameFiles.getInstance(null);
+  }
+
+  @Test
+  public void testUnitTestsGameFilesDirectory() throws InterruptedException {
+    AtomicReference<FriendsEvent> resultFriendsEvent = new AtomicReference<>(null);
+    AtomicReference<ShutdownEvent> resultShutdownEvent = new AtomicReference<>(null);
+    this.eliteDangerousAPIBuilder.addEventListener(FriendsEvent.class, (FriendsEvent.Listener) resultFriendsEvent::set);
+    this.eliteDangerousAPIBuilder.addEventListener(ShutdownEvent.class, (ShutdownEvent.Listener) resultShutdownEvent::set);
+    this.build();
+
+    this.eliteDangerousAPI.start();
+    Assert.assertTrue(this.eliteDangerousAPI.isActive());
+
+    Thread.sleep(100);
+
+    // First Known Event
+    Assert.assertNotNull(resultFriendsEvent.get());
+
+    Thread.sleep(1000);
+
+    // Last Known Event
+    Assert.assertNotNull(resultShutdownEvent.get());
+
+    this.eliteDangerousAPI.stop();
+    Assert.assertFalse(this.eliteDangerousAPI.isActive());
   }
 
   @Test
@@ -359,7 +385,27 @@ public class EliteDangerousAPITest {
   }
 
   @Test
-  public void ShipTargetedStage3Event() {
+  public void testShipTargetedEvent() {
+    AtomicReference<ShipTargetedEvent> resultEvent = new AtomicReference<>(null);
+    this.eliteDangerousAPIBuilder.addEventListener(ShipTargetedEvent.class,
+        (ShipTargetedEvent.Listener) resultEvent::set);
+    this.build();
+    Event event = this.eliteDangerousAPI.parseEvent(JsonParser.parseString(
+            "{"
+                + "\"timestamp\":\"2022-10-06T14:23:01Z\","
+                + "\"event\":\"ShipTargeted\","
+                + "\"TargetLocked\":false"
+                + "}")
+        .getAsJsonObject());
+    this.eliteDangerousAPI.triggerEventIfNeededSafely(event);
+
+    Assert.assertNotNull(resultEvent.get());
+    Assert.assertEquals("type", "ShipTargeted", resultEvent.get().type);
+    Assert.assertFalse(resultEvent.get().targetLocked);
+  }
+
+  @Test
+  public void testShipTargetedStage3Event() {
     AtomicReference<ShipTargetedEvent> resultEvent = new AtomicReference<>(null);
     this.eliteDangerousAPIBuilder.addEventListener(ShipTargetedEvent.class,
         (ShipTargetedEvent.Listener) resultEvent::set);
