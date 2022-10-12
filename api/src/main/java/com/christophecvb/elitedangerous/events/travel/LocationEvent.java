@@ -30,14 +30,14 @@ public class LocationEvent extends Event {
   public String stationGovernment;
   public String stationEconomyLocalised;
   public String stationGovernmentLocalised;
-  private Double[] starPos;
-  private Long systemAddress, population, marketID;
-  private Integer bodyID;
-  private Boolean docked;
-  private List<Faction> factions;
-  private List<Conflict> conflicts;
-  private List<String> powers, stationServices;
-  private List<StationEconomy> stationEconomies;
+  public Double[] starPos;
+  public Long systemAddress, population, marketID;
+  public Integer bodyID;
+  public Boolean docked;
+  public List<Faction> factions;
+  public List<Conflict> conflicts;
+  public List<String> powers, stationServices;
+  public List<StationEconomy> stationEconomies;
 
   public interface Listener extends Event.Listener {
 

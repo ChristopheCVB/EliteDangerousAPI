@@ -8,6 +8,8 @@ public class LiftoffEvent extends Event {
   public Double longitude, latitude;
   public String nearestDestination;
   public String nearestDestinationLocalised;
+  public Integer bodyID;
+  public Long systemAddress;
 
   public interface Listener extends Event.Listener {
 
