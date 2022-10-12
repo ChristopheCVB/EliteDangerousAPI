@@ -10,6 +10,12 @@ import com.christophecvb.elitedangerous.events.other.FriendsEvent;
 import com.christophecvb.elitedangerous.events.other.MusicEvent;
 import com.christophecvb.elitedangerous.events.startup.*;
 import com.christophecvb.elitedangerous.events.travel.TouchdownEvent;
+import com.christophecvb.elitedangerous.events.other.ShutdownEvent;
+import com.christophecvb.elitedangerous.events.startup.CommanderEvent;
+import com.christophecvb.elitedangerous.events.startup.MaterialsEvent;
+import com.christophecvb.elitedangerous.events.startup.ProgressEvent;
+import com.christophecvb.elitedangerous.events.startup.RankEvent;
+import com.christophecvb.elitedangerous.events.startup.ReputationEvent;
 import com.christophecvb.elitedangerous.utils.GameFiles;
 import com.google.gson.JsonParser;
 import org.junit.After;
@@ -45,6 +51,31 @@ public class EliteDangerousAPITest {
     }
     // Reset GameFiles instance to default
     GameFiles.getInstance(null);
+  }
+
+  @Test
+  public void testUnitTestsGameFilesDirectory() throws InterruptedException {
+    AtomicReference<FriendsEvent> resultFriendsEvent = new AtomicReference<>(null);
+    AtomicReference<ShutdownEvent> resultShutdownEvent = new AtomicReference<>(null);
+    this.eliteDangerousAPIBuilder.addEventListener(FriendsEvent.class, (FriendsEvent.Listener) resultFriendsEvent::set);
+    this.eliteDangerousAPIBuilder.addEventListener(ShutdownEvent.class, (ShutdownEvent.Listener) resultShutdownEvent::set);
+    this.build();
+
+    this.eliteDangerousAPI.start();
+    Assert.assertTrue(this.eliteDangerousAPI.isActive());
+
+    Thread.sleep(100);
+
+    // First Known Event
+    Assert.assertNotNull(resultFriendsEvent.get());
+
+    Thread.sleep(1000);
+
+    // Last Known Event
+    Assert.assertNotNull(resultShutdownEvent.get());
+
+    this.eliteDangerousAPI.stop();
+    Assert.assertFalse(this.eliteDangerousAPI.isActive());
   }
 
   @Test
@@ -396,5 +427,71 @@ public class EliteDangerousAPITest {
     Event event = this.eliteDangerousAPI.parseEvent(JsonParser.parseString(content).getAsJsonObject());
     this.eliteDangerousAPI.triggerEventIfNeededSafely(event);
     return resultEvent.get();
+  }
+
+  @Test
+  public void testShipTargetedEvent() {
+    AtomicReference<ShipTargetedEvent> resultEvent = new AtomicReference<>(null);
+    this.eliteDangerousAPIBuilder.addEventListener(ShipTargetedEvent.class,
+        (ShipTargetedEvent.Listener) resultEvent::set);
+    this.build();
+    Event event = this.eliteDangerousAPI.parseEvent(JsonParser.parseString(
+            "{"
+                + "\"timestamp\":\"2022-10-06T14:23:01Z\","
+                + "\"event\":\"ShipTargeted\","
+                + "\"TargetLocked\":false"
+                + "}")
+        .getAsJsonObject());
+    this.eliteDangerousAPI.triggerEventIfNeededSafely(event);
+
+    Assert.assertNotNull(resultEvent.get());
+    Assert.assertEquals("type", "ShipTargeted", resultEvent.get().type);
+    Assert.assertFalse(resultEvent.get().targetLocked);
+  }
+
+  @Test
+  public void testShipTargetedStage3Event() {
+    AtomicReference<ShipTargetedEvent> resultEvent = new AtomicReference<>(null);
+    this.eliteDangerousAPIBuilder.addEventListener(ShipTargetedEvent.class,
+        (ShipTargetedEvent.Listener) resultEvent::set);
+    this.build();
+    Event event = this.eliteDangerousAPI.parseEvent(JsonParser.parseString(
+            "{"
+                + "\"timestamp\":\"2022-10-06T14:23:01Z\","
+                + "\"event\":\"ShipTargeted\","
+                + "\"TargetLocked\":true,"
+                + "\"Ship\":\"viper\","
+                + "\"Ship_Localised\":\"Viper Mk III\","
+                + "\"ScanStage\":3,"
+                + "\"PilotName\":\"$ShipName_Police_Independent;\","
+                + "\"PilotName_Localised\":\"System Authority Vessel\","
+                + "\"PilotRank\":\"Master\","
+                + "\"ShieldHealth\":100.000000,"
+                + "\"HullHealth\":100.000000,"
+                + "\"Faction\":\"New HIP 35246 Liberals\","
+                + "\"LegalStatus\":\"Clean\","
+                + "\"Subsystem\":\"$int_powerplant_size3_class3_name;\","
+                + "\"Subsystem_Localised\":\"Power Plant\","
+                + "\"SubsystemHealth\":100.000000 }")
+        .getAsJsonObject());
+    this.eliteDangerousAPI.triggerEventIfNeededSafely(event);
+
+    Assert.assertNotNull(resultEvent.get());
+    Assert.assertEquals("type", "ShipTargeted", resultEvent.get().type);
+    ShipTargetedStage3Event shipTargetedStage3Event = (ShipTargetedStage3Event) resultEvent.get();
+    Assert.assertEquals("targetLocked", Boolean.TRUE, resultEvent.get().targetLocked);
+    Assert.assertEquals("ship", "viper", shipTargetedStage3Event.ship);
+    Assert.assertEquals("shipLocalised", "Viper Mk III", shipTargetedStage3Event.shipLocalised);
+    Assert.assertEquals("scanStage", new Integer(3), shipTargetedStage3Event.scanStage);
+    Assert.assertEquals("pilotName", "$ShipName_Police_Independent;", shipTargetedStage3Event.pilotName);
+    Assert.assertEquals("pilotNameLocalised", "System Authority Vessel", shipTargetedStage3Event.pilotNameLocalised);
+    Assert.assertEquals("pilotRank", "Master", shipTargetedStage3Event.pilotRank);
+    Assert.assertEquals("shieldHealth", new Double(100), shipTargetedStage3Event.shieldHealth);
+    Assert.assertEquals("hullHealth", new Double(100), shipTargetedStage3Event.hullHealth);
+    Assert.assertEquals("faction", "New HIP 35246 Liberals", shipTargetedStage3Event.faction);
+    Assert.assertEquals("legalStatus", "Clean", shipTargetedStage3Event.legalStatus);
+    Assert.assertEquals("subsystem", "$int_powerplant_size3_class3_name;", shipTargetedStage3Event.subsystem);
+    Assert.assertEquals("subsystemLocalised", "Power Plant", shipTargetedStage3Event.subsystemLocalised);
+    Assert.assertEquals("subsystemHealth", new Double(100), shipTargetedStage3Event.subsystemHealth);
   }
 }
