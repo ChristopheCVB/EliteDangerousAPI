@@ -4,6 +4,7 @@ import com.christophecvb.elitedangerous.events.Event;
 import com.christophecvb.elitedangerous.events.StatusEvent;
 import com.christophecvb.elitedangerous.events.combat.ShipTargetedEvent;
 import com.christophecvb.elitedangerous.events.combat.ShipTargetedStage3Event;
+import com.christophecvb.elitedangerous.events.exploration.SAASignalsFoundEvent;
 import com.christophecvb.elitedangerous.events.exploration.ScanPlanetOrMoonEvent;
 import com.christophecvb.elitedangerous.events.other.FriendsEvent;
 import com.christophecvb.elitedangerous.events.other.MusicEvent;
@@ -370,6 +371,16 @@ public class EliteDangerousAPITest {
     Assert.assertEquals("type", "Touchdown", event.type);
     Assert.assertEquals("systemAddress", 9467047323073L, event.systemAddress.longValue());
     Assert.assertEquals("bodyId", 11L, event.bodyID.longValue());
+  }
+
+  @Test
+  public void testSAASignalsFoundEvent() {
+    SAASignalsFoundEvent event = getEvent(SAASignalsFoundEvent.class, "{\"timestamp\":\"2022-10-11T17:13:22Z\",\"event\":\"SAASignalsFound\",\"BodyName\":\"Harpulidna 4 c\",\"SystemAddress\":3932277445330,\"BodyID\":56,\"Signals\":[{\"Type\":\"$SAA_SignalType_Biological;\",\"Type_Localised\":\"Biological\",\"Count\":1},{\"Type\":\"$SAA_SignalType_Human;\",\"Type_Localised\":\"Human\",\"Count\":1}],\"Genuses\":[{\"Genus\":\"$Codex_Ent_Bacterial_Genus_Name;\",\"Genus_Localised\":\"Bacterium\"}]}");
+
+    Assert.assertNotNull(event);
+    Assert.assertEquals("type", "SAASignalsFound", event.type);
+    Assert.assertEquals("systemAddress", 3932277445330L, event.systemAddress.longValue());
+    Assert.assertEquals("bodyId", 56L, event.bodyID.longValue());
   }
 
 

@@ -50,6 +50,7 @@ import com.christophecvb.elitedangerous.events.exploration.MultiSellExplorationD
 import com.christophecvb.elitedangerous.events.exploration.NavBeaconScanEvent;
 import com.christophecvb.elitedangerous.events.exploration.NavRouteEvent;
 import com.christophecvb.elitedangerous.events.exploration.SAAScanCompleteEvent;
+import com.christophecvb.elitedangerous.events.exploration.SAASignalsFoundEvent;
 import com.christophecvb.elitedangerous.events.exploration.ScanEvent;
 import com.christophecvb.elitedangerous.events.exploration.ScreenshotEvent;
 import com.christophecvb.elitedangerous.events.exploration.SellExplorationDataEvent;
@@ -519,6 +520,7 @@ public class EliteDangerousAPI {
     eventDeserializer.registerEventType(ShipLockerMaterialsEvent.class);
     eventDeserializer.registerEventType(SwitchSuitLoadoutEvent.class);
     eventDeserializer.registerEventType(TransferMicroResourcesEvent.class);
+    eventDeserializer.registerEventType(SAASignalsFoundEvent.class);
 
     DiedEventDeserializer diedEventDeserializer = new DiedEventDeserializer();
     ParentDeserializer parentDeserializer = new ParentDeserializer();
