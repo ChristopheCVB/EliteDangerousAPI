@@ -7,7 +7,6 @@ public class ScanStarEvent extends ScanEvent {
 
   public String starType;
   public String luminosity;
-  public Long systemAddress;
   public Double stellarMass;
   public Long radius;
   public Double absoluteMagnitude;

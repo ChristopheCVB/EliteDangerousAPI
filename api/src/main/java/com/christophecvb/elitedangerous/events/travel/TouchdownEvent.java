@@ -8,6 +8,8 @@ public class TouchdownEvent extends Event {
   public Double latitude, longitude;
   public String nearestDestination;
   public String nearestDestinationLocalised;
+  public Integer bodyID;
+  public Long systemAddress;
 
   public interface Listener extends Event.Listener {
 
