@@ -19,6 +19,7 @@ public abstract class ScanEvent extends Event {
   public Double orbitalInclination;
   public Double periapsis;
   public Long orbitalPeriod;
+  public Long systemAddress;
 
   public interface Listener extends Event.Listener {
 
